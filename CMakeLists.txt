@@ -13,7 +13,7 @@ set(BIN_NAME "X")
 # -----------------------------------------------------------------------------
 # Find SDL library.
 #
-find_package(Raylib REQUIRED)
+find_package(raylib REQUIRED)
 
 # -----------------------------------------------------------------------------
 # Set the project include directories.
@@ -24,7 +24,7 @@ add_executable(${BIN_NAME} main.cpp)
 
 #add_subdirectory("src")
 
-set(X_LIB "X")
+set(X_LIB "XLIB")
 
 add_library(${X_LIB} SHARED
 	"${X_DIR}/Transform.cpp"
