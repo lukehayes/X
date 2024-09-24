@@ -1,16 +1,12 @@
-#ifndef XX_ENTITY_H
-#define XX_ENTITY_H
+#ifndef X_ENTITY_H
+#define X_ENTITY_H
 
-#include "XX/Transform.h"
-#include "XX/Gfx/Color.h"
-#include "XX/Gfx/Shader.h"
-#include <glm/glm.hpp>
+#include "X/Transform.h"
 
-namespace XX
+namespace X
 {
-class Entity
+struct Entity
 {
-public:
     Entity();
     Entity(const glm::vec3& position, const XX::Gfx::Color& color);
     Entity(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3 &scale);
@@ -23,11 +19,8 @@ public:
 
     XX::Gfx::Shader getShader() const;
 
-
-private:
     XX::Transform   mTransform;
     XX::Gfx::Color  mColor;
-    XX::Gfx::Shader mShader;
 };
 }
 
