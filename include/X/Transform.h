@@ -8,8 +8,8 @@ namespace X
 struct Transform
 {
     Transform();
-    Transform(const Vector2& position, const Vector2& rotation, const Vector2 &scale);
     Transform(const Vector2& position);
+    Transform(const Vector2& position, const Vector2& rotation, const Vector2 &scale);
 
     Vector2 position;
     Vector2 rotation;
