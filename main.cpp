@@ -11,7 +11,6 @@ int main(void)
     SetTargetFPS(global.FPS);
 
     X::GameObject object1({100,100});
-    X::GameObject object2({400,500});
 
     while (!WindowShouldClose())
     {
@@ -25,13 +24,6 @@ int main(void)
                 object1.color
             );
 
-            DrawRectangle(
-                object2.transform.position.x,
-                object2.transform.position.y,
-                object2.transform.scale.x,
-                object2.transform.scale.y,
-                object2.color
-            );
         EndDrawing();
     }
 
