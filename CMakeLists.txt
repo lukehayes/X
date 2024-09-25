@@ -28,11 +28,11 @@ set(X_LIB "XLIB")
 
 add_library(${X_LIB} SHARED
 	"${X_DIR}/Transform.cpp"
-	"${X_DIR}/Entity.cpp"
+	"${X_DIR}/Object.cpp"
 )
 
 # -----------------------------------------------------------------------------
 # Link in the libraies the binary needs.
 #
-target_link_libraries(${BIN_NAME} Raylib)
+target_link_libraries(${BIN_NAME} raylib)
 target_link_libraries(${BIN_NAME} ${X_LIB})
