@@ -1,35 +1,20 @@
-#ifndef XX_TRANSFORM_H
-#define XX_TRANSFORM_H
+#ifndef X_TRANSFORM_H
+#define X_TRANSFORM_H
 
-#include <glm/glm.hpp>
+#include "raylib.h"
 
-namespace XX
+namespace X
 {
-
-class Transform
+struct Transform
 {
-public:
-
     Transform();
-    Transform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3 &scale);
-    Transform(const glm::vec3& position);
+    Transform(const Vector2& position, const Vector2& rotation, const Vector2 &scale);
+    Transform(const Vector2& position);
 
-    void setPosition(const glm::vec3& position);
-    void setRotation(const glm::vec3& rotation);
-
-    void setRotation(double x, double y, double z);
-
-    void setScale(const glm::vec3& scale);
-
-    glm::vec3 getPosition() const;
-    glm::vec3 getRotation() const;
-    glm::vec3 getScale()    const;
-
-private:
-    glm::vec3 mPosition;
-    glm::vec3 mRotation;
-    glm::vec3 mScale;
+    Vector2 position;
+    Vector2 rotation;
+    Vector2 scale;
 };
 }
 
-#endif // !XX_TRANSFORM_H
+#endif // !X_TRANSFORM_H
