@@ -5,19 +5,15 @@
 
 namespace X
 {
-
 struct GameObject : public X::Object
 {
-    GameObject()
-        : Object(), color(RED) {}
-
-    GameObject(const Vector2& position)
-        : Object(position),
-          color(RED) {}
-
+    // Constructors
+    GameObject();
+    GameObject(const Vector2& position);
+    
+    // Members
     Color color;
 };
-
 }
 
 
