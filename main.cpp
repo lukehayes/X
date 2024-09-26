@@ -2,6 +2,9 @@
 
 #include "X/Global.h"
 #include "X/GameObject.h"
+#include "X/Sprite.h"
+
+#include <vector>
 
 int main(void)
 {
@@ -12,11 +15,30 @@ int main(void)
     SetExitKey(KEY_Q);
 
     X::GameObject object1({100,100});
+    X::Sprite s1("../assets/debug.png", Vector2({200,200}));
+
+
+    std::vector<X::Object> objects;
+
+    for(int i = 0; i<= 100; i++)
+    {
+        float rx = GetRandomValue(0,600);
+        float ry = GetRandomValue(0,600);
+
+        X::Sprite o("../assets/debug.png", Vector2({rx,ry}));
+
+        objects.push_back(o);
+
+    }
+
+
+
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
             ClearBackground(LIGHTGRAY);
+
             DrawRectangle(
                 object1.transform.position.x,
                 object1.transform.position.y,
@@ -24,10 +46,22 @@ int main(void)
                 object1.transform.scale.y,
                 object1.color
             );
+
+        for(auto o : objects)
+        {
+        }
+
+        //     DrawTextureEx(
+        //         s1->texture,
+        //         s1->transform.position,
+        //         0,
+        //         4,
+        //         WHITE
+        //     );
         EndDrawing();
     }
 
-    CloseWindow();        // Close window and OpenGL context
+    CloseWindow();
 
     return 0;
 }
