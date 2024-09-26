@@ -9,6 +9,7 @@ int main(void)
 
     InitWindow(global.screen_width, global.screen_height, global.title);
     SetTargetFPS(global.FPS);
+    SetExitKey(KEY_Q);
 
     X::GameObject object1({100,100});
 
@@ -23,7 +24,6 @@ int main(void)
                 object1.transform.scale.y,
                 object1.color
             );
-
         EndDrawing();
     }
 
