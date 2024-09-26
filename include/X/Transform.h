@@ -7,14 +7,13 @@ namespace X
 {
 struct Transform
 {
-    Transform();
-    Transform(const Vector2& position);
-    Transform(const Vector2& position, const Vector2& rotation, const Vector2 &scale);
-
     Vector2 position;
     Vector2 rotation;
     Vector2 scale;
 };
+
+Transform TransformCreate(Vector2 pos, Vector2 rot, Vector2 scale);
+
 }
 
 #endif // !X_TRANSFORM_H

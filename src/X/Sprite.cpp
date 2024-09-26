@@ -3,15 +3,19 @@
 
 namespace X
 {
-Sprite::Sprite(const char* image, const Vector2 position)
-        : GameObject(position),
-          texture(LoadTexture(image)) {}
+    Sprite SpriteCreate(const char* image, Vector2 pos)
+    {
+        Sprite sprite;
+        sprite.gameObject = GameObjectCreate(pos);
+        sprite.texture = LoadTexture(image);
+        return sprite;
+    }
 
-Sprite::~Sprite()
-{
-    printf("Unloaded Sprite \n");
-    UnloadTexture(this->texture);
+    void SpriteDestroy(Sprite* sprite)
+    {
+        UnloadTexture(sprite->texture);
+    }
 }
-}
+
 
 

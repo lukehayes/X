@@ -6,22 +6,13 @@ constexpr float ENTITY_SCALE = 32;
 
 namespace X
 {
-Transform::Transform() :
-        position({0,0}),
-        rotation({0,0}),
-        scale({ENTITY_SCALE, ENTITY_SCALE})
-    {}
+    Transform TransformCreate(Vector2 pos, Vector2 rot, Vector2 scale)
+    {
+        Transform t;
+        t.position = pos;
+        t.rotation = rot;
+        t.scale = scale;
 
-Transform::Transform(const Vector2& position) :
-        position(position),
-        rotation({0,0}),
-        scale({ENTITY_SCALE, ENTITY_SCALE})
-    {}
-
-Transform::Transform(const Vector2& position, const Vector2& rotation, const Vector2 &scale) :
-        position(position),
-        rotation(rotation),
-        scale(scale)
-    {}
-
+        return t;
+    }
 }

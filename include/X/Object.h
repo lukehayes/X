@@ -8,11 +8,10 @@ namespace X
 {
    struct Object
    {
-      Object();
-      Object(const Vector2& position);
-
       X::Transform transform;
    };
+
+   Object ObjectCreate(Vector2 pos, Vector2 rot, Vector2 scale);
 }
 
 

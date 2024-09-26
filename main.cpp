@@ -2,6 +2,27 @@
 
 #include "X/Global.h"
 #include "X/GameObject.h"
+#include "X/Sprite.h"
+
+#include <stdio.h>
+
+void DrawObject(X::GameObject* obj)
+{
+    printf("Color: r: %d g: %d b: %d a: %d\n", 
+           obj->color.r,
+           obj->color.g,
+           obj->color.b,
+           obj->color.a
+    );
+
+    DrawRectangle(
+        obj->object.transform.position.x,
+        obj->object.transform.position.y,
+        obj->object.transform.scale.x,
+        obj->object.transform.scale.y,
+        obj->color
+    );
+}
 
 int main(void)
 {
@@ -11,19 +32,14 @@ int main(void)
     SetTargetFPS(global.FPS);
     SetExitKey(KEY_Q);
 
-    X::GameObject object1({100,100});
+    X::GameObject object1 = X::GameObjectCreate({100, 200});
+    X::Object* o = &object1.object; 
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
             ClearBackground(LIGHTGRAY);
-            DrawRectangle(
-                object1.transform.position.x,
-                object1.transform.position.y,
-                object1.transform.scale.x,
-                object1.transform.scale.y,
-                object1.color
-            );
+            DrawObject(&object1);
         EndDrawing();
     }
 

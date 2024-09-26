@@ -6,14 +6,14 @@
 
 namespace X
 {
-struct Sprite : public X::GameObject
-{
-    Sprite(const char* image, const Vector2 position);
-    ~Sprite();
-    Texture2D texture;
-};
+    struct Sprite
+    {
+        GameObject gameObject;
+        Texture2D texture;
+    };
+
+    Sprite SpriteCreate(const char* image, Vector2 pos);
+    void SpriteDestroy(Sprite* sprite);
 }
-
-
 
 #endif
