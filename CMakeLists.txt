@@ -30,6 +30,7 @@ add_library(${X_LIB} SHARED
 	"${X_DIR}/Transform.cpp"
 	"${X_DIR}/Object.cpp"
 	"${X_DIR}/GameObject.cpp"
+	"${X_DIR}/Sprite.cpp"
 )
 
 # -----------------------------------------------------------------------------
