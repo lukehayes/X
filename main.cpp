@@ -3,17 +3,22 @@
 #include "X/Global.h"
 #include "X/GameObject.h"
 #include "X/Sprite.h"
-
 #include <vector>
+#include <iostream>
+#include <memory>
 
-void DrawSprite(const X::Sprite& sprite)
+template<class T> 
+using UPtr = std::unique_ptr<T>;
+using GOUptr = UPtr<X::GameObject>;
+
+void DrawSprite(X::Sprite* sprite)
 {
     DrawTextureEx(
-        sprite.texture,
-        sprite.transform.position,
+        sprite->texture,
+        sprite->transform.position,
         0,
-        12,
-        sprite.color
+        4,
+        sprite->color
     );
 }
 
@@ -33,27 +38,24 @@ int main(void)
     X::Global global = X::Global::create_global();
 
     InitWindow(global.screen_width, global.screen_height, global.title);
+    SetTraceLogLevel(LOG_NONE);
     SetTargetFPS(global.FPS);
     SetExitKey(KEY_Q);
 
     X::GameObject object1({100,100});
     X::Sprite s1("../assets/debug.png", Vector2({200,200}));
 
+    std::vector<GOUptr>objects;
 
-    std::vector<X::Object> objects;
-
-    for(int i = 0; i<= 100; i++)
+    for(int i = 0; i<= 10; i++)
     {
-        float rx = GetRandomValue(0,600);
-        float ry = GetRandomValue(0,600);
+        float rx = GetRandomValue(0,1900);
+        float ry = GetRandomValue(0,1000);
 
-        X::Sprite o("../assets/debug.png", Vector2({rx,ry}));
-
-        objects.push_back(o);
-
+        std::unique_ptr<X::GameObject> o;
+        o = std::make_unique<X::Sprite>("../assets/debug.png", Vector2({rx,ry}));
+        objects.push_back(std::move(o));
     }
-
-
 
 
     while (!WindowShouldClose())
@@ -61,27 +63,15 @@ int main(void)
         BeginDrawing();
             ClearBackground(LIGHTGRAY);
 
-            DrawRectangle(
-                object1.transform.position.x,
-                object1.transform.position.y,
-                object1.transform.scale.x,
-                object1.transform.scale.y,
-                object1.color
-            );
+            for(auto& obj : objects)
+            {
+                X::Sprite* spr = dynamic_cast<X::Sprite*>(obj.get());
+                DrawSprite(spr);
+            }
 
-        for(auto o : objects)
-        {
-        }
-
-        //     DrawTextureEx(
-        //         s1->texture,
-        //         s1->transform.position,
-        //         0,
-        //         4,
-        //         WHITE
-        //     );
         EndDrawing();
     }
+
 
     CloseWindow();
 
