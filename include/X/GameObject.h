@@ -12,6 +12,7 @@ struct GameObject : public X::Object
     GameObject(const Vector2& position);
     GameObject(const Vector2& position, const Color& color);
 
+    virtual ~GameObject() {}
     
     // Members
     Color color;
