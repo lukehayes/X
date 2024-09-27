@@ -6,6 +6,28 @@
 
 #include <vector>
 
+void DrawSprite(const X::Sprite& sprite)
+{
+    DrawTextureEx(
+        sprite.texture,
+        sprite.transform.position,
+        0,
+        12,
+        sprite.color
+    );
+}
+
+void DrawObject(const X::GameObject& object)
+{
+    DrawRectangle(
+        object.transform.position.x,
+        object.transform.position.y,
+        object.transform.scale.x,
+        object.transform.scale.y,
+        object.color
+    );
+}
+
 int main(void)
 {
     X::Global global = X::Global::create_global();
