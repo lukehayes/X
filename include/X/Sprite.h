@@ -10,12 +10,12 @@ struct Sprite : public X::GameObject
 {
     Sprite() = delete;
     Sprite(const char* image, const Vector2& position);
+
     Sprite(const Sprite& other);
-
     Sprite(Sprite&& other);
-    Sprite& operator=(Sprite& other);
-    Sprite& operator=(Sprite&& other);
 
+    Sprite& operator=(Sprite& other)  = delete;
+    Sprite& operator=(Sprite&& other) = delete;
 
     ~Sprite();
 
