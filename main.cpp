@@ -4,6 +4,7 @@
 #include "X/GameObject.h"
 #include "X/Sprite.h"
 #include "X/Renderer.h"
+#include "X/Game.h"
 #include <vector>
 #include <memory>
 #include <iostream>
@@ -12,10 +13,14 @@ template<class T>
 using UPtr = std::unique_ptr<T>;
 using GOUptr = UPtr<X::GameObject>;
 
+extern X::Game game;
 
 int main(void)
 {
     X::Global global = X::Global::create_global();
+
+    X::Renderer renderer;
+    game.renderer = &renderer;
 
     InitWindow(global.screen_width, global.screen_height, global.title);
     SetTraceLogLevel(LOG_NONE);
@@ -53,7 +58,8 @@ int main(void)
             {
                 X::Sprite* spr = dynamic_cast<X::Sprite*>(obj.get());
 
-                X::Renderer::DrawSprite(spr);
+                game.renderer->DrawSprite(spr);
+
 
                 // auto spr = dynamic_cast<X::Sprite*>(&obj);
                 // DrawSprite(spr);
