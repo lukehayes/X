@@ -3,6 +3,7 @@
 #include "X/Global.h"
 #include "X/GameObject.h"
 #include "X/Sprite.h"
+#include "X/Renderer.h"
 #include <vector>
 #include <memory>
 #include <iostream>
@@ -11,27 +12,6 @@ template<class T>
 using UPtr = std::unique_ptr<T>;
 using GOUptr = UPtr<X::GameObject>;
 
-void DrawSprite(X::Sprite* sprite)
-{
-    DrawTextureEx(
-        sprite->texture,
-        sprite->transform.position,
-        0,
-        3,
-        sprite->color
-    );
-}
-
-void DrawObject(const X::GameObject& object)
-{
-    DrawRectangle(
-        object.transform.position.x,
-        object.transform.position.y,
-        object.transform.scale.x,
-        object.transform.scale.y,
-        object.color
-    );
-}
 
 int main(void)
 {
@@ -73,7 +53,7 @@ int main(void)
             {
                 X::Sprite* spr = dynamic_cast<X::Sprite*>(obj.get());
 
-                DrawSprite(spr);
+                X::Renderer::DrawSprite(spr);
 
                 // auto spr = dynamic_cast<X::Sprite*>(&obj);
                 // DrawSprite(spr);
