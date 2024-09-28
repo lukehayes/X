@@ -8,7 +8,7 @@ namespace X
 {
 struct Sprite : public X::GameObject
 {
-    Sprite() {}
+    Sprite() = delete;
     Sprite(const char* image, const Vector2& position);
     Sprite(const Sprite& other);
 
