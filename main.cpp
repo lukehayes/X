@@ -13,11 +13,14 @@ template<class T>
 using UPtr = std::unique_ptr<T>;
 using GOUptr = UPtr<X::GameObject>;
 
-extern X::Game game;
 
 int main(void)
 {
+
+    // Set initial state here.
     X::Global global = X::Global::create_global();
+
+    X::Game game;
 
     X::Renderer renderer;
     game.renderer = &renderer;
