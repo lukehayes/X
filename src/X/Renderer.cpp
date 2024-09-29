@@ -13,7 +13,7 @@ namespace X
         );
     }
 
-    void DrawObject(const X::GameObject& object)
+    void DrawObject(X::GameObject& object)
     {
         DrawRectangle(
             object.transform.position.x,

@@ -1,4 +1,6 @@
 #include "X/GameObject.h"
+#include "X/Game.h"
+#include "X/Renderer.h"
 
 namespace X
 {
@@ -11,7 +13,16 @@ GameObject::GameObject(const Vector2& position)
 
 GameObject::GameObject(const Vector2& position, const Color& color)
         : Object(position), color(color){}
+
+
+void GameObject::update(double dt)
+{
+    // this->transform.position.x += 1 * game.deltaTime;
 }
 
+void GameObject::render(X::Game* game)
+{
+    game->renderer->DrawObject(*this);
+}
 
-
+}

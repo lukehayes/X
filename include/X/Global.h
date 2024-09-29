@@ -14,8 +14,8 @@ struct Global
     {
         Global global;
 
-        global.screen_width  = 320 * 8;
-        global.screen_height = 180 * 8;
+        global.screen_width  = 320 * 4;
+        global.screen_height = 180 * 4;
         global.FPS           = 60;
         global.title         = "Global Window";
 

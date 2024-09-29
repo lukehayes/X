@@ -8,9 +8,9 @@ namespace X
 {
 struct Renderer
 {
-    static void DrawSprite(X::Sprite* sprite);
+    void DrawSprite(X::Sprite* sprite);
 
-    static void DrawObject(const X::GameObject& object);
+    void DrawObject(X::GameObject& object);
 };
 
 }
