@@ -27,12 +27,12 @@ add_executable(${BIN_NAME} main.cpp)
 set(X_LIB "XLIB")
 
 add_library(${X_LIB} SHARED
-	"${X_DIR}/Renderer.cpp"
 	"${X_DIR}/Transform.cpp"
 	"${X_DIR}/Object.cpp"
 	"${X_DIR}/GameObject.cpp"
 	"${X_DIR}/Sprite.cpp"
 	"${X_DIR}/Game.cpp"
+	"${X_DIR}/Renderer.cpp"
 )
 
 # -----------------------------------------------------------------------------
