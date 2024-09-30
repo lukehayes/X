@@ -10,7 +10,7 @@ struct Renderer
 {
     void DrawSprite(X::Sprite* sprite);
 
-    void DrawObject(X::GameObject& object);
+    void DrawObject(X::GameObject* object);
 };
 
 }

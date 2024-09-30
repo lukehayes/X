@@ -13,14 +13,14 @@ namespace X
         );
     }
 
-    void DrawObject(X::GameObject& object)
+    void Renderer::DrawObject(X::GameObject* object)
     {
         DrawRectangle(
-            object.transform.position.x,
-            object.transform.position.y,
-            object.transform.scale.x,
-            object.transform.scale.y,
-            object.color
+            object->transform.position.x,
+            object->transform.position.y,
+            object->transform.scale.x,
+            object->transform.scale.y,
+            object->color
         );
     }
 }
