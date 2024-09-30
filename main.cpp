@@ -19,12 +19,13 @@ int main(void)
     // ------------------------------------------------------------------------
     // Set initial state here.
     X::Global global = X::Global::create_global();
-
+    
     X::Game game;
     game.deltaTime = GetFrameTime();
 
     X::Renderer renderer;
     game.renderer = &renderer;
+
     // ------------------------------------------------------------------------
 
 
@@ -44,6 +45,9 @@ int main(void)
         float ry = GetRandomValue(0, global.screen_height - 20);
 
         UPtr<X::Sprite> o = std::make_unique<X::Sprite>("../assets/debug.png", Vector2 {rx,ry});
+
+        o->game = &game;
+        
         objects.push_back(std::move(o));
     }
 
@@ -52,15 +56,20 @@ int main(void)
     {
         game.deltaTime = GetFrameTime();
 
+        for(auto& obj : objects)
+        {
+            obj->update();
+        }
+
         BeginDrawing();
             ClearBackground(LIGHTGRAY);
 
             for(auto& obj : objects)
             {
-                X::Sprite* spr = dynamic_cast<X::Sprite*>(obj.get());
+                X::Sprite* spr = static_cast<X::Sprite*>(obj.get());
+                X::GameObject* o = obj.get();
 
-                spr->update(1.0);
-
+                obj->render();
             }
 
         EndDrawing();
