@@ -8,6 +8,7 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <chrono>
 
 template<class T> 
 using UPtr = std::unique_ptr<T>;
@@ -25,6 +26,7 @@ int main(void)
 
     X::Renderer renderer;
     game.renderer = &renderer;
+
 
     // ------------------------------------------------------------------------
 
@@ -47,11 +49,37 @@ int main(void)
     spr1->game = &game;
     objects.push_back(std::move(spr1));
 
+    std::chrono::milliseconds start = std::chrono::duration()::zero;
+    std::chrono::milliseconds end;
+    double tick = 0;
+    double ns = 1000000.0 / 60.0; // Syncs updates at 60 per second (59 - 61)
 
-    while (!WindowShouldClose())
-    {
-        game.deltaTime = GetFrameTime();
+    while (!WindowShouldClose()) {
 
+        auto start = (std::chrono::steady_clock::now()).time_since_epoch();
+
+        std::chrono::milliseconds m = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
+
+        std::cout << m.count() << std::endl;
+
+
+        start = (std::chrono::steady_clock().now()).time_since_epoch();
+
+        // tick  += (double)(start - end) / ns;
+
+        std::cout << "Tick" << std::endl;
+
+        while (tick >= 1.0) {
+            
+            // Call tick() here
+
+            std::cout << "Tick" << std::endl;
+
+            tick -=1.0;
+        }
+
+
+        std::cout << "Update" << std::endl;
         for(auto& obj : objects)
         {
             obj->update();
@@ -59,6 +87,7 @@ int main(void)
 
         BeginDrawing();
             ClearBackground(LIGHTGRAY);
+            std::cout << "Render" << std::endl;
 
             for(auto& obj : objects)
             {
