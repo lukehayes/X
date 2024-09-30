@@ -7,7 +7,7 @@ namespace X
 
     struct Game
     {
-        Renderer* renderer;
+        X::Renderer* renderer;
         double deltaTime;
     };
 }
