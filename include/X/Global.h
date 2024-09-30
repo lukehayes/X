@@ -14,7 +14,7 @@ struct Global
     {
         Global global;
 
-        int mult = 4;
+        int mult = 8;
 
         global.screen_width  = 320 * mult;
         global.screen_height = 180 * mult;

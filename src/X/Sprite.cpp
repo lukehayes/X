@@ -29,7 +29,7 @@ Sprite::update()
 void
 Sprite::render()
 {
-    this->game->renderer->DrawObject(this);
+    this->game->renderer->DrawSprite(this);
 }
 
 
