@@ -6,6 +6,7 @@
 
 namespace X
 {
+
 struct Sprite : public X::GameObject
 {
     Sprite() = delete;
@@ -16,6 +17,9 @@ struct Sprite : public X::GameObject
 
     Sprite& operator=(Sprite& other)  = delete;
     Sprite& operator=(Sprite&& other) = delete;
+
+    void update() override;
+    void render() override;
 
     ~Sprite();
 
