@@ -28,28 +28,24 @@ int main(void)
 
     // ------------------------------------------------------------------------
 
-
+    // ------------------------------------------------------------------------
+    // Raylib setup
     InitWindow(global.screen_width, global.screen_height, global.title);
     SetTraceLogLevel(LOG_NONE);
     SetTargetFPS(global.FPS);
     SetExitKey(KEY_Q);
 
-    X::GameObject object1({100,100});
-    X::Sprite s1("../assets/debug.png", Vector2({200,200}));
+    // ------------------------------------------------------------------------
 
+
+    // ------------------------------------------------------------------------
+    // Test objects
     VGOUptr objects;
+    X::GameObject object1({100,100});
 
-    for(int i = 0; i<= 10; i++)
-    {
-        float rx = GetRandomValue(0, global.screen_width - 20);
-        float ry = GetRandomValue(0, global.screen_height - 20);
-
-        UPtr<X::Sprite> o = std::make_unique<X::Sprite>("../assets/debug.png", Vector2 {rx,ry});
-
-        o->game = &game;
-        
-        objects.push_back(std::move(o));
-    }
+    UPtr<X::Sprite> spr1 = std::make_unique<X::Sprite>("../assets/debug.png", Vector2({200,300}));
+    spr1->game = &game;
+    objects.push_back(std::move(spr1));
 
 
     while (!WindowShouldClose())
@@ -67,15 +63,12 @@ int main(void)
             for(auto& obj : objects)
             {
                 X::Sprite* spr = static_cast<X::Sprite*>(obj.get());
-                X::GameObject* o = obj.get();
 
-                obj->render();
+                spr->render();
             }
 
         EndDrawing();
     }
-
-    std::cout << "Deleted All objects" << std::endl;
 
     CloseWindow();
 
