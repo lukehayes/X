@@ -23,7 +23,7 @@ Sprite::Sprite(Sprite&& other)
 void
 Sprite::update()
 {
-    this->transform.position.x += 100 * game->deltaTime;
+    this->transform.position.y += 100 * game->deltaTime;
 }
 
 void
