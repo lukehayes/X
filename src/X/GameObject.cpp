@@ -15,14 +15,14 @@ GameObject::GameObject(const Vector2& position, const Color& color)
         : Object(position), color(color){}
 
 
-void GameObject::update(double dt)
+void GameObject::update()
 {
     // this->transform.position.x += 1 * game.deltaTime;
 }
 
-void GameObject::render(X::Game* game)
+void GameObject::render()
 {
-    game->renderer->DrawObject(*this);
+    game->renderer->DrawObject(this);
 }
 
 }

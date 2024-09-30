@@ -7,27 +7,27 @@
 namespace X
 {
 
-
 struct GameObject : public X::Object
 {
     // Constructors
     GameObject();
     GameObject(const Vector2& position);
     GameObject(const Vector2& position, const Color& color);
-
+    
     // // Normal update method - 60FPS.
-    virtual void update(double dt);
+    virtual void update();
     //
     // // Fixed timestep update.
     // virtual void tick() = 0;
     //
-    virtual void render(X::Game* game);
+    virtual void render();
     //
     //
     virtual ~GameObject() {}
     
     // Members
     Color color;
+    X::Game* game = nullptr;
 };
 }
 
