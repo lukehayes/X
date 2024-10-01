@@ -15,6 +15,9 @@ using UPtr = std::unique_ptr<T>;
 using GOUptr = UPtr<X::GameObject>;
 using VGOUptr = std::vector<GOUptr>;
 
+template<class T>
+using dur = std::chrono::duration<T>;
+
 int main(void)
 {
     // ------------------------------------------------------------------------
@@ -50,39 +53,55 @@ int main(void)
     objects.push_back(std::move(spr1));
 
     using secs = std::chrono::milliseconds;
-    using millis = std::chrono::microseconds;
+    using millis = std::chrono::seconds;
     using sys_clock = std::chrono::high_resolution_clock;
+    using time_point = std::chrono::high_resolution_clock::time_point;
+
 
     millis startMS  = std::chrono::duration_cast<millis>(sys_clock::now().time_since_epoch());
-    double start = 0.0, end = 0.0;
-    double tick  = 0.0;
-    double ns    = 1000000.0 / 60.0; // Syncs updates at 60 per second (59 - 61)
+    
+    auto t1 = std::chrono::steady_clock().now();
+    time_point t2;
+
+    long double start = 0.0, end = 0.0;
+    long double tick  = 0.0;
+    long double ns    = 1000000.0 / 60.0; // Syncs updates at 60 per second (59 - 61)
 
     while (!WindowShouldClose()) {
 
-        // auto start = (std::chrono::steady_clock::now()).time_since_epoch();
+        t1 = std::chrono::steady_clock().now();
+        start = t1.time_since_epoch().count();
 
-        // Get milli seconds
-        startMS = std::chrono::duration_cast<millis>(sys_clock::now().time_since_epoch());
-        start   = startMS.count();
+        std::cout << "Start " << start << std::endl;
+        std::cout << "End " << end << std::endl;
+        std::cout << "start - end " << (start - end) << std::endl;
+        std::cout << "start - end / ns " << (long double)(start - end) / ns << std::endl;
+        std::cout << "ns" << ns << std::endl;
+        std::cout << "   " << std::endl;
+        std::cout << "---------" << std::endl;
 
+        // auto n = std::chrono::duration_cast<std::chrono::duration<double>>(t1 - t2);
+
+        // tick  += (double)n.count() / ns;
         tick  += (double)(start - end) / ns;
-        end   = start;
+        end = start;
 
-        std::cout << "Tick: " << tick << std::setprecision(10) << std::endl;
-        std::cout << "start: " << start << std::setprecision(10) << std::endl;
-        std::cout << "end: " << end << std::setprecision(10) << std::endl;
-        std::cout << "Start - end: " << (start - end) << std::endl;
-        std::cout << "Start - end: / ns " << (start - end) / ns << std::endl;
-        std::cout << "End: " << end << std::endl;
+        std::cout << "tick " << tick << std::endl;
 
-        // while (tick >= 1.0) {
-        //
-        //     // Call tick() here
-        //
-        //     std::cout << "Tick Update: " << tick << std::setprecision(10) << std::endl;
-        //     tick -= 1.0;
-        // }
+        game.tick = tick;
+        while (tick >= 1.0) {
+
+            // Call n.count()() here
+            for(auto& obj : objects)
+            {
+                X::Sprite* spr = static_cast<X::Sprite*>(obj.get());
+
+                spr->update();
+            }
+
+            std::cout << "---------> tick Update: " << (long double)tick << std::endl;
+            tick -= 1.0;
+        }
 
 
         std::cout << "Update" << std::endl;
