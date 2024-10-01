@@ -9,6 +9,7 @@ namespace X
     {
         X::Renderer* renderer;
         double deltaTime;
+        double tick;
     };
 }
 
