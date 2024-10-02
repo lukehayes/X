@@ -17,8 +17,10 @@ struct GameObject : public X::Object
     // // Normal update method - 60FPS.
     virtual void update();
     //
+
     // // Fixed timestep update.
-    // virtual void tick() = 0;
+    virtual void tick();
+
     //
     virtual void render();
     //
