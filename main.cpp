@@ -14,6 +14,7 @@ template<class T>
 using UPtr = std::unique_ptr<T>;
 using GOUptr = UPtr<X::GameObject>;
 using VGOUptr = std::vector<GOUptr>;
+using millis = std::chrono::milliseconds;
 
 template<class T>
 using dur = std::chrono::duration<T>;
@@ -53,11 +54,7 @@ int main(void)
     spr1->game = &game;
     objects.push_back(std::move(spr1));
 
-
-    using millis = std::chrono::milliseconds;
-    using time_point = std::chrono::high_resolution_clock::time_point;
-
-    auto previous = std::chrono::steady_clock().now();
+    std::chrono::time_point previous = std::chrono::steady_clock().now();
     long double tick  = 0.0;
     long double MS_PER_UPDATE = 0.016;
 
@@ -65,8 +62,8 @@ int main(void)
 
         game.deltaTime = GetFrameTime();
 
-        auto current = std::chrono::steady_clock().now();
-        auto elapsed = std::chrono::duration_cast<millis>(current - previous);
+        std::chrono::time_point current = std::chrono::steady_clock().now();
+        millis elapsed = std::chrono::duration_cast<millis>(current - previous);
         previous     = current;
         tick        += elapsed.count();
 
