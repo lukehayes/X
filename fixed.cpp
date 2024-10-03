@@ -1,3 +1,36 @@
+// GameDevFaq
+double accumulatedTime;
+double fixedTimestep = 0.01; 
+
+while (gameIsRunning)
+{
+  double newTime = getSystemTime(); 
+  double frameTime = newTime - currentTime; 
+  currentTime = newTime;
+   
+  accumulatedTime += frameTime;
+
+  while(accumulatedTime >= fixedTimestep)
+  {
+     // Do physics simulation step at fixed dt   
+     DoPhysicsStep(fixedTimestep);
+ 
+     accumulatedTime -= fixedTimestep;
+  } 
+
+  // Interpolate between current and previous state
+  LerpPhysicsResults();
+  
+  // Render scene with interpolated physics
+  DrawScene();
+}
+
+
+
+
+
+
+
 // Munificent version
 
 double previous = getCurrentTime();
