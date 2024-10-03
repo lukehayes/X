@@ -58,17 +58,42 @@ int main(void)
     long double tick  = 0.0;
     long double MS_PER_UPDATE = 0.016;
 
+    millis accumulatedTime;
+    double fixedTimestep = 0.00016;
+
     while (!WindowShouldClose()) {
 
         game.deltaTime = GetFrameTime();
 
         std::chrono::time_point current = std::chrono::steady_clock().now();
-        millis elapsed = std::chrono::duration_cast<millis>(current - previous);
-        previous     = current;
-        tick        += elapsed.count();
+        millis frameTime = std::chrono::duration_cast<millis>(current - previous);
 
-        std::cout << "Elapsed " << elapsed << std::endl;
+
+        accumulatedTime += frameTime;
+        tick = accumulatedTime.count();
+
+        std::cout << "Acc " << accumulatedTime.count() << std::endl;
         std::cout << "Tick " << tick << std::endl;
+        std::cout << "Timestep " << fixedTimestep << std::endl;
+
+        while(tick >= fixedTimestep)
+        {
+            // Do physics simulation step at fixed dt   
+            // DoPhysicsStep(fixedTimestep);
+         
+            tick -= fixedTimestep;
+            std::cout << "Tick inner " << tick << std::endl;
+            std::cout << "Timestep " << fixedTimestep << std::endl;
+        } 
+
+
+        // std::chrono::time_point current = std::chrono::steady_clock().now();
+        // millis elapsed = std::chrono::duration_cast<millis>(current - previous);
+        // previous     = current;
+        // tick        += elapsed.count();
+        //
+        // std::cout << "Elapsed " << elapsed << std::endl;
+        // std::cout << "Tick " << tick << std::endl;
 
         
         /**--------------------------------------------------------------------
