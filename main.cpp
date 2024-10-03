@@ -48,41 +48,31 @@ int main(void)
     VGOUptr objects;
     X::GameObject object1({100,100});
 
-    UPtr<X::Sprite> spr1 = std::make_unique<X::Sprite>("../assets/debug.png", Vector2({200,300}));
+    // UPtr<X::Sprite> spr1 = std::make_unique<X::Sprite>("../assets/debug.png", Vector2({200,300}));
+    UPtr<X::GameObject> spr1 = std::make_unique<X::GameObject>(Vector2{100,100});
     spr1->game = &game;
     objects.push_back(std::move(spr1));
 
-    using secs = std::chrono::milliseconds;
-    using millis = std::chrono::seconds;
-    using sys_clock = std::chrono::high_resolution_clock;
+
+    using millis = std::chrono::milliseconds;
     using time_point = std::chrono::high_resolution_clock::time_point;
 
-
-    millis startMS  = std::chrono::duration_cast<millis>(sys_clock::now().time_since_epoch());
-    
     auto previous = std::chrono::steady_clock().now();
-    // auto current = std::chrono::steady_clock::now();
-    long double elapsed = 0.0;
     long double tick  = 0.0;
-    long double MS_PER_UPDATE = 0.033;
+    long double MS_PER_UPDATE = 0.016;
 
     while (!WindowShouldClose()) {
 
-        auto current = std::chrono::steady_clock().now();
-        long double elapsed = current.time_since_epoch().count() - previous.time_since_epoch().count();
-        previous = current;
+        game.deltaTime = GetFrameTime();
 
-        auto t = std::chrono::duration<double, std::ratio<1,10000>>(current.time_since_epoch().count());
-        // tick = t.count();
-        tick += elapsed;
-        // auto tick2 = std::chrono::duration<long double>(tick).count();
+        auto current = std::chrono::steady_clock().now();
+        auto elapsed = std::chrono::duration_cast<millis>(current - previous);
+        previous     = current;
+        tick        += elapsed.count();
 
         std::cout << "Elapsed " << elapsed << std::endl;
         std::cout << "Tick " << tick << std::endl;
-        std::cout << "t " << t << std::endl;
 
-        // std::chrono::duration<double,std::ratio<1,1000>>
-        // auto n = std::chrono::duration_cast<std::chrono::duration<double>>(previous - current);
         
         /**--------------------------------------------------------------------
         INPUT
@@ -93,39 +83,41 @@ int main(void)
         /**--------------------------------------------------------------------
         TICK PHYSICS
         --------------------------------------------------------------------**/
-        // while(tick >= MS_PER_UPDATE)
-        // {
-        //     for(auto& obj : objects)
-        //     {
-        //         obj->tick();
-        //     }
-        //
-        //     std::cout << "UPDATING. Currrent Tick: " << tick << std::endl;
-        //     tick -= MS_PER_UPDATE;
-        //     game.tick = tick;
-        // }
+        while(tick >= MS_PER_UPDATE)
+        {
+            for(auto& obj : objects)
+            {
+                obj->tick();
+            }
+
+            std::cout << "Tick B: " << tick << std::endl;
+            tick -= MS_PER_UPDATE;
+            std::cout << "Tick A: " << tick << std::endl;
+            std::cout << "------" << std::endl;
+        }
 
 
         /**--------------------------------------------------------------------
         UPDATE DELTA
         --------------------------------------------------------------------**/
-        std::cout << "Update" << std::endl;
+        std::cout << "-----------> Update" << std::endl;
 
-        for(auto& obj : objects)
-        {
-            // obj->update();
-        }
+        // for(auto& obj : objects)
+        // {
+        //     obj->update();
+        // }
 
         /**--------------------------------------------------------------------
         RENDER
         --------------------------------------------------------------------**/
         BeginDrawing();
             ClearBackground(LIGHTGRAY);
-            std::cout << "Render" << std::endl;
+            std::cout << "-----------> Render" << std::endl;
 
             for(auto& obj : objects)
             {
-                X::Sprite* spr = static_cast<X::Sprite*>(obj.get());
+                std::cout << "-----------> Render LOOP" << std::endl;
+                // X::Sprite* spr = static_cast<X::Sprite*>(obj.get());
 
                 obj->render();
                 // spr->render();

@@ -2,7 +2,6 @@
 #include "X/Game.h"
 #include "X/Renderer.h"
 #include <iostream>
-#include <chrono>
 
 namespace X
 {
@@ -20,13 +19,14 @@ GameObject::GameObject(const Vector2& position, const Color& color)
 void GameObject::update()
 {
     std::cout << "Game Object Update: " << game->deltaTime << std::endl;
-    this->transform.position.x += 10 * game->deltaTime;
+    // this->transform.position.x += 10 * game->deltaTime;
 }
 
 void GameObject::tick()
 {
-    std::cout << "Game Object Tick: " << game->tick << std::endl;
-    this->transform.position.y += 10 * game->tick;
+    std::cout << "Game Object Tick: " << std::endl;
+    this->transform.position.x += 0.002;
+    this->transform.position.y += 0.002;
 }
 
 void GameObject::render()
