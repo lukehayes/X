@@ -2,6 +2,7 @@
 #include "X/Game.h"
 #include "X/Renderer.h"
 #include <iostream>
+#include <stdio.h>
 
 namespace X
 {
@@ -24,14 +25,14 @@ void GameObject::update()
 
 void GameObject::tick()
 {
-    std::cout << "Game Object Tick: " << std::endl;
-    this->transform.position.x += 0.002;
-    this->transform.position.y += 0.002;
+    static float speed = 0.00001;
+    this->transform.position.x += 1 * speed;
+    printf("Pos %f\n", this->transform.position.x);
+    // this->transform.position.y += 0.002;
 }
 
 void GameObject::render()
 {
-    std::cout << "Game Object Render: " << std::endl;
     game->renderer->DrawObject(this);
 }
 

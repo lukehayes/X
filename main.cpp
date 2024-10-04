@@ -59,7 +59,7 @@ int main(void)
     long double MS_PER_UPDATE = 0.016;
 
     millis accumulatedTime;
-    double fixedTimestep = 0.00016;
+    double fixedTimestep = 0.016;
 
     while (!WindowShouldClose()) {
 
@@ -67,25 +67,14 @@ int main(void)
 
         std::chrono::time_point current = std::chrono::steady_clock().now();
         millis frameTime = std::chrono::duration_cast<millis>(current - previous);
-
-
+        previous = current;
         accumulatedTime += frameTime;
         tick = accumulatedTime.count();
 
         std::cout << "Acc " << accumulatedTime.count() << std::endl;
         std::cout << "Tick " << tick << std::endl;
         std::cout << "Timestep " << fixedTimestep << std::endl;
-
-        while(tick >= fixedTimestep)
-        {
-            // Do physics simulation step at fixed dt   
-            // DoPhysicsStep(fixedTimestep);
-         
-            tick -= fixedTimestep;
-            std::cout << "Tick inner " << tick << std::endl;
-            std::cout << "Timestep " << fixedTimestep << std::endl;
-        } 
-
+        std::cout << "Timepoint " << current.time_since_epoch().count() << std::endl;
 
         // std::chrono::time_point current = std::chrono::steady_clock().now();
         // millis elapsed = std::chrono::duration_cast<millis>(current - previous);
@@ -105,24 +94,25 @@ int main(void)
         /**--------------------------------------------------------------------
         TICK PHYSICS
         --------------------------------------------------------------------**/
-        while(tick >= MS_PER_UPDATE)
+        while(tick >= fixedTimestep)
         {
+            // Do physics simulation step at fixed dt   
+            // DoPhysicsStep(fixedTimestep);
+         
+            game.tick = tick;
+
             for(auto& obj : objects)
             {
                 obj->tick();
             }
 
-            std::cout << "Tick B: " << tick << std::endl;
-            tick -= MS_PER_UPDATE;
-            std::cout << "Tick A: " << tick << std::endl;
-            std::cout << "------" << std::endl;
-        }
+            tick -= fixedTimestep;
 
+        } 
 
         /**--------------------------------------------------------------------
         UPDATE DELTA
         --------------------------------------------------------------------**/
-        std::cout << "-----------> Update" << std::endl;
 
         // for(auto& obj : objects)
         // {
@@ -132,17 +122,17 @@ int main(void)
         /**--------------------------------------------------------------------
         RENDER
         --------------------------------------------------------------------**/
+
         BeginDrawing();
+
             ClearBackground(LIGHTGRAY);
-            std::cout << "-----------> Render" << std::endl;
 
             for(auto& obj : objects)
             {
-                std::cout << "-----------> Render LOOP" << std::endl;
                 // X::Sprite* spr = static_cast<X::Sprite*>(obj.get());
 
-                obj->render();
                 // spr->render();
+                obj->render();
             }
 
         EndDrawing();
