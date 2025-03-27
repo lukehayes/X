@@ -37,4 +37,6 @@ int main(int argc, char *argv[])
 
     SDL_GL_DestroyContext(window_ctx);
     SDL_DestroyWindow(window);
+
+    SDL_Quit();
 }
