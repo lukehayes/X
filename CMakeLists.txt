@@ -15,6 +15,9 @@ set(BIN_NAME "X")
 #
 find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
 
+# Find OpenGL library.
+find_package(OpenGL REQUIRED)
+
 # -----------------------------------------------------------------------------
 # Set the project include directories.
 #
@@ -29,3 +32,6 @@ target_link_libraries(${BIN_NAME} ${X_LIB})
 
 # Link SDL3
 target_link_libraries(${BIN_NAME} SDL3::SDL3)
+
+# Link OpenGL
+target_link_libraries(${BIN_NAME} ${OPENGL_LIBRARY})
