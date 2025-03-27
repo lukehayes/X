@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
 
+    bool isRunning = true;
     SDL_Window* window = SDL_CreateWindow("Title", 800,600, SDL_WINDOW_OPENGL);
     SDL_GLContext window_ctx = SDL_GL_CreateContext(window);
 
@@ -26,14 +27,23 @@ int main(int argc, char *argv[])
         std::cout << "Error:" << SDL_GetError() << std::endl;
     }
 
-    // Test basic OPENGL works
-    glClearColor(0,0,0,1);
-    glClear(GL_COLOR_BUFFER_BIT);
+    while (isRunning) {
+        SDL_Event event;
 
-    SDL_GL_SwapWindow(window);
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) {
+                isRunning = false;
 
-    SDL_Delay(3000);
+                std::cout << "QUIT" << std::endl;
+            }
+        }
 
+        // Test basic OPENGL works
+        glClearColor(0,0,1,1);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        SDL_GL_SwapWindow(window);
+    }
 
     SDL_GL_DestroyContext(window_ctx);
     SDL_DestroyWindow(window);
