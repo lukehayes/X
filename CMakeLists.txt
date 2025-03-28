@@ -23,7 +23,7 @@ find_package(OpenGL REQUIRED)
 #
 include_directories(${INCLUDE_DIRS})
 
-add_executable(${BIN_NAME} main.cpp)
+add_executable(${BIN_NAME} main.cpp "${X_DIR}/Util.cpp")
 
 # -----------------------------------------------------------------------------
 # Link in the libraies the binary needs.
