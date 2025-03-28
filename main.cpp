@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
 
-    bool isRunning = true;
-    SDL_Window* window = SDL_CreateWindow("Title", 800,600, SDL_WINDOW_OPENGL);
+    bool isRunning           = true;
+    SDL_Window* window       = SDL_CreateWindow("Title", 800,600, SDL_WINDOW_OPENGL);
     SDL_GLContext window_ctx = SDL_GL_CreateContext(window);
 
     if (window == NULL) {
