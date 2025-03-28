@@ -26,9 +26,20 @@ include_directories(${INCLUDE_DIRS})
 add_executable(${BIN_NAME} main.cpp)
 
 # -----------------------------------------------------------------------------
+# Build Libraries
+#
+
+# TODO Break this into different CMake files when it gets larger.
+set(X_IO "XIO")
+add_library(${X_IO} STATIC
+	"src/X/IO/IO.cpp"
+)
+
+
+# -----------------------------------------------------------------------------
 # Link in the libraies the binary needs.
 #
-target_link_libraries(${BIN_NAME} ${X_LIB})
+target_link_libraries(${BIN_NAME} ${X_LIB} ${X_IO})
 
 # Link SDL3
 target_link_libraries(${BIN_NAME} SDL3::SDL3)
