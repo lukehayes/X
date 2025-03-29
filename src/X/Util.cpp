@@ -2,11 +2,14 @@
 
 #include <string>
 #include <fstream>
+#include <filesystem>
 
 namespace X {
 
 std::string readFile(const std::string& file)
 {
+	if (!std::filesystem::exists(file)) return "FILE NOT FOUND";
+
 	std::string contents;
 	std::fstream stream;
 
@@ -16,6 +19,7 @@ std::string readFile(const std::string& file)
 	{
 		contents += stream.get();
 	}
+
 
 	stream.close();
 
