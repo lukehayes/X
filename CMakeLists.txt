@@ -23,12 +23,21 @@ find_package(OpenGL REQUIRED)
 #
 include_directories(${INCLUDE_DIRS})
 
-add_executable(${BIN_NAME} main.cpp "${X_DIR}/Util.cpp")
+add_executable(${BIN_NAME} main.cpp)
+
+# -----------------------------------------------------------------------------
+# Build X_System library
+#
+set(X_LIB_SYSTEM "X_SYSTEM")
+
+add_library(${X_LIB_SYSTEM} STATIC
+  "${X_DIR}/Util.cpp"
+)
 
 # -----------------------------------------------------------------------------
 # Link in the libraies the binary needs.
 #
-target_link_libraries(${BIN_NAME} ${X_LIB})
+target_link_libraries(${BIN_NAME} ${X_LIB_SYSTEM})
 
 # Link SDL3
 target_link_libraries(${BIN_NAME} SDL3::SDL3)
