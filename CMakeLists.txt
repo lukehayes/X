@@ -32,6 +32,8 @@ set(X_LIB_SYSTEM "X_SYSTEM")
 
 add_library(${X_LIB_SYSTEM} STATIC
   "${X_DIR}/Util.cpp"
+  "${X_DIR}/App.cpp"
+  "${X_DIR}/Window.cpp"
 )
 
 # -----------------------------------------------------------------------------
