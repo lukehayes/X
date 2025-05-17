@@ -24,5 +24,5 @@ namespace X::GL
 	private:
 		std::string vsh;
 		std::string fsh;
-	}
+	};
 }

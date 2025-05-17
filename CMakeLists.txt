@@ -23,7 +23,12 @@ find_package(OpenGL REQUIRED)
 #
 include_directories(${INCLUDE_DIRS})
 
-add_executable(${BIN_NAME} main.cpp "${X_DIR}/Util.cpp")
+add_executable(${BIN_NAME} main.cpp
+    "${X_DIR}/Util.cpp"
+
+	## X/GL
+	"${X_DIR}/GL/Shader.cpp"
+)
 
 # -----------------------------------------------------------------------------
 # Link in the libraies the binary needs.
