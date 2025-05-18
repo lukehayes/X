@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(INCLUDE_DIRS "include")
 set(X_SRC_DIR "${PROJECT_SOURCE_DIR}/src/X")
+set(SRC_DIR "${PROJECT_SOURCE_DIR}/src/")
 set(BIN_NAME "X")
 
 # -----------------------------------------------------------------------------
@@ -28,6 +29,9 @@ add_executable(${BIN_NAME} main.cpp
 
     ## X/GL
     "${X_SRC_DIR}/GL/Shader.cpp"
+
+    ## X/GL
+    "${SRC_DIR}/glad.c"
 )
 
 # -----------------------------------------------------------------------------
