@@ -1,4 +1,5 @@
 #include "X/GL/Shader.h"
+#include "glad/glad.h"
 
 namespace X::GL
 {
@@ -19,4 +20,10 @@ namespace X::GL
 	Shader::operator=(Shader&& rhs) { return *this; }
 
 	Shader::~Shader() {}
+
+
+	void Shader::use() const
+	{
+		glUseProgram(this->program);
+	}
 }
