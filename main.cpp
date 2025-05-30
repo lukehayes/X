@@ -10,6 +10,10 @@ int main(int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Set initial state here.
 
+    constexpr int WIN_MULT   = 4;
+    constexpr int WIN_WIDTH  = 320 * WIN_MULT;
+    constexpr int WIN_HEIGHT = 180 * WIN_MULT;
+
     bool isRunning           = true;
 
     if(!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
@@ -23,7 +27,7 @@ int main(int argc, char *argv[])
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
 
-    SDL_Window* window       = SDL_CreateWindow("Title", 800,600, SDL_WINDOW_OPENGL);
+    SDL_Window* window       = SDL_CreateWindow("Title", WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_GLContext window_ctx = SDL_GL_CreateContext(window);
 
     SDL_GL_MakeCurrent(window, window_ctx);
@@ -46,10 +50,10 @@ int main(int argc, char *argv[])
     }
 
 
-    //X::GL::Shader default_shader(
-        //"VSH-Default.glsl",
-        //"FSH-Default.glsl"
-    //);
+    X::GL::Shader default_shader(
+        "VSH-Default.glsl",
+        "FSH-Default.glsl"
+    );
 
 
     while (isRunning) {
