@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 4.0)
 project(X)
 
 # -----------------------------------------------------------------------------
 # Variables
 #
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_FLAGS "-ggdb")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(INCLUDE_DIRS "include")
 set(X_SRC_DIR "${PROJECT_SOURCE_DIR}/src/X")
@@ -25,13 +26,13 @@ find_package(OpenGL REQUIRED)
 include_directories(${INCLUDE_DIRS})
 
 add_executable(${BIN_NAME} main.cpp
+    ## X/GL
+    "${SRC_DIR}/glad.c"
+
     "${X_SRC_DIR}/Util.cpp"
 
     ## X/GL
     "${X_SRC_DIR}/GL/Shader.cpp"
-
-    ## X/GL
-    "${SRC_DIR}/glad.c"
 )
 
 # -----------------------------------------------------------------------------
