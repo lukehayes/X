@@ -22,13 +22,22 @@ public:
 
 	void use() const;
 
-
-
 	~Shader();
 
+
+	void checkCompileErrors(unsigned int shader, std::string type);
+
+//protected:
+	void compile();
+	void link();
+	void build();
+
+
 private:
-	std::string vsh;
-	std::string fsh;
+	std::string vshSource;
+	std::string fshSource;
+	GLuint vshProgram;
+	GLuint fshProgram;
 	GLuint program;
 };
 }
