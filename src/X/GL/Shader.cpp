@@ -59,6 +59,7 @@ void Shader::build()
 	std::string vString = vertexStream.str();
 	const char* vShader = vString.c_str();
 
+	// TODO Add errors
 	glShaderSource(this->vshProgram, 1, &vShader, NULL);
 	glCompileShader(this->vshProgram);
 
@@ -80,6 +81,7 @@ void Shader::build()
 	const char* fShader = vString.c_str();
 	this->fshProgram = glCreateShader(GL_FRAGMENT_SHADER);
 
+	// TODO Add errors
 	glShaderSource(this->fshProgram, 1, &fShader, NULL);
 	glCompileShader(this->fshProgram);
 	this->checkCompileErrors(this->fshProgram, "FRAGMENT");
