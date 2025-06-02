@@ -1,7 +1,7 @@
 #include "X/GL/VertexBuffer.h"
 
 
-void MakeVertexBuffer(X::GL::VertexBuffer* buffer)
+void VertexBufferMake(X::GL::VertexBuffer* buffer)
 {
 	glGenVertexArrays(1, &buffer->vertexArrayObject);
 	glBindVertexArray(buffer->vertexArrayObject);

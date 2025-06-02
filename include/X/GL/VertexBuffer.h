@@ -13,7 +13,7 @@ namespace X::GL
 	};
 }
 
-void MakeVertexBuffer(X::GL::VertexBuffer* buffer);
+void VertexBufferMake(X::GL::VertexBuffer* buffer);
 
 
 #endif // !GL_VERTEXBUFFER_H
