@@ -14,6 +14,7 @@ namespace X::GL
 }
 
 void VertexBufferMake(X::GL::VertexBuffer* buffer);
+void VertexBufferSetData(X::GL::VertexBuffer* buffer);
 
 
 #endif // !GL_VERTEXBUFFER_H
