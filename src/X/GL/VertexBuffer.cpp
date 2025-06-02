@@ -8,6 +8,6 @@ void VertexBufferMake(X::GL::VertexBuffer* buffer)
 
 
 	glGenBuffers(1, &buffer->vertexBufferObject);
-	glBindBuffer(1,buffer->vertexBufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER,buffer->vertexBufferObject);
 
 }
