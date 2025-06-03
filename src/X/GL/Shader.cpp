@@ -71,14 +71,12 @@ void Shader::build()
 	std::ifstream fragmentInput;
 	std::stringstream fragmentStream;
 
-	fragmentInput.open(this->vshSource);
+	fragmentInput.open(this->fshSource);
 	fragmentStream << fragmentInput.rdbuf();
 	fragmentInput.close();
 
-	this->vshProgram = glCreateShader(GL_VERTEX_SHADER);
-
 	std::string fString = fragmentStream.str();
-	const char* fShader = vString.c_str();
+	const char* fShader = fString.c_str();
 	this->fshProgram = glCreateShader(GL_FRAGMENT_SHADER);
 
 	// TODO Add errors
