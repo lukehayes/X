@@ -46,43 +46,11 @@ void Shader::build()
 {
 	// VERTEX SHADER
 
-	// Read File
-	std::ifstream vertexInput;
-	std::stringstream vertexStream;
-
-	vertexInput.open(this->vshSource);
-	vertexStream << vertexInput.rdbuf();
-	vertexInput.close();
-
-	this->vshProgram = glCreateShader(GL_VERTEX_SHADER);
-
-	std::string vString = vertexStream.str();
-	const char* vShader = vString.c_str();
-
-	// TODO Add errors
-	glShaderSource(this->vshProgram, 1, &vShader, NULL);
-	glCompileShader(this->vshProgram);
-
-	this->checkCompileErrors(this->vshProgram, "VERTEX");
+	this->compile("VERTEX", X::ShaderType::VERTEX);
 
 	// FRAGMENT SHADER
 
-	// Read File
-	std::ifstream fragmentInput;
-	std::stringstream fragmentStream;
-
-	fragmentInput.open(this->fshSource);
-	fragmentStream << fragmentInput.rdbuf();
-	fragmentInput.close();
-
-	std::string fString = fragmentStream.str();
-	const char* fShader = fString.c_str();
-	this->fshProgram = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// TODO Add errors
-	glShaderSource(this->fshProgram, 1, &fShader, NULL);
-	glCompileShader(this->fshProgram);
-	this->checkCompileErrors(this->fshProgram, "FRAGMENT");
+	//this->compile("FRAGMENT", X::ShaderType::FRAGMENT);
 
 	this->program = glCreateProgram();
 
@@ -91,6 +59,31 @@ void Shader::build()
 	glLinkProgram(this->program);
 
 }
+
+void Shader::compile(const std::string& name, ShaderType type)
+{
+	// VERTEX SHADER
+
+	// Read File
+	std::ifstream shaderSrcInput;
+	std::stringstream shaderStream;
+
+	shaderSrcInput.open(this->vshSource);
+	shaderStream << shaderSrcInput.rdbuf();
+	shaderSrcInput.close();
+
+	GLuint shaderProg = glCreateShader(type);
+
+	std::string vString = shaderStream.str();
+	const char* vShader = vString.c_str();
+
+	// TODO Add errors
+	glShaderSource(shaderProg, 1, &vShader, NULL);
+	glCompileShader(shaderProg);
+
+	this->checkCompileErrors(shaderProg, "VERTEX");
+}
+
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type)
 {

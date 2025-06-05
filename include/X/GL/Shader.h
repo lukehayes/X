@@ -1,6 +1,8 @@
-
 #include <string>
 #include "glad/glad.h"
+#include "X/GL/BufferType.h"
+#include "X/GL/ShaderType.h"
+
 
 namespace X::GL
 {
@@ -28,7 +30,7 @@ public:
 	void checkCompileErrors(unsigned int shader, std::string type);
 
 //protected:
-	void compile();
+	void compile(const std::string& name, ShaderType type);
 	void link();
 	void build();
 
