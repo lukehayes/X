@@ -18,7 +18,7 @@ void VertexBufferSetData(X::GL::VertexBuffer* buffer)
 	GLenum type          = GL_FLOAT;
 	GLboolean normalized = GL_FALSE;
 	GLuint stride        = 0;
-	GLvoid* pointer      = 0;
+	GLvoid* pointer      = (void*)0;
 
 	glVertexAttribPointer(
 		index,
@@ -43,6 +43,4 @@ void VertexBufferSetData(X::GL::VertexBuffer* buffer)
 		data,
 		GL_STATIC_DRAW
 	);
-
-
 }
