@@ -30,7 +30,7 @@ public:
 	void checkCompileErrors(unsigned int shader, std::string type);
 
 //protected:
-	void compile(const std::string& name, ShaderType type);
+	void compile(const std::string& source, const std::string& name, ShaderType type);
 	void link();
 	void build();
 
