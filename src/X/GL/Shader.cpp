@@ -66,6 +66,11 @@ void Shader::build()
 
 }
 
+void Shader::SetUniformMat4(glm::mat4 matrix, const char* name)
+{
+	int location = glGetUniformLocation(this->program, name);
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+}
 void Shader::compile(const std::string& source, const std::string& name, ShaderType type)
 {
 	// Read File

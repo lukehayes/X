@@ -2,6 +2,7 @@
 #include "glad/glad.h"
 #include "X/GL/BufferType.h"
 #include "X/GL/ShaderType.h"
+#include "X/Math/GLM.h"
 
 
 namespace X::GL
@@ -26,8 +27,13 @@ public:
 
 	~Shader();
 
-
 	void checkCompileErrors(unsigned int shader, std::string type);
+
+	/**
+	* ----------------------------------------------------------------------------
+	*  Uniform Methods
+	* --------------------------------------------------------------------------*/
+	void SetUniformMat4(glm::mat4 matrix, const char* name);
 
 //protected:
 	void compile(const std::string& source, const std::string& name, ShaderType type);
