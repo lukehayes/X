@@ -1,6 +1,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <iostream>
+#include "X/GL/VertexBuffer.h"
 #include "glad/glad.h"
 
 #include "X/GL/Shader.h"
@@ -10,7 +11,7 @@ int main(int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Set initial state here.
 
-    constexpr int WIN_MULT   = 4;
+    constexpr int WIN_MULT   = 8;
     constexpr int WIN_WIDTH  = 320 * WIN_MULT;
     constexpr int WIN_HEIGHT = 180 * WIN_MULT;
 
@@ -51,9 +52,17 @@ int main(int argc, char *argv[])
 
 
     X::GL::Shader default_shader(
-        "VSH-Default.glsl",
-        "FSH-Default.glsl"
+        "../assets/shaders/VSH-Default.glsl",
+        "../assets/shaders/FSH-Default.glsl"
     );
+
+
+	X::GL::VertexBuffer buffer;
+
+	VertexBufferMake(&buffer);
+	VertexBufferSetData(&buffer);
+
+
 
 
     while (isRunning) {
@@ -67,8 +76,13 @@ int main(int argc, char *argv[])
 
         // Test basic OPENGL works
         float cv = 0.25;
+
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT);
+
+		default_shader.use();
+
+		glDrawArrays(GL_TRIANGLES,0,3);
 
         SDL_GL_SwapWindow(window);
     }
