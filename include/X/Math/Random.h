@@ -2,6 +2,7 @@
 #define X_MATH_RANDOM_H
 
 #include <random>
+#include <ctime>
 
 namespace X::Math {
 
@@ -26,6 +27,12 @@ private:
     std::mt19937 m_generator;
     std::random_device m_device;
 };
+
+inline size_t rand(size_t min, size_t max)
+{
+    std::srand(std::time({}));
+    return min + std::rand() % max;
+}
 
 }
 

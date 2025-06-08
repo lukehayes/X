@@ -1,4 +1,7 @@
-### Saturday 6th June 2025
+### Sunday 8th June 2025
+- [x] feat: add math/random functions
+
+### Saturday 7th June 2025
 - [x] feat: add shader uniform methods
 - [x] feat: implement model view projection
 
@@ -12,7 +15,7 @@
 
 
 ### Backlog
-- [ ] feat: implement Random class
+- [ ] refactor: make better random functions
 - [ ] feat: create Entity class
 - [ ] feat: implement index buffer - gl_element_array
 - [ ] feat: add shader combine() method
