@@ -15,6 +15,7 @@
 
 
 ### Backlog
+- [ ] refactor: move matrix calcs into Camera class
 - [ ] refactor: make better random functions
 - [ ] feat: create Entity class
 - [ ] feat: implement index buffer - gl_element_array
