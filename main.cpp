@@ -5,13 +5,14 @@
 #include "glad/glad.h"
 
 #include "X/GL/Shader.h"
+#include "X/Math/GLM.h"
 
 int main(int argc, char *argv[])
 {
     // ------------------------------------------------------------------------
     // Set initial state here.
 
-    constexpr int WIN_MULT   = 8;
+    constexpr int WIN_MULT   = 4;
     constexpr int WIN_WIDTH  = 320 * WIN_MULT;
     constexpr int WIN_HEIGHT = 180 * WIN_MULT;
 
@@ -52,17 +53,26 @@ int main(int argc, char *argv[])
 
 
     X::GL::Shader default_shader(
-        "../assets/shaders/VSH-Default.glsl",
-        "../assets/shaders/FSH-Default.glsl"
+        "../assets/shaders/VSH-Camera3D.glsl",
+        "../assets/shaders/FSH-Camera3D.glsl"
     );
 
 
-	X::GL::VertexBuffer buffer;
+    X::GL::VertexBuffer buffer;
 
-	VertexBufferMake(&buffer);
-	VertexBufferSetData(&buffer);
+    VertexBufferMake(&buffer);
+    VertexBufferSetData(&buffer);
 
+    glm::mat4 projection = glm::perspective(45.0f, (float)WIN_HEIGHT / (float)WIN_HEIGHT, 0.1f, 100.f);
 
+    glm::mat4 view = glm::lookAt(
+        (glm::vec3){0,0,-10.0},
+        (glm::vec3){0,0, 0},
+        (glm::vec3){0,1,0}
+    );
+
+    float c = 0.0;
+    glm::mat4 model = glm::mat4(1.0f);
 
 
     while (isRunning) {
@@ -80,9 +90,18 @@ int main(int argc, char *argv[])
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT);
 
-		default_shader.use();
+        c += 0.01;
 
-		glDrawArrays(GL_TRIANGLES,0,3);
+        default_shader.use();
+
+        model = glm::translate(model, { 0,0, sin(c) });
+
+        default_shader.SetUniformMat4(projection, "projection");
+        default_shader.SetUniformMat4(view, "view");
+        default_shader.SetUniformMat4(model, "model");
+
+
+        glDrawArrays(GL_TRIANGLES,0,3);
 
         SDL_GL_SwapWindow(window);
     }
