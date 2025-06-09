@@ -71,6 +71,13 @@ void Shader::SetUniformMat4(glm::mat4 matrix, const char* name)
 	int location = glGetUniformLocation(this->program, name);
 	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
+
+void Shader::setUniformFloat(float val, const char* name)
+{
+	int location = glGetUniformLocation(this->program, name);
+	glUniform1f(location, val);
+}
+
 void Shader::compile(const std::string& source, const std::string& name, ShaderType type)
 {
 	// Read File
@@ -112,6 +119,9 @@ void Shader::compile(const std::string& source, const std::string& name, ShaderT
 	}
 	// TODO Add errors
 
+	// glAttachShader(this->program, this->vshProgram);
+	// glAttachShader(this->program, this->fshProgram);
+	// glLinkProgram(this->program);
 }
 
 
@@ -129,7 +139,7 @@ void Shader::checkCompileErrors(unsigned int shader, std::string type)
 		}
 	}
 	else
-	{
+{
 		glGetProgramiv(shader, GL_LINK_STATUS, &success);
 		if (!success)
 		{
