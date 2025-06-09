@@ -78,6 +78,13 @@ void Shader::setUniformFloat(float val, const char* name)
 	glUniform1f(location, val);
 }
 
+void Shader::setUniformVec3(glm::vec3 val, const char* name)
+{
+	int location = glGetUniformLocation(this->program, name);
+	glUniform3f(location, val.x, val.y, val.z);
+
+}
+
 void Shader::compile(const std::string& source, const std::string& name, ShaderType type)
 {
 	// Read File

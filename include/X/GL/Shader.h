@@ -34,6 +34,7 @@ public:
 	*  Uniform Methods
 	* --------------------------------------------------------------------------*/
 	void SetUniformMat4(glm::mat4 matrix, const char* name);
+	void setUniformVec3(glm::vec3 val, const char* name);
 	void setUniformFloat(float val, const char* name);
 
 
