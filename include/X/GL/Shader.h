@@ -34,6 +34,8 @@ public:
 	*  Uniform Methods
 	* --------------------------------------------------------------------------*/
 	void SetUniformMat4(glm::mat4 matrix, const char* name);
+	void setUniformFloat(float val, const char* name);
+
 
 //protected:
 	void compile(const std::string& source, const std::string& name, ShaderType type);
