@@ -1,5 +1,6 @@
 ### Monday 9th June 2025
 - [x] feat: add float shader uniform
+- [x] feat: add vec3 shader uniform
 
 ### Sunday 8th June 2025
 - [x] feat: add math/random functions

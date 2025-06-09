@@ -84,7 +84,6 @@ void Shader::setUniformVec3(glm::vec3 val, const char* name)
 	glUniform3f(location, val.x, val.y, val.z);
 
 }
-
 void Shader::compile(const std::string& source, const std::string& name, ShaderType type)
 {
 	// Read File
