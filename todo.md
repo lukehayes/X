@@ -1,3 +1,6 @@
+### Tuesday 10th June 2025
+- [ ] feat: add GLProgram class
+
 ### Monday 9th June 2025
 - [x] feat: add float shader uniform
 - [x] feat: add vec3 shader uniform
@@ -19,6 +22,8 @@
 
 
 ### Backlog
+- [ ] feat: add orthographic camera
+- [ ] feat: add FPS style movement
 - [ ] refactor: move matrix calcs into Camera class
 - [ ] refactor: make better random functions
 - [ ] feat: create Entity class
