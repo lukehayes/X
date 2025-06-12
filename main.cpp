@@ -6,6 +6,7 @@
 
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
+#include "X/GL/GLProgram.h"
 
 int main(int argc, char *argv[])
 {
@@ -56,6 +57,9 @@ int main(int argc, char *argv[])
         "../assets/shaders/VSH-Camera3D.glsl",
         "../assets/shaders/FSH-Camera3D.glsl"
     );
+
+
+    X::GL::GLProgram  glprogram;
 
 
     X::GL::VertexBuffer buffer;

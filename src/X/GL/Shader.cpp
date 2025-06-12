@@ -49,14 +49,14 @@ void Shader::build()
 	this->compile(
 		this->vshSource,
 		"VERTEX",
-		X::ShaderType::VERTEX);
+		X::GL::ShaderType::VERTEX);
 
 	// FRAGMENT SHADER
 
 	this->compile(
 		this->fshSource,
 		"FRAGMENT",
-		X::ShaderType::FRAGMENT);
+		X::GL::ShaderType::FRAGMENT);
 
 	this->program = glCreateProgram();
 
