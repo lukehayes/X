@@ -14,6 +14,10 @@ namespace X::GL
 class Shader
 {
 public:
+
+	// TODO Sort this default shader out - fixes issue in GLProgram for now
+	Shader() {}
+
 	Shader(const char* vsh, const char* fsh);
 
 	Shader(
