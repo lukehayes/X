@@ -59,21 +59,23 @@ int main(int argc, char *argv[])
     );
 
 
-    X::GL::GLProgram  glprogram;
-
-
-    X::GL::VertexBuffer buffer;
-
-    VertexBufferMake(&buffer);
-    VertexBufferSetData(&buffer);
-
-    glm::mat4 projection = glm::perspective(45.0f, (float)WIN_HEIGHT / (float)WIN_HEIGHT, 0.1f, 100.f);
-
-    glm::mat4 view = glm::lookAt(
+    X::GL::GLProgram program = X::GL::GLProgramCreate();
+    program.projection = glm::perspective(45.0f, (float)WIN_HEIGHT / (float)WIN_HEIGHT, 0.1f, 100.f);
+    program.view = glm::lookAt(
         (glm::vec3){0,0,-10.0},
         (glm::vec3){0,0, 0},
         (glm::vec3){0,1,0}
     );
+
+
+    X::GL::VertexBuffer buffer;
+    VertexBufferMake(&buffer);
+    VertexBufferSetData(&buffer);
+
+    program.buffer = buffer;
+    program.shader = default_shader;
+
+
 
     float c = 0.0;
     glm::mat4 model = glm::mat4(1.0f);
@@ -100,8 +102,14 @@ int main(int argc, char *argv[])
 
         model = glm::translate(model, { 0,0, sin(c) });
 
-        default_shader.SetUniformMat4(projection, "projection");
-        default_shader.SetUniformMat4(view, "view");
+    program.view = glm::lookAt(
+        (glm::vec3){sin(c),0,-10.0},
+        (glm::vec3){0,0, 0},
+        (glm::vec3){0,1,0}
+    );
+
+        default_shader.SetUniformMat4(program.projection, "projection");
+        default_shader.SetUniformMat4(program.view, "view");
         default_shader.SetUniformMat4(model, "model");
 
 
