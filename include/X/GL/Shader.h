@@ -1,3 +1,7 @@
+#ifndef X_GL_SHADER
+#define X_GL_SHADER
+
+
 #include <string>
 #include "glad/glad.h"
 #include "X/GL/BufferType.h"
@@ -52,3 +56,5 @@ private:
 	GLuint program;
 };
 }
+
+#endif // !X_GL_SHADER
