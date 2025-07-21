@@ -7,6 +7,8 @@
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
 #include "X/GL/GLProgram.h"
+#include "X/Model/Model.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -58,14 +60,22 @@ int main(int argc, char *argv[])
         "../assets/shaders/FSH-Camera3D.glsl"
     );
 
+    glm::vec4 color = glm::vec4{1,0,1,1};
+    default_shader.setUniformVec4(color, "color");
+
 
     X::GL::GLProgram program = X::GL::GLProgramCreate();
-    program.projection = glm::perspective(45.0f, (float)WIN_HEIGHT / (float)WIN_HEIGHT, 0.1f, 100.f);
-    program.view = glm::lookAt(
-        (glm::vec3){0,0,-10.0},
-        (glm::vec3){0,0, 0},
-        (glm::vec3){0,1,0}
-    );
+    //program.projection = glm::perspective(45.0f, (float)WIN_HEIGHT / (float)WIN_HEIGHT, 0.1f, 100.f);
+    //program.projection = glm::ortho(0.0f,0.0f,800.0f,600.0f,1.0f, 10.0f);
+
+    // Centered 2D projection
+    program.projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, 0.1f, 1000.0f);
+    program.view = glm::mat4(1.0f);
+    //program.view = glm::lookAt(
+        //(glm::vec3){0,0,-10.0},
+        //(glm::vec3){0,0, 0},
+        //(glm::vec3){0,1,0}
+    //);
 
 
     X::GL::VertexBuffer buffer;
@@ -75,10 +85,9 @@ int main(int argc, char *argv[])
     program.buffer = buffer;
     program.shader = default_shader;
 
-
-
     float c = 0.0;
-    glm::mat4 model = glm::mat4(1.0f);
+
+    Model::Model model;
 
 
     while (isRunning) {
@@ -94,25 +103,21 @@ int main(int argc, char *argv[])
         float cv = 0.25;
 
         glClearColor(cv,cv,cv,1);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         c += 0.01;
 
+        model.position.z += std::sin(c) / 100.0f;
+        model.matrix = glm::translate(model.matrix, model.position);
+
         default_shader.use();
 
-        model = glm::translate(model, { 0,0, sin(c) });
-
-    program.view = glm::lookAt(
-        (glm::vec3){sin(c),0,-10.0},
-        (glm::vec3){0,0, 0},
-        (glm::vec3){0,1,0}
-    );
 
         default_shader.SetUniformMat4(program.projection, "projection");
         default_shader.SetUniformMat4(program.view, "view");
-        default_shader.SetUniformMat4(model, "model");
 
-
+        default_shader.SetUniformMat4(model.matrix, "model");
+        default_shader.setUniformVec4(color, "color");
         glDrawArrays(GL_TRIANGLES,0,3);
 
         SDL_GL_SwapWindow(window);
