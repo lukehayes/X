@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
         "../assets/shaders/FSH-Camera3D.glsl"
     );
 
-    glm::vec4 color = glm::vec4{1,0,1,1};
+    glm::vec4 color = glm::vec4{0.45,0.45,0.45,1.0};
     default_shader.setUniformVec4(color, "color");
 
 
@@ -87,7 +87,10 @@ int main(int argc, char *argv[])
 
     float c = 0.0;
 
-    Model::Model model;
+    Model::Model model({0.01,0,-3.0f});
+
+    model.matrix = glm::translate(model.matrix, model.position);
+    model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
 
 
     while (isRunning) {
@@ -100,18 +103,16 @@ int main(int argc, char *argv[])
         }
 
         // Test basic OPENGL works
-        float cv = 0.25;
+        float cv = 0.60;
 
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         c += 0.01;
 
-        model.position.z += std::sin(c) / 100.0f;
-        model.matrix = glm::translate(model.matrix, model.position);
-
         default_shader.use();
 
+    model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
 
         default_shader.SetUniformMat4(program.projection, "projection");
         default_shader.SetUniformMat4(program.view, "view");
