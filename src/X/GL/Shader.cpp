@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <print>
 
 namespace X::GL
 {
@@ -82,8 +83,14 @@ void Shader::setUniformVec3(glm::vec3 val, const char* name)
 {
 	int location = glGetUniformLocation(this->program, name);
 	glUniform3f(location, val.x, val.y, val.z);
-
 }
+
+void Shader::setUniformVec4(glm::vec4 val, const char* name)
+{
+	int location = glGetUniformLocation(this->program, name);
+	glUniform4f(location, val.r, val.g, val.b, val.a);
+}
+
 void Shader::compile(const std::string& source, const std::string& name, ShaderType type)
 {
 	// Read File

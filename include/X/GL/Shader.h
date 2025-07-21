@@ -43,10 +43,11 @@ public:
 	* --------------------------------------------------------------------------*/
 	void SetUniformMat4(glm::mat4 matrix, const char* name);
 	void setUniformVec3(glm::vec3 val, const char* name);
+	void setUniformVec4(glm::vec4 val, const char* name);
 	void setUniformFloat(float val, const char* name);
 
 
-//protected:
+	//protected:
 	void compile(const std::string& source, const std::string& name, ShaderType type);
 	void link();
 	void build();
