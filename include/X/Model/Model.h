@@ -8,11 +8,11 @@ namespace Model
 class Model
 {
 public:
-	Model() {}
-	~Model() {}
+	Model(const glm::vec3 &position = {0,0, -0.1f});
+	~Model();
 
 	glm::vec3 position = {0,0,-0.1f};
-    glm::mat4 matrix = glm::mat4(1.0f);
+	glm::mat4 matrix = glm::mat4(1.0f);
 };
 }
 
