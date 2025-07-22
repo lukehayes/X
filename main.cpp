@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
         "../assets/shaders/FSH-Camera3D.glsl"
     );
 
-    glm::vec4 color = glm::vec4{0.45,0.45,0.45,1.0};
+    glm::vec4 color = glm::vec4{0.25,0.25,0.25,1.0};
     default_shader.setUniformVec4(color, "color");
 
 
@@ -79,8 +79,8 @@ int main(int argc, char *argv[])
 
 
     X::GL::VertexBuffer buffer;
-    VertexBufferMake(&buffer);
-    VertexBufferSetData(&buffer);
+    VertexBufferMake(&buffer, X::GL::BufferType::ELEMENT_BUFFER);
+    VertexBufferSetData(&buffer, X::GL::BufferType::ELEMENT_BUFFER);
 
     program.buffer = buffer;
     program.shader = default_shader;
@@ -110,16 +110,19 @@ int main(int argc, char *argv[])
 
         c += 0.01;
 
+        glBindVertexArray(buffer.vertexArrayObject);
+
         default_shader.use();
 
-    model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
+        model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
 
         default_shader.SetUniformMat4(program.projection, "projection");
         default_shader.SetUniformMat4(program.view, "view");
 
         default_shader.SetUniformMat4(model.matrix, "model");
         default_shader.setUniformVec4(color, "color");
-        glDrawArrays(GL_TRIANGLES,0,3);
+        //glDrawArrays(GL_TRIANGLES,0,3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         SDL_GL_SwapWindow(window);
     }
