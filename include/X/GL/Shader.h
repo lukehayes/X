@@ -4,7 +4,6 @@
 
 #include <string>
 #include "glad/glad.h"
-#include "X/GL/BufferType.h"
 #include "X/GL/ShaderType.h"
 #include "X/Math/GLM.h"
 
