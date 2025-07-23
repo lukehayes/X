@@ -1,27 +1,19 @@
-### Tuesday 10th June 2025
-- [ ] feat: add GLProgram class
+### Wednesday 23rd July 2025
+- [ ] feat: add Render Pool hash map idea
 
-### Monday 9th June 2025
-- [x] feat: add float shader uniform
-- [x] feat: add vec3 shader uniform
-
-### Sunday 8th June 2025
-- [x] feat: add math/random functions
-
-### Saturday 7th June 2025
-- [x] feat: add shader uniform methods
-- [x] feat: implement model view projection
-
-### Friday 6th June 2025
-- [x] fix: fix shader compilation
-- [x] build: add GLM math library
-
-
-### Thursday 5th June 2025
-- [x] feat: add GL_ENUMS for GL_ARRAY_BUFFER etc
-
+### Tuesday 29th July 2025
+### Monday 28th July 2025
+### Sunday 27th July 2025
+### Saturday 26th July 2025
+### Friday 25th July 2025
+### Thursday 24th July 2025
 
 ### Backlog
+- [ ] feat: add Random class
+- [ ] feat: implement delta time
+- [ ] feat: add simple logging for debug mode
+- [ ] refactor: tidy up main entry point
+- [ ] feat: add Model class
 - [ ] feat: add orthographic camera
 - [ ] feat: add FPS style movement
 - [ ] refactor: move matrix calcs into Camera class
