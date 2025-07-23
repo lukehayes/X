@@ -19,10 +19,11 @@ void Camera3D::update(double dt)
 
     static float c = 0.0;
     c += 0.01;
+	int mult = 10.0f;
 
     this->view = glm::lookAt(
-        (glm::vec3){std::cos(c) * 10, -std::cos(10) * 10, -10.0f - std::sin(c) * 10},
-        (glm::vec3){0,0, std::sin(c) * 10},
+        (glm::vec3){std::cos(c) * mult, std::sin(c) * mult, -20 + std::cos(c) * mult},
+        (glm::vec3){0,0,0},
         (glm::vec3){0,1,0}
     );
 

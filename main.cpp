@@ -10,6 +10,11 @@
 #include "X/Model/Model.h"
 #include "X/Camera/Camera3D.h"
 
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
+
 
 int main(int argc, char *argv[])
 {
@@ -83,6 +88,28 @@ int main(int argc, char *argv[])
     model.matrix = glm::translate(model.matrix, model.position);
     model.matrix = glm::scale(model.matrix, {20,1,1});
 
+    std::vector<X::Model::Model> models;
+
+    //std::srand( std::time({}) );
+
+    for(int i = 0; i <= 1000; i++)
+    {
+        constexpr int N = 10;
+        float rx = -std::rand() % N + std::rand() % N;
+        float ry = -std::rand() % N + std::rand() % N;
+        float rz = -std::rand() % N + std::rand() % N;
+
+        float rr = std::rand() % 2;
+        float rg = std::rand() % 2;
+        float rb = std::rand() % 2;
+        float ra = std::rand() % 2;
+
+        X::Model::Model model({(float)rx,(float)ry,-10 + rz});
+        model.color = glm::vec4 {rr,rg,rb,ra};
+
+        models.push_back(model);
+    }
+
 
     while (isRunning) {
         SDL_Event event;
@@ -107,10 +134,15 @@ int main(int argc, char *argv[])
         default_shader.SetUniformMat4(cam.projection, "projection");
         default_shader.SetUniformMat4(cam.view, "view");
 
-        default_shader.SetUniformMat4(model.matrix, "model");
-        default_shader.setUniformVec4(color, "color");
-        //glDrawArrays(GL_TRIANGLES,0,3);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        for(auto m : models)
+        {
+            m.matrix = glm::translate(m.matrix, m.position);
+            default_shader.SetUniformMat4(m.matrix, "model");
+            default_shader.setUniformVec4(m.color, "color");
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        }
+
 
         SDL_GL_SwapWindow(window);
     }
