@@ -1,19 +1,18 @@
 #include "X/GL/VertexBuffer.h"
 
-
-void VertexBufferMake(X::GL::VertexBuffer* buffer, X::GL::BufferType bufferType)
+void VertexBufferMake(X::GL::VertexBuffer* buffer)
 {
 	glGenVertexArrays(1, &buffer->vertexArrayObject);
 	glBindVertexArray(buffer->vertexArrayObject);
 
 	glGenBuffers(1, &buffer->vertexBufferObject);
-	glBindBuffer(bufferType,buffer->vertexBufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER ,buffer->vertexBufferObject);
 
 	glGenBuffers(1, &buffer->indexBufferObject);
-	glBindBuffer(bufferType, buffer->indexBufferObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
 }
 
-void VertexBufferSetData(X::GL::VertexBuffer* buffer, X::GL::BufferType bufferType)
+void VertexBufferSetData(X::GL::VertexBuffer* buffer)
 {
 	GLuint index         = 0;
 	//GLuint size          = sizeof(GLuint) * 3;
@@ -69,7 +68,8 @@ void VertexBufferSetData(X::GL::VertexBuffer* buffer, X::GL::BufferType bufferTy
 
 	glBufferData (
 		GL_ELEMENT_ARRAY_BUFFER,
-		sizeof(data),
+		22,
+		//sizeof(indices),
 		indices,
 		GL_STATIC_DRAW
 	);
