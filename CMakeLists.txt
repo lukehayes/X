@@ -37,6 +37,9 @@ add_executable(${BIN_NAME} main.cpp
 
     ## X/Model
     "${X_SRC_DIR}/Model/Model.cpp"
+
+    ## X/Camera
+    "${X_SRC_DIR}/Camera/Camera3D.cpp"
 )
 
 # -----------------------------------------------------------------------------

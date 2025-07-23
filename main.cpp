@@ -8,6 +8,7 @@
 #include "X/Math/GLM.h"
 #include "X/GL/GLProgram.h"
 #include "X/Model/Model.h"
+#include "X/Camera/Camera3D.h"
 
 
 int main(int argc, char *argv[])
@@ -65,22 +66,12 @@ int main(int argc, char *argv[])
 
 
     X::GL::GLProgram program = X::GL::GLProgramCreate();
-    //program.projection = glm::perspective(45.0f, (float)WIN_HEIGHT / (float)WIN_HEIGHT, 0.1f, 100.f);
-    //program.projection = glm::ortho(0.0f,0.0f,800.0f,600.0f,1.0f, 10.0f);
 
-    // Centered 2D projection
-    program.projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, 0.1f, 1000.0f);
-    program.view = glm::mat4(1.0f);
-    //program.view = glm::lookAt(
-        //(glm::vec3){0,0,-10.0},
-        //(glm::vec3){0,0, 0},
-        //(glm::vec3){0,1,0}
-    //);
-
+    X::Camera::Camera3D cam;
 
     X::GL::VertexBuffer buffer;
-    VertexBufferMake(&buffer, X::GL::BufferType::ELEMENT_BUFFER);
-    VertexBufferSetData(&buffer, X::GL::BufferType::ELEMENT_BUFFER);
+    VertexBufferMake(&buffer);
+    VertexBufferSetData(&buffer);
 
     program.buffer = buffer;
     program.shader = default_shader;
@@ -90,7 +81,7 @@ int main(int argc, char *argv[])
     Model::Model model({0.01,0,-3.0f});
 
     model.matrix = glm::translate(model.matrix, model.position);
-    model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
+    model.matrix = glm::scale(model.matrix, {20,1,1});
 
 
     while (isRunning) {
@@ -108,16 +99,13 @@ int main(int argc, char *argv[])
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        c += 0.01;
+        cam.update(0.1);
 
-        glBindVertexArray(buffer.vertexArrayObject);
-
+    //model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
         default_shader.use();
 
-        model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
-
-        default_shader.SetUniformMat4(program.projection, "projection");
-        default_shader.SetUniformMat4(program.view, "view");
+        default_shader.SetUniformMat4(cam.projection, "projection");
+        default_shader.SetUniformMat4(cam.view, "view");
 
         default_shader.SetUniformMat4(model.matrix, "model");
         default_shader.setUniformVec4(color, "color");
