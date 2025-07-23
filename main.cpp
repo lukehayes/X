@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 
     float c = 0.0;
 
-    Model::Model model({0.01,0,-3.0f});
+    X::Model::Model model({0.01,0,-3.0f});
 
     model.matrix = glm::translate(model.matrix, model.position);
     model.matrix = glm::scale(model.matrix, {20,1,1});

@@ -1,6 +1,6 @@
 #include "X/Model/Model.h"
 
-namespace Model
+namespace X::Model
 {
 Model::Model(const glm::vec3& position)
 	: position(position)
