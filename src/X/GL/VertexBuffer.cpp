@@ -1,18 +1,41 @@
 #include "X/GL/VertexBuffer.h"
 
-void VertexBufferMake(X::GL::VertexBuffer* buffer)
+#include <print>
+
+namespace X::GL
 {
-	glGenVertexArrays(1, &buffer->vertexArrayObject);
-	glBindVertexArray(buffer->vertexArrayObject);
 
-	glGenBuffers(1, &buffer->vertexBufferObject);
-	glBindBuffer(GL_ARRAY_BUFFER ,buffer->vertexBufferObject);
-
-	glGenBuffers(1, &buffer->indexBufferObject);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
+VertexBuffer::VertexBuffer()
+{
+	this->Create();
+	this->SetData();
+	std::println("Vertext Buffer Created");
 }
 
-void VertexBufferSetData(X::GL::VertexBuffer* buffer)
+VertexBuffer::~VertexBuffer()
+{
+	glDeleteBuffers(1, &this->vertexArrayObject);
+	glDeleteBuffers(1, &this->vertexBufferObject);
+	glDeleteBuffers(1, &this->indexBufferObject);
+
+	std::println("Vertext Buffer Deleted");
+}
+
+void
+VertexBuffer::Create()
+{
+	glGenVertexArrays(1, &this->vertexArrayObject);
+	glBindVertexArray(this->vertexArrayObject);
+
+	glGenBuffers(1, &this->vertexBufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER ,this->vertexBufferObject);
+
+	glGenBuffers(1, &this->indexBufferObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBufferObject);
+}
+
+void
+VertexBuffer::SetData()
 {
 	GLuint index         = 0;
 	//GLuint size          = sizeof(GLuint) * 3;
@@ -33,16 +56,8 @@ void VertexBufferSetData(X::GL::VertexBuffer* buffer)
 
 	glEnableVertexAttribArray(index);
 
-	// Triangle Data
-	//static const GLfloat data[] = {
-	    //-0.5f, -0.5f, 0.0f,
-	     //0.5f, -0.5f, 0.0f,
-	     //0.0f,  0.5f, 0.0f
-	//};
-
-
-	// VERTEX BUFFER
-	glBindBuffer(GL_ARRAY_BUFFER, buffer->vertexBufferObject);
+	// VERTEX this
+	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferObject);
 
 	// Square Data
 	static const GLfloat data[] = {
@@ -60,7 +75,7 @@ void VertexBufferSetData(X::GL::VertexBuffer* buffer)
 	);
 
 	// ELEMENT_BUFFER
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBufferObject);
 	unsigned int indices[] = {
 		0, 1, 3,   // first triangle
 		1, 2, 3    // second triangle
@@ -74,3 +89,6 @@ void VertexBufferSetData(X::GL::VertexBuffer* buffer)
 		GL_STATIC_DRAW
 	);
 }
+
+}
+

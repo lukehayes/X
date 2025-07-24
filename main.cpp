@@ -13,6 +13,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <print>
 
 
 
@@ -75,8 +76,6 @@ int main(int argc, char *argv[])
     X::Camera::Camera3D cam;
 
     X::GL::VertexBuffer buffer;
-    VertexBufferMake(&buffer);
-    VertexBufferSetData(&buffer);
 
     program.buffer = buffer;
     program.shader = default_shader;
@@ -118,6 +117,12 @@ int main(int argc, char *argv[])
             if (event.type == SDL_EVENT_QUIT) {
                 isRunning = false;
             }
+
+            if (event.type == SDL_EVENT_KEY_DOWN) {
+                if (event.key.key == SDLK_SPACE) {
+                    std::println("SPace");
+                }
+            }
         }
 
         // Test basic OPENGL works
@@ -145,7 +150,9 @@ int main(int argc, char *argv[])
 
 
         SDL_GL_SwapWindow(window);
+
     }
+
 
     SDL_GL_DestroyContext(window_ctx);
     SDL_DestroyWindow(window);
