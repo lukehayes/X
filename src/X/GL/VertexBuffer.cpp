@@ -120,7 +120,7 @@ VertexBuffer::SetData()
 
 	glBufferData (
 		GL_ELEMENT_ARRAY_BUFFER,
-		22,
+		sizeof(indices),
 		//sizeof(indices),
 		indices,
 		GL_STATIC_DRAW
