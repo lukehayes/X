@@ -10,10 +10,19 @@ class VertexBuffer
 	public:
 
 	VertexBuffer();
+	VertexBuffer(const VertexBuffer& rhs) = delete;
+	VertexBuffer& operator=(const VertexBuffer& rhs) = delete;
+
+	VertexBuffer(const VertexBuffer&& rhs);
+	VertexBuffer& operator=(const VertexBuffer&& rhs);
+
+
 	~VertexBuffer();
+
 
 	void Create();
 	void SetData();
+	void Release();
 
 
 	GLuint vertexArrayObject;

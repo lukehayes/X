@@ -1,5 +1,6 @@
 #include "X/GL/VertexBuffer.h"
 
+#include <algorithm>
 #include <print>
 
 namespace X::GL
@@ -12,14 +13,50 @@ VertexBuffer::VertexBuffer()
 	std::println("Vertext Buffer Created");
 }
 
+VertexBuffer::VertexBuffer(const VertexBuffer&& rhs)
+	: vertexArrayObject(rhs.vertexArrayObject),
+	 vertexBufferObject(rhs.vertexBufferObject),
+	 indexBufferObject(rhs.indexBufferObject)
+{
+	std::println("Move copy");
+}
+
+VertexBuffer&
+VertexBuffer::operator=(const VertexBuffer&& rhs)
+{
+	if (this != &rhs)
+	{
+		std::println("Move assign");
+		this->Release();
+		std::swap(vertexArrayObject,  const_cast<GLuint&>(rhs.vertexArrayObject));
+		std::swap(vertexBufferObject, const_cast<GLuint&>(rhs.vertexBufferObject));
+		std::swap(indexBufferObject,  const_cast<GLuint&>(rhs.indexBufferObject));
+	}
+
+	return *this;
+}
+
 VertexBuffer::~VertexBuffer()
 {
-	glDeleteBuffers(1, &this->vertexArrayObject);
-	glDeleteBuffers(1, &this->vertexBufferObject);
-	glDeleteBuffers(1, &this->indexBufferObject);
+	this->Release();
 
-	std::println("Vertext Buffer Deleted");
+	std::println("Vertex Buffer Deleted");
 }
+
+void
+VertexBuffer::Release()
+{
+	glDeleteBuffers(1, &vertexBufferObject);
+	vertexBufferObject = 0;
+
+	glDeleteBuffers(1, &indexBufferObject);
+	indexBufferObject = 0;
+
+	glDeleteVertexArrays(1, &vertexArrayObject);
+	vertexArrayObject = 0;
+}
+
+
 
 void
 VertexBuffer::Create()
