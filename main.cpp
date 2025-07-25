@@ -71,17 +71,8 @@ int main(int argc, char *argv[])
     default_shader.setUniformVec4(color, "color");
 
 
-    X::GL::GLProgram program = X::GL::GLProgramCreate();
-
     X::Camera::Camera3D cam;
-
     X::GL::VertexBuffer buffer;
-
-    program.buffer = buffer;
-    program.shader = default_shader;
-
-    float c = 0.0;
-
     X::Model::Model model({0.01,0,-3.0f});
 
     model.matrix = glm::translate(model.matrix, model.position);
@@ -91,7 +82,7 @@ int main(int argc, char *argv[])
 
     //std::srand( std::time({}) );
 
-    for(int i = 0; i <= 1000; i++)
+    for(int i = 0; i <= 100; i++)
     {
         constexpr int N = 10;
         float rx = -std::rand() % N + std::rand() % N;
@@ -126,16 +117,14 @@ int main(int argc, char *argv[])
         }
 
         // Test basic OPENGL works
-        float cv = 0.60;
+        float cv = 0.20;
 
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         cam.update(0.1);
 
-    //model.matrix = glm::rotate(model.matrix, glm::radians(model.rotAngle), model.rotation);
         default_shader.use();
-
         default_shader.SetUniformMat4(cam.projection, "projection");
         default_shader.SetUniformMat4(cam.view, "view");
 
