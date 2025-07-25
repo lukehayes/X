@@ -98,10 +98,10 @@ int main(int argc, char *argv[])
         float ry = -std::rand() % N + std::rand() % N;
         float rz = -std::rand() % N + std::rand() % N;
 
-        float rr = std::rand() % 2;
-        float rg = std::rand() % 2;
-        float rb = std::rand() % 2;
-        float ra = std::rand() % 2;
+        double rr = std::rand() % 100 / 100.0;
+        double rg = std::rand() % 100 / 100.0;
+        double rb = std::rand() % 100 / 100.0;
+        double ra = std::rand() % 100 / 100.0;
 
         X::Model::Model model({(float)rx,(float)ry,-10 + rz});
         model.color = glm::vec4 {rr,rg,rb,ra};
