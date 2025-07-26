@@ -11,6 +11,7 @@ public:
 	Model(const glm::vec3 &position = {0,0, -0.1f});
 	~Model();
 
+
 	/**
 	* Translate the model.
 	*
@@ -38,6 +39,13 @@ public:
 	* @param float angle
 	*/
 	void RotateZ(float angle);
+
+	/**
+	* Scale the model.
+	*
+	* @param const glm::vec3& axis    The axis to scale.
+	*/
+	void Scale(const glm::vec3& axis);
 
 	glm::vec3 position = {0,0,-0.1f};
 	glm::vec3 rotation = {0,0,0};
