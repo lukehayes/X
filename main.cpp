@@ -72,16 +72,20 @@ int main(int argc, char *argv[])
 
     X::Camera::Camera3D cam;
     X::GL::VertexBuffer buffer;
-    X::Model::Model model({0.01,0,-3.0f});
+    X::Model::Model model({0.01,0,-10.0f});
+    model.color = {0.3,0.6,0.2,1.0};
 
     model.matrix = glm::translate(model.matrix, model.position);
-    model.matrix = glm::scale(model.matrix, {20,1,1});
+    model.matrix = glm::scale(model.matrix, {1,1,1});
+
+    model.Translate({0,0,0});
+    model.RotateX(45.0f);
 
     std::vector<X::Model::Model> models;
 
     //std::srand( std::time({}) );
 
-    for(int i = 0; i <= 100; i++)
+    for(int i = 0; i <= 1000; i++)
     {
         constexpr int N = 10;
         float rx = -std::rand() % N + std::rand() % N;
@@ -94,7 +98,8 @@ int main(int argc, char *argv[])
         double ra = std::rand() % 100 / 100.0;
 
         X::Model::Model model({(float)rx,(float)ry,-10 + rz});
-        model.color = glm::vec4 {rr,rg,rb,ra};
+        model.color = {0.2,0.22,rb,1.0};
+        model.RotateX( std::rand() % 360 );
 
         models.push_back(model);
     }
@@ -116,21 +121,24 @@ int main(int argc, char *argv[])
         }
 
         // Test basic OPENGL works
-        float cv = 0.20;
-
+        float cv = 0.70;
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         cam.update(0.1);
 
+        static float c = 0.0;
+        c += 0.01;
+
         default_shader.use();
         default_shader.SetUniformMat4(cam.projection, "projection");
         default_shader.SetUniformMat4(cam.view, "view");
 
-
         for(auto m : models)
         {
             m.matrix = glm::translate(m.matrix, m.position);
+            m.matrix = glm::scale(m.matrix, m.scale);
+
             default_shader.SetUniformMat4(m.matrix, "model");
             default_shader.setUniformVec4(m.color, "color");
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
