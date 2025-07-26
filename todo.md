@@ -9,6 +9,8 @@
 ### Thursday 24th July 2025
 
 ### Backlog
+- [ ] feat: create VAO abstraction
+- [ ] feat: add textures
 - [ ] feat: add Random class
 - [ ] feat: implement delta time
 - [ ] feat: add simple logging for debug mode
