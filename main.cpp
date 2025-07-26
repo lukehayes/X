@@ -6,7 +6,6 @@
 
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
-#include "X/GL/GLProgram.h"
 #include "X/Model/Model.h"
 #include "X/Camera/Camera3D.h"
 
