@@ -10,7 +10,14 @@ namespace X::Camera
 Camera3D::Camera3D()
 	: projection( glm::perspective(45.0f, (float)WIN_WIDTH/(float)WIN_HEIGHT, 0.1f, 100.0f) ),
 	  view(glm::mat4(1.0f))
-{}
+{
+
+    this->view = glm::lookAt(
+        (glm::vec3){0,0,-20},
+        (glm::vec3){0,0,0},
+        (glm::vec3){0,1,0}
+    );
+}
 
 Camera3D::~Camera3D() {}
 
