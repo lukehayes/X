@@ -11,6 +11,12 @@ public:
 	Model(const glm::vec3 &position = {0,0, -0.1f});
 	~Model();
 
+	/**
+	* Translate the model.
+	*
+	* @param float angle
+	*/
+	void Translate(const glm::vec3& position);
 
 	/**
 	* Rotate the model on the X axis.

@@ -9,6 +9,12 @@ Model::Model(const glm::vec3& position)
 Model::~Model() {}
 
 void
+Model::Translate(const glm::vec3& position)
+{
+	this->matrix = glm::translate(this->matrix, position);
+}
+
+void
 Model::RotateX(float angle) {
 	this->matrix = glm::rotate(this->matrix, glm::radians(angle), {1,0,0});
 }
