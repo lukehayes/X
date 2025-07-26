@@ -11,8 +11,26 @@ public:
 	Model(const glm::vec3 &position = {0,0, -0.1f});
 	~Model();
 
+
+	/**
+	* Rotate the model on the X axis.
+	*
+	* @param float angle
+	*/
 	void RotateX(float angle);
+
+	/**
+	* Rotate the model on the Y axis.
+	*
+	* @param float angle
+	*/
 	void RotateY(float angle);
+
+	/**
+	* Rotate the model on the Z axis.
+	*
+	* @param float angle
+	*/
 	void RotateZ(float angle);
 
 	glm::vec3 position = {0,0,-0.1f};
