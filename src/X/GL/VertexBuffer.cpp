@@ -127,5 +127,53 @@ VertexBuffer::SetData()
 	);
 }
 
+VertexBuffer
+VertexBuffer::Make(
+	GLuint idx,
+	GLuint sz,
+	const std::vector<float>& data,
+	const std::vector<unsigned int>& indices
+)
+{
+
+	VertexBuffer buffer;
+
+	GLuint index         = idx;
+	GLuint size          = sz;
+	GLenum type          = GL_FLOAT;
+	GLboolean normalized = GL_FALSE;
+	GLuint stride        = 0;
+	GLvoid* pointer      = (void*)0;
+
+	glVertexAttribPointer(
+		index,
+		size,
+		type,
+		normalized,
+		stride,
+		pointer
+	);
+
+	glEnableVertexAttribArray(index);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer.vertexBufferObject);
+
+	glBufferData (
+		GL_ARRAY_BUFFER,
+		sizeof(data.at(0)) * data.size(),
+		data.data(),
+		GL_STATIC_DRAW
+	);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer.indexBufferObject);
+
+	glBufferData (
+		GL_ELEMENT_ARRAY_BUFFER,
+		sizeof(data.at(0)) * data.size(),
+		indices.data(),
+		GL_STATIC_DRAW
+	);
+
+	return buffer;
 }
 
+}

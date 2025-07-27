@@ -2,6 +2,7 @@
 #define GL_VERTEXBUFFER_H
 
 #include "glad/glad.h"
+#include <vector>
 
 namespace X::GL
 {
@@ -19,6 +20,12 @@ class VertexBuffer
 
 	~VertexBuffer();
 
+	static VertexBuffer Make(
+		GLuint idx,
+		GLuint sz,
+		const std::vector<float>& data,
+		const std::vector<unsigned int>& indices
+	);
 
 	void Create();
 	void SetData();
