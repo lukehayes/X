@@ -71,7 +71,20 @@ int main(int argc, char *argv[])
 
 
     X::Camera::Camera3D cam;
-    X::GL::VertexBuffer buffer;
+    X::GL::VertexBuffer buffer = X::GL::VertexBuffer::Make(
+        0,
+        3,
+        {
+        0.5f,  0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f
+        },
+        {
+	 0, 1, 3,   // first triangle
+	1, 2, 3    // second triangle
+        }
+    );
     X::Model::Model model({0.01,0,-10.0f});
     model.color = {0.3,0.6,0.2,1.0};
 
