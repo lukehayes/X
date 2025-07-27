@@ -8,6 +8,7 @@
 #include "X/Math/GLM.h"
 #include "X/Model/Model.h"
 #include "X/Camera/Camera3D.h"
+#include "X/Gfx/Renderer.h"
 
 #include <vector>
 #include <cstdlib>
@@ -69,6 +70,8 @@ int main(int argc, char *argv[])
     glm::vec4 color = glm::vec4{0.25,0.25,0.25,1.0};
     default_shader.setUniformVec4(color, "color");
 
+    X::Gfx::Renderer renderer;
+
 
     X::Camera::Camera3D cam;
     X::GL::VertexBuffer buffer = X::GL::VertexBuffer::Make(
@@ -91,16 +94,13 @@ int main(int argc, char *argv[])
     model.matrix = glm::translate(model.matrix, model.position);
     model.matrix = glm::scale(model.matrix, {1,1,1});
 
-    model.Translate({0,0,0});
-    model.RotateX(45.0f);
-
     std::vector<X::Model::Model> models;
 
     //std::srand( std::time({}) );
 
-    for(int i = 0; i <= 1000; i++)
+    for(int i = 0; i <= 10; i++)
     {
-        constexpr int N = 10;
+        constexpr int N = 4;
         float rx = -std::rand() % N + std::rand() % N;
         float ry = -std::rand() % N + std::rand() % N;
         float rz = -std::rand() % N + std::rand() % N;
@@ -147,15 +147,31 @@ int main(int argc, char *argv[])
         default_shader.SetUniformMat4(cam.projection, "projection");
         default_shader.SetUniformMat4(cam.view, "view");
 
+        renderer.Draw(0,0,0, default_shader);
+        renderer.Draw(0,0,5, default_shader);
+        renderer.Draw(5,0,0, default_shader);
+        renderer.Draw(0,5,0, default_shader);
+
         for(auto m : models)
         {
             m.matrix = glm::translate(m.matrix, m.position);
             m.matrix = glm::scale(m.matrix, m.scale);
 
-            default_shader.SetUniformMat4(m.matrix, "model");
-            default_shader.setUniformVec4(m.color, "color");
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        renderer.Draw(
+                m.position.x,
+                m.position.y,
+                m.position.z,
+                default_shader);
+
+            //default_shader.SetUniformMat4(m.matrix, "model");
+            //default_shader.setUniformVec4(m.color, "color");
+            //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
         }
+
+
+
 
 
         SDL_GL_SwapWindow(window);
