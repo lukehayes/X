@@ -67,9 +67,6 @@ int main(int argc, char *argv[])
         "../assets/shaders/FSH-Camera3D.glsl"
     );
 
-    glm::vec4 color = glm::vec4{0.25,0.25,0.25,1.0};
-    default_shader.setUniformVec4(color, "color");
-
     X::Gfx::Renderer renderer;
 
 
@@ -88,35 +85,10 @@ int main(int argc, char *argv[])
 	1, 2, 3    // second triangle
         }
     );
-    X::Model::Model model({0.01,0,-10.0f});
-    model.color = {0.3,0.6,0.2,1.0};
 
-    model.matrix = glm::translate(model.matrix, model.position);
-    model.matrix = glm::scale(model.matrix, {1,1,1});
-
-    std::vector<X::Model::Model> models;
-
-    //std::srand( std::time({}) );
-
-    for(int i = 0; i <= 10; i++)
-    {
-        constexpr int N = 4;
-        float rx = -std::rand() % N + std::rand() % N;
-        float ry = -std::rand() % N + std::rand() % N;
-        float rz = -std::rand() % N + std::rand() % N;
-
-        double rr = std::rand() % 100 / 100.0;
-        double rg = std::rand() % 100 / 100.0;
-        double rb = std::rand() % 100 / 100.0;
-        double ra = std::rand() % 100 / 100.0;
-
-        X::Model::Model model({(float)rx,(float)ry,-10 + rz});
-        model.color = {0.2,0.22,rb,1.0};
-        model.RotateX( std::rand() % 360 );
-
-        models.push_back(model);
-    }
-
+    int x = 0;
+    int y = 0;
+    bool camToggled = false;
 
     while (isRunning) {
         SDL_Event event;
@@ -130,6 +102,27 @@ int main(int argc, char *argv[])
                 if (event.key.key == SDLK_SPACE) {
                     std::println("SPace");
                 }
+
+                if (event.key.key == SDLK_A) {
+                    x += 1;
+                }
+                if (event.key.key == SDLK_D) {
+                    x -= 1;
+                }
+                if (event.key.key == SDLK_W) {
+                    y += 1;
+                }
+                if (event.key.key == SDLK_S) {
+                    y -= 1;
+                }
+
+                if (event.key.key == SDLK_C) {
+                    camToggled = true;
+                }
+
+                if (event.key.key == SDLK_V) {
+                    camToggled = false;
+                }
             }
         }
 
@@ -138,41 +131,20 @@ int main(int argc, char *argv[])
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        cam.update(0.1);
+        if (camToggled) {
+            cam.update(0.1);
+        }
 
-        static float c = 0.0;
-        c += 0.01;
-
-        default_shader.use();
+	default_shader.use();
         default_shader.SetUniformMat4(cam.projection, "projection");
         default_shader.SetUniformMat4(cam.view, "view");
 
-        renderer.Draw(0,0,0, default_shader);
-        renderer.Draw(0,0,5, default_shader);
-        renderer.Draw(5,0,0, default_shader);
-        renderer.Draw(0,5,0, default_shader);
-
-        for(auto m : models)
-        {
-            m.matrix = glm::translate(m.matrix, m.position);
-            m.matrix = glm::scale(m.matrix, m.scale);
-
-
-        renderer.Draw(
-                m.position.x,
-                m.position.y,
-                m.position.z,
-                default_shader);
-
-            //default_shader.SetUniformMat4(m.matrix, "model");
-            //default_shader.setUniformVec4(m.color, "color");
-            //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-        }
-
-
-
-
+        renderer.Draw(x,y,0, default_shader, {0,0,0,1});
+        renderer.Draw(0,0,5, default_shader, {0,1,0,1});
+        renderer.Draw(5,0,0, default_shader, {0,0,1,1});
+        renderer.Draw(0,5,0, default_shader, {1,0,1,1});
+        renderer.Draw(0,-5,-3, default_shader, {0,1,1,1});
+        renderer.Draw(-5,5, -3, default_shader, {1,1,0,1});
 
         SDL_GL_SwapWindow(window);
 
