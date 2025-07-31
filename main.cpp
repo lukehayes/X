@@ -1,5 +1,6 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <SDL3/SDL_timer.h>
 #include <iostream>
 #include "X/GL/VertexBuffer.h"
 #include "glad/glad.h"
@@ -90,8 +91,15 @@ int main(int argc, char *argv[])
     int y = 0;
     bool camToggled = false;
 
+    float deltaTime = 0;
+    float currentTime = SDL_GetTicks();
+    float startTime = SDL_GetTicks();
+
     while (isRunning) {
         SDL_Event event;
+
+        currentTime = SDL_GetTicks();
+        deltaTime = currentTime - startTime;
 
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_EVENT_QUIT) {
@@ -131,6 +139,8 @@ int main(int argc, char *argv[])
         glClearColor(cv,cv,cv,1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        std::println("DeltaTime: {}", deltaTime);
+
         if (camToggled) {
             cam.update(0.1);
         }
@@ -147,6 +157,7 @@ int main(int argc, char *argv[])
         renderer.Draw(-5,5, -3, default_shader, {1,1,0,1});
 
         SDL_GL_SwapWindow(window);
+        startTime = currentTime;
 
     }
 

@@ -8,7 +8,10 @@ constexpr int WIN_HEIGHT = 180 * WIN_MULT;
 namespace X::Camera
 {
 Camera3D::Camera3D()
-	: projection( glm::perspective(45.0f, (float)WIN_WIDTH/(float)WIN_HEIGHT, 0.1f, 100.0f) ),
+        : position({0,0,-30.0}),
+          eye({0,0,0}),
+          up({0,1,0}),
+	  projection( glm::perspective(45.0f, (float)WIN_WIDTH/(float)WIN_HEIGHT, 0.1f, 100.0f) ),
 	  view(glm::mat4(1.0f)
         )
 {
