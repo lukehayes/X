@@ -15,8 +15,10 @@ public:
 	/**
 	* Draw whatever is set to the currently bound VAO.
 	*/
-	void Draw(int x, int y, int z, X::GL::Shader& shader)
+	void Draw(int x, int y, int z, X::GL::Shader& shader,glm::vec4 color )
 	{
+		shader.use();
+
 		X::Model::Model model;
 
 		model.matrix = glm::translate(
@@ -25,7 +27,7 @@ public:
 		);
 
 		shader.SetUniformMat4(model.matrix, "model");
-		shader.setUniformVec4(model.color, "color");
+		shader.setUniformVec4(color, "color");
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	}
