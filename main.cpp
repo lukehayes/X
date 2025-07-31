@@ -92,14 +92,15 @@ int main(int argc, char *argv[])
     bool camToggled = false;
 
     float deltaTime = 0;
-    float currentTime = SDL_GetTicks();
-    float startTime = SDL_GetTicks();
+    Uint64 NOW = SDL_GetPerformanceCounter();
+    Uint64 LAST = 0;
 
     while (isRunning) {
         SDL_Event event;
 
-        currentTime = SDL_GetTicks();
-        deltaTime = currentTime - startTime;
+        LAST = NOW;
+        NOW = SDL_GetPerformanceCounter();
+        deltaTime = (double)((NOW - LAST)*1000 / (double)SDL_GetPerformanceFrequency() );
 
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_EVENT_QUIT) {
@@ -149,15 +150,14 @@ int main(int argc, char *argv[])
         default_shader.SetUniformMat4(cam.projection, "projection");
         default_shader.SetUniformMat4(cam.view, "view");
 
-        renderer.Draw(x,y,0, default_shader, {0,0,0,1});
-        renderer.Draw(0,0,5, default_shader, {0,1,0,1});
-        renderer.Draw(5,0,0, default_shader, {0,0,1,1});
-        renderer.Draw(0,5,0, default_shader, {1,0,1,1});
-        renderer.Draw(0,-5,-3, default_shader, {0,1,1,1});
-        renderer.Draw(-5,5, -3, default_shader, {1,1,0,1});
+        renderer.Draw(x,y,0,    default_shader, {0,0,0,1});
+        renderer.Draw(0,0,0,    default_shader, {0,1,0,1});
+        renderer.Draw(5,0,0,    default_shader, {0,0,1,1});
+        renderer.Draw(0,5,0,    default_shader, {1,0,1,1});
+        renderer.Draw(0,-5,-0,  default_shader, {0,1,1,1});
+        renderer.Draw(-5,5, -0, default_shader, {1,1,0,1});
 
         SDL_GL_SwapWindow(window);
-        startTime = currentTime;
 
     }
 
