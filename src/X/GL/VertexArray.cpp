@@ -23,4 +23,10 @@ VertexArray::operator=(VertexArray&& other) {
 
 	return *this;
 }
+
+void
+VertexArray::Bind()
+{
+	glBindVertexArray(this->id);
+}
 }

@@ -15,7 +15,10 @@ public:
 	~VertexArray();
 
 	VertexArray(VertexArray&& other);
+
 	VertexArray& operator=(VertexArray&& other);
+
+	void Bind();
 
 	VertexArray(const VertexArray& other) = delete;
 	VertexArray& operator=(VertexArray& other) = delete;
