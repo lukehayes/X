@@ -10,6 +10,7 @@
 #include "X/Model/Model.h"
 #include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
+#include "X/GL/VertexArray.h"
 
 #include <vector>
 #include <cstdlib>
@@ -62,6 +63,8 @@ int main(int argc, char *argv[])
 		std::cout << "Error:" << SDL_GetError() << std::endl;
 	}
 
+	X::GL::VertexArray vao;
+	vao.Bind();
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
@@ -86,6 +89,7 @@ int main(int argc, char *argv[])
 			1, 2, 3    // second triangle
 		}
 	);
+
 
 	int x = 0;
 	int y = 0;
@@ -148,7 +152,7 @@ int main(int argc, char *argv[])
 		default_shader.SetUniformMat4(cam.projection, "projection");
 		default_shader.SetUniformMat4(cam.view, "view");
 
-		renderer.Draw(x,y,0,    default_shader, {0,0,0,1});
+		renderer.Draw(x,y - 2,0,    default_shader, {0,0,0,1});
 		renderer.Draw(0,0,0,    default_shader, {0,1,0,1});
 		renderer.Draw(5,0,0,    default_shader, {0,0,1,1});
 		renderer.Draw(0,5,0,    default_shader, {1,0,1,1});
