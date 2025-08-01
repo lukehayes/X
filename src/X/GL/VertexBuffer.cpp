@@ -14,9 +14,8 @@ VertexBuffer::VertexBuffer()
 }
 
 VertexBuffer::VertexBuffer(const VertexBuffer&& rhs)
-	: vertexArrayObject(rhs.vertexArrayObject),
-	 vertexBufferObject(rhs.vertexBufferObject),
-	 indexBufferObject(rhs.indexBufferObject)
+	: vertexBufferObject(rhs.vertexBufferObject),
+	  indexBufferObject(rhs.indexBufferObject)
 {
 	std::println("Move copy");
 }
@@ -28,7 +27,6 @@ VertexBuffer::operator=(const VertexBuffer&& rhs)
 	{
 		std::println("Move assign");
 		this->Release();
-		std::swap(vertexArrayObject,  const_cast<GLuint&>(rhs.vertexArrayObject));
 		std::swap(vertexBufferObject, const_cast<GLuint&>(rhs.vertexBufferObject));
 		std::swap(indexBufferObject,  const_cast<GLuint&>(rhs.indexBufferObject));
 	}
@@ -52,8 +50,6 @@ VertexBuffer::Release()
 	glDeleteBuffers(1, &indexBufferObject);
 	indexBufferObject = 0;
 
-	glDeleteVertexArrays(1, &vertexArrayObject);
-	vertexArrayObject = 0;
 }
 
 
@@ -61,9 +57,6 @@ VertexBuffer::Release()
 void
 VertexBuffer::Create()
 {
-	glGenVertexArrays(1, &this->vertexArrayObject);
-	glBindVertexArray(this->vertexArrayObject);
-
 	glGenBuffers(1, &this->vertexBufferObject);
 	glBindBuffer(GL_ARRAY_BUFFER ,this->vertexBufferObject);
 

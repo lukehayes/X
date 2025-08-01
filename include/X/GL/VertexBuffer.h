@@ -8,7 +8,7 @@ namespace X::GL
 {
 class VertexBuffer
 {
-	public:
+public:
 
 	VertexBuffer();
 	VertexBuffer(const VertexBuffer& rhs) = delete;
@@ -32,7 +32,6 @@ class VertexBuffer
 	void Release();
 
 
-	GLuint vertexArrayObject;
 	GLuint vertexBufferObject;
 	GLuint indexBufferObject;
 };

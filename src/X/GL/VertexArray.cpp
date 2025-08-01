@@ -29,4 +29,12 @@ VertexArray::Bind()
 {
 	glBindVertexArray(this->id);
 }
+
+void
+VertexArray::Delete()
+{
+	glDeleteVertexArrays(1, &this->id);
+	id = 0;
+}
+
 }
