@@ -21,7 +21,6 @@ VertexArray::operator=(VertexArray&& other) {
 
 	this->id = other.id;
 
-	std::println("Move Assign");
 	return *this;
 }
 }
