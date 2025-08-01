@@ -6,6 +6,10 @@
 
 namespace X::GL
 {
+constexpr std::size_t VTX_ATTRIB_POSITION  = 0;
+constexpr std::size_t VTX_ATTRIB_COLOR     = 1;
+constexpr std::size_t VTX_ATTRIB_TEXTURE   = 2;
+
 class VertexBuffer
 {
 public:

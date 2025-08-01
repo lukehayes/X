@@ -6,6 +6,7 @@
 namespace X::GL
 {
 
+
 VertexBuffer::VertexBuffer()
 {
 	this->Create();
@@ -15,7 +16,7 @@ VertexBuffer::VertexBuffer()
 
 VertexBuffer::VertexBuffer(const VertexBuffer&& rhs)
 	: vertexBufferObject(rhs.vertexBufferObject),
-	  indexBufferObject(rhs.indexBufferObject)
+	indexBufferObject(rhs.indexBufferObject)
 {
 	std::println("Move copy");
 }
@@ -67,8 +68,7 @@ VertexBuffer::Create()
 void
 VertexBuffer::SetData()
 {
-	GLuint index         = 0;
-	//GLuint size          = sizeof(GLuint) * 3;
+	GLuint index         = X::GL::VTX_ATTRIB_POSITION;
 	GLuint size          = 3;
 	GLenum type          = GL_FLOAT;
 	GLboolean normalized = GL_FALSE;
