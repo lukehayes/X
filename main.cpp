@@ -141,8 +141,7 @@ int main(int argc, char *argv[])
 
 		// Test basic OPENGL works
 		float cv = 0.70;
-		glClearColor(cv,cv,cv,1);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		renderer.Clear(cv,cv,cv);
 
 		if (camToggled) {
 			cam.update(0.1);
