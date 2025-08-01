@@ -7,21 +7,20 @@
 
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
-#include "X/Model/Model.h"
 #include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
+#include "X/GL/VertexArray.h"
 
 #include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <print>
 
-
-
 int main(int argc, char *argv[])
 {
 	// ------------------------------------------------------------------------
 	// Set initial state here.
+
 
 	constexpr int WIN_MULT   = 4;
 	constexpr int WIN_WIDTH  = 320 * WIN_MULT;
@@ -49,6 +48,9 @@ int main(int argc, char *argv[])
 	if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
 		throw(std::string("Failed to initialize GLAD"));
 	}
+
+	X::GL::VertexArray vao;
+	vao.Bind();
 
 	if (window == NULL) {
 
@@ -86,6 +88,23 @@ int main(int argc, char *argv[])
 			1, 2, 3    // second triangle
 		}
 	);
+
+	std::vector<glm::vec3> positions;
+
+	for(int i = 0; i<= 10000; i++)
+	{
+		constexpr int n = 100;
+		float rx = std::tan(i)  * i / n;
+		float ry = -std::cos(i) * i / n;
+		float rz = -std::sin(i) * i / n;
+
+		//float rr = std::rand() % 100 + -std::rand() % 100;
+		//float rg = std::rand() % 100 + -std::rand() % 100;
+		//float rb = std::rand() % 100 + -std::rand() % 100;
+
+		positions.push_back( {rx,ry,rz} );
+
+	}
 
 	int x = 0;
 	int y = 0;
@@ -136,7 +155,7 @@ int main(int argc, char *argv[])
 		}
 
 		// Test basic OPENGL works
-		float cv = 0.70;
+		float cv = 0.10;
 		glClearColor(cv,cv,cv,1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -154,6 +173,13 @@ int main(int argc, char *argv[])
 		renderer.Draw(0,5,0,    default_shader, {1,0,1,1});
 		renderer.Draw(0,-5,-0,  default_shader, {0,1,1,1});
 		renderer.Draw(-5,5, -0, default_shader, {1,1,0,1});
+
+		for(auto pos : positions)
+		{
+			renderer.Draw(
+				pos.x, pos.y, pos.z,
+				default_shader, {1,1,1,1});
+		}
 
 		SDL_GL_SwapWindow(window);
 

@@ -28,7 +28,7 @@ public:
 
 		shader.SetUniformMat4(model.matrix, "model");
 		shader.setUniformVec4(color, "color");
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_POINTS, 6, GL_UNSIGNED_INT, 0);
 
 	}
 };
