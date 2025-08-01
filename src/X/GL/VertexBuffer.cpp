@@ -54,7 +54,6 @@ VertexBuffer::Release()
 }
 
 
-
 void
 VertexBuffer::Create()
 {
