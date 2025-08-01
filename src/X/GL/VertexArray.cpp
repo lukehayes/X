@@ -31,6 +31,12 @@ VertexArray::Bind()
 }
 
 void
+VertexArray::UnBind()
+{
+	glBindVertexArray(0);
+}
+
+void
 VertexArray::Delete()
 {
 	glDeleteVertexArrays(1, &this->id);
