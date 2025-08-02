@@ -35,6 +35,7 @@ add_executable(${BIN_NAME} main.cpp
     "${X_SRC_DIR}/GL/Shader.cpp"
     "${X_SRC_DIR}/GL/VertexArray.cpp"
     "${X_SRC_DIR}/GL/VertexBuffer.cpp"
+    "${X_SRC_DIR}/GL/IndexBuffer.cpp"
 
     ## X/Model
     "${X_SRC_DIR}/Model/Model.cpp"
