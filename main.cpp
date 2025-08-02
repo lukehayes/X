@@ -11,6 +11,8 @@
 #include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
 #include "X/GL/VertexArray.h"
+#include "X/GL/VertexBuffer.h"
+#include "X/GL/IndexBuffer.h"
 
 #include <vector>
 #include <cstdlib>
@@ -66,29 +68,30 @@ int main(int argc, char *argv[])
 	X::GL::VertexArray vao;
 	vao.Bind();
 
+
+	std::vector<GLfloat> data = {
+		0.5f,  0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f
+	};
+
+	X::GL::VertexBuffer vbo{0, 3,0, data, GL_ARRAY_BUFFER};
+
+	std::vector<unsigned int> indices = {
+		0, 1, 3,   // first triangle
+		1, 2, 3    // second triangle
+	};
+
+	X::GL::IndexBuffer ibo(indices);
+
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
 		"../assets/shaders/FSH-Camera3D.glsl"
 	);
 
 	X::Gfx::Renderer renderer;
-
-
 	X::Camera::Camera3D cam;
-	X::GL::VertexBuffer buffer = X::GL::VertexBuffer::Make(
-		0,
-		3,
-		{
-			0.5f,  0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			-0.5f, -0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
-		},
-		{
-			0, 1, 3,   // first triangle
-			1, 2, 3    // second triangle
-		}
-	);
 
 
 	int x = 0;
@@ -147,16 +150,18 @@ int main(int argc, char *argv[])
 			cam.update(0.1);
 		}
 
+		//vao.Bind();
+
 		default_shader.use();
 		default_shader.SetUniformMat4(cam.projection, "projection");
 		default_shader.SetUniformMat4(cam.view, "view");
 
-		renderer.Draw(x,y - 2,0,    default_shader, {0,0,0,1});
-		renderer.Draw(0,0,0,    default_shader, {0,1,0,1});
-		renderer.Draw(5,0,0,    default_shader, {0,0,1,1});
-		renderer.Draw(0,5,0,    default_shader, {1,0,1,1});
-		renderer.Draw(0,-5,-0,  default_shader, {0,1,1,1});
-		renderer.Draw(-5,5, -0, default_shader, {1,1,0,1});
+		renderer.Draw(x,y - 2,0, default_shader, {0,0,0,1});
+		renderer.Draw(0,0,0,     default_shader, {0,1,0,1});
+		renderer.Draw(5,0,0,     default_shader, {0,0,1,1});
+		renderer.Draw(0,5,0,     default_shader, {1,0,1,1});
+		renderer.Draw(0,-5,-0,   default_shader, {0,1,1,1});
+		renderer.Draw(-5,5, -0,  default_shader, {1,1,0,1});
 
 		SDL_GL_SwapWindow(window);
 

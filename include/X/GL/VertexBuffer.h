@@ -3,16 +3,22 @@
 
 #include "glad/glad.h"
 #include <vector>
+#include <cstdint>
 
 namespace X::GL
 {
-constexpr std::size_t VTX_ATTRIB_POSITION  = 0;
-constexpr std::size_t VTX_ATTRIB_COLOR     = 1;
-constexpr std::size_t VTX_ATTRIB_TEXTURE   = 2;
 
 class VertexBuffer
 {
 public:
+
+	VertexBuffer(
+		std::uint8_t attrib_position,
+		std::uint8_t vtx_size,
+		std::uint8_t vtx_stride,
+		const std::vector<GLfloat>& data,
+		GLenum buffer_type
+	);
 
 	VertexBuffer();
 	VertexBuffer(const VertexBuffer& rhs) = delete;
@@ -21,23 +27,13 @@ public:
 	VertexBuffer(const VertexBuffer&& rhs);
 	VertexBuffer& operator=(const VertexBuffer&& rhs);
 
-
 	~VertexBuffer();
 
-	static VertexBuffer Make(
-		GLuint idx,
-		GLuint sz,
-		const std::vector<float>& data,
-		const std::vector<unsigned int>& indices
-	);
+	void Bind();
+	void UnBind();
+	void Destroy();
 
-	void Create();
-	void SetData();
-	void Release();
-
-
-	GLuint vertexBufferObject;
-	GLuint indexBufferObject;
+	GLuint id;
 };
 }
 
