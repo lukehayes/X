@@ -9,6 +9,8 @@
 ### Thursday 24th July 2025
 
 ### Backlog
+- [ ] feat: add Color class
+- [ ] feat: create input manager
 - [ ] feat: add hashmap for vertex arrays
 - [ ] feat: create VAO abstraction
 - [ ] feat: add textures
