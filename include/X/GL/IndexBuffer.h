@@ -11,6 +11,8 @@ class IndexBuffer
 {
 public:
 
+	IndexBuffer();
+
 	IndexBuffer(
 		std::vector<unsigned int> data
 	);

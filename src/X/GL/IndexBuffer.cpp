@@ -2,6 +2,8 @@
 
 namespace X::GL
 {
+	IndexBuffer::IndexBuffer() {}
+
 	IndexBuffer::IndexBuffer(
 		std::vector<unsigned int> data
 	) {
