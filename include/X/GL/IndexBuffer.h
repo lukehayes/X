@@ -1,4 +1,5 @@
 #ifndef X_GL_GENERIC_BUFFER_H
+#define X_GL_GENERIC_BUFFER_H
 
 #include "glad/glad.h"
 #include <vector>
