@@ -9,6 +9,8 @@
 ### Thursday 24th July 2025
 
 ### Backlog
+- [ ] refactor: tidy up Mesh Factory
+- [ ] feat: add Scene Tree
 - [ ] feat: add Color class
 - [ ] feat: create input manager
 - [ ] feat: add hashmap for vertex arrays
