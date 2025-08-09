@@ -13,6 +13,7 @@
 #include "X/GL/VertexArray.h"
 #include "X/GL/VertexBuffer.h"
 #include "X/GL/IndexBuffer.h"
+#include "X/Factory/MeshFactory.h"
 
 #include <vector>
 #include <cstdlib>
@@ -65,25 +66,8 @@ int main(int argc, char *argv[])
 		std::cout << "Error:" << SDL_GetError() << std::endl;
 	}
 
-	X::GL::VertexArray vao;
-	vao.Bind();
 
-
-	std::vector<GLfloat> data = {
-		0.5f,  0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
-	};
-
-	X::GL::VertexBuffer vbo{0, 3,0, data, GL_ARRAY_BUFFER};
-
-	std::vector<unsigned int> indices = {
-		0, 1, 3,   // first triangle
-		1, 2, 3    // second triangle
-	};
-
-	X::GL::IndexBuffer ibo(indices);
+	X::Factory::Mesh mesh = X::Factory::CreatePlaneMesh();
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
@@ -151,17 +135,19 @@ int main(int argc, char *argv[])
 		}
 
 		//vao.Bind();
+		mesh.vao.Bind();
+		//mesh.vao.UnBind();
 
 		default_shader.use();
 		default_shader.SetUniformMat4(cam.projection, "projection");
 		default_shader.SetUniformMat4(cam.view, "view");
 
-		renderer.Draw(x,y - 2,0, default_shader, {0,0,0,1});
-		renderer.Draw(0,0,0,     default_shader, {0,1,0,1});
-		renderer.Draw(5,0,0,     default_shader, {0,0,1,1});
-		renderer.Draw(0,5,0,     default_shader, {1,0,1,1});
-		renderer.Draw(0,-5,-0,   default_shader, {0,1,1,1});
-		renderer.Draw(-5,5, -0,  default_shader, {1,1,0,1});
+		//renderer.Draw(x,y - 2,0, mesh, default_shader, {0,0,0,1});
+		//renderer.Draw(0,0,0,     default_shader, {0,1,0,1});
+		//renderer.Draw(5,0,0,     default_shader, {0,0,1,1});
+		//renderer.Draw(0,5,0,     default_shader, {1,0,1,1});
+		//renderer.Draw(0,-5,-0,   default_shader, {0,1,1,1});
+		//renderer.Draw(-5,5, -0,  default_shader, {1,1,0,1});
 
 		SDL_GL_SwapWindow(window);
 
