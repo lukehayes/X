@@ -9,8 +9,8 @@ VertexBuffer::VertexBuffer() {}
 
 VertexBuffer::VertexBuffer(
 	std::uint8_t attrib_position,
-	std::uint8_t vtx_size,
-	std::uint8_t vtx_stride,
+	std::uint8_t vertex_size,
+	std::uint8_t vertex_stride,
 	const std::vector<GLfloat>& data,
 	GLenum buffer_type
 ) {
@@ -18,21 +18,18 @@ VertexBuffer::VertexBuffer(
 	glGenBuffers(1, &this->id);
 	glBindBuffer(buffer_type, this->id);
 
-	GLuint index         = attrib_position;
-	GLuint size          = vtx_size;
 	GLenum type          = GL_FLOAT;
 	GLboolean normalized = GL_FALSE;
-	GLuint stride        = vtx_stride;
 	GLvoid* pointer      = (void*)0;
 
 	glEnableVertexAttribArray(attrib_position);
 
 	glVertexAttribPointer(
-		index,
-		size,
+		attrib_position,
+		vertex_size,
 		type,
 		normalized,
-		stride,
+		vertex_stride,
 		pointer
 	);
 
