@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
 		}
 
 		//vao.Bind();
-		mesh.vao.Bind();
+		//mesh.vao.Bind();
 		//mesh.vao.UnBind();
 
 		default_shader.use();

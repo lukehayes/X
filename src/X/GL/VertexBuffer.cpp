@@ -5,6 +5,8 @@
 namespace X::GL
 {
 
+VertexBuffer::VertexBuffer() {}
+
 VertexBuffer::VertexBuffer(
 	std::uint8_t attrib_position,
 	std::uint8_t vtx_size,
