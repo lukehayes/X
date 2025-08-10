@@ -30,7 +30,12 @@ X::Factory::Mesh CreatePlaneMesh()
 		-0.5f,  0.5f, 0.0f
 	};
 
-	X::GL::VertexBuffer vbo{0, 3,0, data, GL_ARRAY_BUFFER};
+	X::GL::VertexBuffer vbo{
+		GL::ATTRIB_VERTEX_POSITION,
+		GL::ATTRIB_VERTEX_COUNT,
+		GL::ATTRIB_STRIDE,
+		data,
+		GL_ARRAY_BUFFER};
 
 	std::vector<unsigned int> indices = {
 		0, 1, 3,   // first triangle

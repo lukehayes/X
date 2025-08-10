@@ -8,6 +8,10 @@
 namespace X::GL
 {
 
+constexpr std::uint8_t ATTRIB_VERTEX_POSITION = 0;
+constexpr std::uint8_t ATTRIB_VERTEX_COUNT    = 3;
+constexpr std::uint8_t ATTRIB_STRIDE          = 0;
+
 class VertexBuffer
 {
 public:
