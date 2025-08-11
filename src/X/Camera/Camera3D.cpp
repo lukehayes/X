@@ -30,7 +30,7 @@ void Camera3D::update(double dt)
 
     static float c = 0.0;
     c += 0.01;
-    int mult = 10.0f;
+    int mult = 50.0f;
 
     this->position.x = std::cos(c) * mult;
     this->position.y = std::sin(c) * mult;

@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <print>
+#include <vector>
 
 
 
@@ -63,14 +64,30 @@ int main(int argc, char *argv[])
 
 	X::Factory::Mesh mesh = X::Factory::CreatePlaneMesh();
 
-	X::GL::Shader default_shader(
+	X::GL::Shader default_shader {
 		"../assets/shaders/VSH-Camera3D.glsl",
 		"../assets/shaders/FSH-Camera3D.glsl"
-	);
+	};
 
 
 	X::Gfx::Renderer renderer;
 	X::Camera::Camera3D cam;
+
+	std::vector<glm::vec3> positions;
+	auto n = 10;
+	auto space = 10000;
+
+	for(int i =0; i <= space; i++)
+	{
+		auto rx = 2 * sin(i) * n;
+		auto ry = 2 * cos(i) * n;
+		//auto ry = -std::rand() % n + std::rand() % n;
+		auto rz = -std::rand() % n + std::rand() % n;
+
+		glm::vec3 v{rx,ry,rz};
+
+		positions.push_back(v);
+	}
 
 
 	int x = 0;
@@ -123,7 +140,7 @@ int main(int argc, char *argv[])
 
 		// Test basic OPENGL works
 		float cv = 0.70;
-		renderer.Clear(cv,cv,cv);
+		renderer.Clear(0,0,0);
 
 		if (camToggled) {
 			cam.update(0.1);
@@ -133,17 +150,23 @@ int main(int argc, char *argv[])
 		//mesh.vao.UnBind();
 		mesh.vao.Bind();
 
-		renderer.Draw(x,y - 2,0, cam, default_shader, {0,0,0,1});
+		for(auto p : positions)
+		{
+			renderer.Draw(p.x, p.y - 2, p.z, cam, default_shader, {1,1,1,1});
+		}
 
-		renderer.Draw(0,0,0,     cam, default_shader, {0,1,0,1});
-		renderer.Draw(5,0,0,     cam, default_shader, {0,0,1,1});
-		renderer.Draw(0,5,0,     cam, default_shader, {1,0,1,1});
-		renderer.Draw(0,-5,-0,   cam, default_shader, {0,1,1,1});
-		renderer.Draw(-5,5, -0,  cam, default_shader, {1,1,0,1});
+		renderer.Draw(x,y - 2,0, cam, default_shader, {1,0,0,1});
+
+		//renderer.Draw(0,0,0,     cam, default_shader, {0,1,0,1});
+		//renderer.Draw(5,0,0,     cam, default_shader, {0,0,1,1});
+		//renderer.Draw(0,5,0,     cam, default_shader, {1,0,1,1});
+		//renderer.Draw(0,-5,-0,   cam, default_shader, {0,1,1,1});
+		//renderer.Draw(-5,5, -0,  cam, default_shader, {1,1,0,1});
 
 		SDL_GL_SwapWindow(window);
 
 	}
+
 
 
 	SDL_GL_DestroyContext(window_ctx);
