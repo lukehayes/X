@@ -2,20 +2,15 @@
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_timer.h>
 #include <iostream>
-#include "X/GL/VertexBuffer.h"
 #include "glad/glad.h"
 
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
-#include "X/Model/Model.h"
 #include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
 #include "X/GL/VertexArray.h"
-#include "X/GL/VertexBuffer.h"
-#include "X/GL/IndexBuffer.h"
 #include "X/Factory/MeshFactory.h"
 
-#include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <print>
@@ -70,7 +65,7 @@ int main(int argc, char *argv[])
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
-		"../assets/shaders/FSH-Camera3D.glsl"
+		"../assets/shaders/FSH-;amera3D.glsl"
 	);
 
 	X::Gfx::Renderer renderer;
