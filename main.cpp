@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
-		"../assets/shaders/FSH-;amera3D.glsl"
+		"../assets/shaders/FSH-Camera3D.glsl"
 	);
 
 	X::Gfx::Renderer renderer;
