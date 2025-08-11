@@ -1,14 +1,9 @@
-### Wednesday 23rd July 2025
-- [ ] feat: add Render Pool hash map idea
-
-### Tuesday 29th July 2025
-### Monday 28th July 2025
 ### Sunday 27th July 2025
-### Saturday 26th July 2025
-### Friday 25th July 2025
-### Thursday 24th July 2025
+- [ ] refactor:  Renderer should accept a Camera
 
 ### Backlog
+- [ ] feat: add destructor to Vertex Array and Index Buffer
+- [ ] feat: create Renderer2D
 - [ ] refactor: tidy up Mesh Factory
 - [ ] feat: add Scene Tree
 - [ ] feat: add Color class
