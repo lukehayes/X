@@ -68,6 +68,7 @@ int main(int argc, char *argv[])
 		"../assets/shaders/FSH-Camera3D.glsl"
 	);
 
+
 	X::Gfx::Renderer renderer;
 	X::Camera::Camera3D cam;
 
@@ -132,17 +133,13 @@ int main(int argc, char *argv[])
 		//mesh.vao.UnBind();
 		mesh.vao.Bind();
 
-		//default_shader.use();
-		//default_shader.SetUniformMat4(cam.projection, "projection");
-		//default_shader.SetUniformMat4(cam.view, "view");
+		renderer.Draw(x,y - 2,0, cam, default_shader, {0,0,0,1});
 
-		renderer.Draw(x,y - 2,0, default_shader, {0,0,0,1});
-
-		//renderer.Draw(0,0,0,     default_shader, {0,1,0,1});
-		//renderer.Draw(5,0,0,     default_shader, {0,0,1,1});
-		//renderer.Draw(0,5,0,     default_shader, {1,0,1,1});
-		//renderer.Draw(0,-5,-0,   default_shader, {0,1,1,1});
-		//renderer.Draw(-5,5, -0,  default_shader, {1,1,0,1});
+		renderer.Draw(0,0,0,     cam, default_shader, {0,1,0,1});
+		renderer.Draw(5,0,0,     cam, default_shader, {0,0,1,1});
+		renderer.Draw(0,5,0,     cam, default_shader, {1,0,1,1});
+		renderer.Draw(0,-5,-0,   cam, default_shader, {0,1,1,1});
+		renderer.Draw(-5,5, -0,  cam, default_shader, {1,1,0,1});
 
 		SDL_GL_SwapWindow(window);
 

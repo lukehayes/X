@@ -10,9 +10,12 @@ Renderer::Clear(float r, float g, float b)
 }
 
 void
-Renderer::Draw(int x, int y, int z, X::GL::Shader& shader,glm::vec4 color )
+Renderer::Draw(int x, int y, int z, X::Camera::Camera3D& cam, X::GL::Shader& shader,glm::vec4 color )
 {
 	shader.use();
+
+	shader.SetUniformMat4(cam.projection, "projection");
+	shader.SetUniformMat4(cam.view, "view");
 
 	X::Model::Model model;
 
