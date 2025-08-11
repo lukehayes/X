@@ -66,7 +66,6 @@ int main(int argc, char *argv[])
 		std::cout << "Error:" << SDL_GetError() << std::endl;
 	}
 
-
 	X::Factory::Mesh mesh = X::Factory::CreatePlaneMesh();
 
 	X::GL::Shader default_shader(
@@ -135,14 +134,15 @@ int main(int argc, char *argv[])
 		}
 
 		//vao.Bind();
-		//mesh.vao.Bind();
 		//mesh.vao.UnBind();
+		mesh.vao.Bind();
 
-		default_shader.use();
-		default_shader.SetUniformMat4(cam.projection, "projection");
-		default_shader.SetUniformMat4(cam.view, "view");
+		//default_shader.use();
+		//default_shader.SetUniformMat4(cam.projection, "projection");
+		//default_shader.SetUniformMat4(cam.view, "view");
 
-		//renderer.Draw(x,y - 2,0, mesh, default_shader, {0,0,0,1});
+		renderer.Draw(x,y - 2,0, default_shader, {0,0,0,1});
+
 		//renderer.Draw(0,0,0,     default_shader, {0,1,0,1});
 		//renderer.Draw(5,0,0,     default_shader, {0,0,1,1});
 		//renderer.Draw(0,5,0,     default_shader, {1,0,1,1});
