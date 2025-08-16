@@ -5,6 +5,7 @@ namespace X::Gfx
 void
 Renderer::Clear(float r, float g, float b)
 {
+	glEnable(GL_DEPTH_TEST);
 	glClearColor(r,g,b,1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
