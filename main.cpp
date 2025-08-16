@@ -1,18 +1,12 @@
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_main.h>
-#include <SDL3/SDL_timer.h>
-#include <iostream>
-#include "glad/glad.h"
 
+#include <SDL3/SDL.h>
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
 #include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
 #include "X/GL/VertexArray.h"
 #include "X/Factory/MeshFactory.h"
-
-#include <cstdlib>
-#include <ctime>
+#include "X/App.h"
 #include <print>
 
 
@@ -25,41 +19,9 @@ int main(int argc, char *argv[])
 	constexpr int WIN_MULT   = 4;
 	constexpr int WIN_WIDTH  = 320 * WIN_MULT;
 	constexpr int WIN_HEIGHT = 180 * WIN_MULT;
-
 	bool isRunning           = true;
 
-	if(!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
-	{
-		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not initialize SDL: %s\n", SDL_GetError());
-		std::cout << "Window Context Failed" << std::endl;
-		std::cout << "Error:" << SDL_GetError() << std::endl;
-	}
-
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
-
-	SDL_Window* window       = SDL_CreateWindow("Title", WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_OPENGL);
-	SDL_GLContext window_ctx = SDL_GL_CreateContext(window);
-
-	SDL_GL_MakeCurrent(window, window_ctx);
-
-	// INITIALIZE GLAD:
-	if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
-		throw(std::string("Failed to initialize GLAD"));
-	}
-
-	if (window == NULL) {
-
-		// In the case that the window could not be made...
-		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create window: %s\n", SDL_GetError());
-		return 1;
-	}
-
-	if (!window_ctx) {
-		std::cout << "Window Context Failed" << std::endl;
-		std::cout << "Error:" << SDL_GetError() << std::endl;
-	}
+	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
 	X::Factory::Mesh mesh = X::Factory::CreatePlaneMesh();
 
@@ -141,13 +103,13 @@ int main(int argc, char *argv[])
 		renderer.Draw(0,-5,-0,   cam, default_shader, {0,1,1,1});
 		renderer.Draw(-5,5, -0,  cam, default_shader, {1,1,0,1});
 
-		SDL_GL_SwapWindow(window);
+		SDL_GL_SwapWindow(app.GetWindow());
 
 	}
 
 
-	SDL_GL_DestroyContext(window_ctx);
-	SDL_DestroyWindow(window);
+	SDL_GL_DestroyContext(app.GetContext());
+	SDL_DestroyWindow(app.GetWindow());
 
 	SDL_Quit();
 }
