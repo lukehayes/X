@@ -2,6 +2,7 @@
 #define MODEL_MODEL_H
 
 #include "X/Math/GLM.h"
+#include "X/Transform.h"
 
 namespace X::Model
 {
@@ -47,9 +48,7 @@ public:
 	*/
 	void Scale(const glm::vec3& axis);
 
-	glm::vec3 position = {0,0,-0.1f};
-	glm::vec3 rotation = {0,0,0};
-	glm::vec3 scale    = {1,1,1};
+	X::Transform transform;
 	glm::vec4 color    = {0.5,0,0.5,1};
 	glm::mat4 matrix   = glm::mat4(1.0f);
 	float rotAngle     = 10.0f;

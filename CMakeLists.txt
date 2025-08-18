@@ -33,6 +33,7 @@ add_executable(${BIN_NAME} main.cpp
 
     ## X/App
     "${X_SRC_DIR}/App.cpp"
+    "${X_SRC_DIR}/Transform.cpp"
 
     ## X/GL
     "${X_SRC_DIR}/GL/Shader.cpp"
