@@ -2,6 +2,8 @@
 - [ ] refactor:  Renderer should accept a Camera
 
 ### Backlog
+- [ ] refactor:  seperate Model\Mesh functionality
+- [ ] refactor: move opengl init to seperate class
 - [ ] feat: add destructor to Vertex Array and Index Buffer
 - [ ] feat: create Renderer2D
 - [ ] refactor: tidy up Mesh Factory
