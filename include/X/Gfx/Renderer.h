@@ -4,6 +4,7 @@
 #include "X/Model/Model.h"
 #include "X/Math/GLM.h"
 #include "X/GL/Shader.h"
+#include "X/Camera/Camera.h"
 #include "X/Camera/Camera3D.h"
 
 namespace X::Gfx
@@ -18,7 +19,7 @@ public:
 	/**
 	* Draw whatever is set to the currently bound VAO.
 	*/
-	void Draw(int x, int y, int z, X::Camera::Camera3D& cam, X::GL::Shader& shader,glm::vec4 color );
+	void Draw(int x, int y, int z, X::Camera::Camera3D cam, X::GL::Shader& shader,glm::vec4 color );
 };
 
 }
