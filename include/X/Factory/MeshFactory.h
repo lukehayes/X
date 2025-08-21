@@ -5,8 +5,20 @@
 #include "X/GL/VertexBuffer.h"
 #include "X/GL/IndexBuffer.h"
 
+#include <vector>
+#include "X/Math/GLM.h"
+
+
 namespace X::Factory
 {
+
+struct Entity
+{
+	glm::vec3 position;
+	glm::vec4 color;
+};
+
+
 
 struct Mesh
 {
@@ -47,6 +59,36 @@ X::Factory::Mesh CreatePlaneMesh()
 	mesh.primitive = GL_TRIANGLES;
 
 	return mesh;
+}
+
+static std::vector<Entity> generateEntities(int count, int space = 10)
+{
+	std::vector<Entity> positions;
+
+
+	for (int i = 0; i<= count; i++)
+	{
+		float rx = -std::rand() % space + std::rand() % space;
+		float ry = -std::rand() % space + std::rand() % space;
+		float rz = -std::rand() % space + std::rand() % space;
+
+		float rr = (-std::rand() % 1 + std::rand() % 10)/10.0;
+		float rg = (-std::rand() % 1 + std::rand() % 10)/10.0;
+		float rb = (-std::rand() % 1 + std::rand() % 10)/10.0;
+		float ra = (-std::rand() % 1 + std::rand() % 10)/10.0;
+
+		glm::vec3 pos{rx,ry,rz};
+		glm::vec4 color{rr,rg,rb,ra};
+
+		Entity f;
+		f.position = pos;
+		f.color = color;
+
+		positions.push_back(f);
+
+	}
+
+	return positions;
 }
 
 }
