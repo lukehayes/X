@@ -72,7 +72,7 @@ X::Factory::Mesh CreatePlaneMesh()
 *
 * @return std::vector<Entity>
 */
-static std::vector<Entity> generateEntities(int count, int space = 10)
+static std::vector<Entity> GenerateEntities(int count, int space = 10)
 {
 	std::vector<Entity> positions;
 
