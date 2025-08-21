@@ -61,6 +61,17 @@ X::Factory::Mesh CreatePlaneMesh()
 	return mesh;
 }
 
+/**
+* Generate randomized entites for quick testing.
+*
+* @static
+*
+* @param int count The anount if entities to draw.
+*
+* @param int space The space between each entity.
+*
+* @return std::vector<Entity>
+*/
 static std::vector<Entity> generateEntities(int count, int space = 10)
 {
 	std::vector<Entity> positions;
