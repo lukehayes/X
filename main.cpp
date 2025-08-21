@@ -7,7 +7,11 @@
 #include "X/GL/VertexArray.h"
 #include "X/Factory/MeshFactory.h"
 #include "X/App.h"
+
+#include "X/Scene/Scene.h"
+#include "Game/Level/Level.h"
 #include <print>
+#include <memory>
 
 
 
@@ -23,6 +27,10 @@ int main(int argc, char *argv[])
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
+	std::shared_ptr<X::Scene::Scene> s1 = std::make_shared<X::Scene::Scene>();
+
+	std::shared_ptr<Game::Level::Level> l1 = std::make_shared<Game::Level::Level>();
+
 	X::Factory::Mesh mesh = X::Factory::CreatePlaneMesh();
 
 	X::GL::Shader default_shader(
@@ -30,10 +38,8 @@ int main(int argc, char *argv[])
 		"../assets/shaders/FSH-Camera3D.glsl"
 	);
 
-
 	X::Gfx::Renderer renderer;
 	X::Camera::Camera3D cam;
-
 
 	int x = 0;
 	int y = 0;
@@ -43,8 +49,11 @@ int main(int argc, char *argv[])
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
 
+	auto positions = X::Factory::GenerateEntities(1000, 4);
+
 	while (isRunning) {
 		SDL_Event event;
+
 
 		LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
@@ -91,17 +100,34 @@ int main(int argc, char *argv[])
 			cam.update(0.1);
 		}
 
+		l1->Update(1.0);
+		l1->Render();
+		std::println(" ");
+		std::println("---------------------------");
+
+
 		//vao.Bind();
 		//mesh.vao.UnBind();
 		mesh.vao.Bind();
 
+		/**
 		renderer.Draw(x,y - 2,0, cam, default_shader, {0,0,0,1});
+
+		for(auto pos : positions)
+		{
+			renderer.Draw(pos.position.x,pos.position.y,pos.position.z,     cam, default_shader,
+				 {pos.color.r, pos.color.g, pos.color.g, pos.color.a});
+		}
+
+
 
 		renderer.Draw(0,0,0,     cam, default_shader, {0,1,0,1});
 		renderer.Draw(5,0,0,     cam, default_shader, {0,0,1,1});
 		renderer.Draw(0,5,0,     cam, default_shader, {1,0,1,1});
 		renderer.Draw(0,-5,-0,   cam, default_shader, {0,1,1,1});
 		renderer.Draw(-5,5, -0,  cam, default_shader, {1,1,0,1});
+		*/
+
 
 		SDL_GL_SwapWindow(app.GetWindow());
 
