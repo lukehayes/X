@@ -1,7 +1,8 @@
-### Sunday 27th July 2025
+### TODO
 - [ ] refactor:  Renderer should accept a Camera
 
 ### Backlog
+- [x] feat:  add simple scene implementation
 - [ ] refactor:  seperate Model\Mesh functionality
 - [ ] refactor: move opengl init to seperate class
 - [ ] feat: add destructor to Vertex Array and Index Buffer
