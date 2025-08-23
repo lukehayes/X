@@ -19,7 +19,7 @@ public:
 	/**
 	* Draw whatever is set to the currently bound VAO.
 	*/
-	void Draw(int x, int y, int z, X::Camera::Camera3D cam, X::GL::Shader& shader,glm::vec4 color );
+	void Draw(X::Model::Model& model, X::Camera::Camera3D cam, X::GL::Shader& shader);
 };
 
 }

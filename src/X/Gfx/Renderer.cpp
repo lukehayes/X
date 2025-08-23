@@ -11,23 +11,21 @@ Renderer::Clear(float r, float g, float b)
 }
 
 void
-Renderer::Draw(int x, int y, int z, X::Camera::Camera3D cam, X::GL::Shader& shader,glm::vec4 color )
+Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D cam, X::GL::Shader& shader)
 {
 	shader.use();
 
 	shader.SetUniformMat4(cam.projection, "projection");
 	shader.SetUniformMat4(cam.view, "view");
 
-	X::Model::Model model;
-
-	model.matrix = glm::translate(
-		model.matrix,
-		{x,y,z}
-	);
+	// model.matrix = glm::translate(
+	// 	model.matrix,
+	// 	model.transform.position
+	// );
 
 	shader.SetUniformMat4(model.matrix, "model");
-	shader.setUniformVec4(color, "color");
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	shader.setUniformVec4(model.color, "color");
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 }
 }
