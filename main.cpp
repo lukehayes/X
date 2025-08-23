@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-	X::Mesh::Mesh mesh = X::Factory::CreatePlaneMesh();
+	X::Mesh::Mesh mesh = X::Factory::CreateCubeMesh();
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
 
-	auto positions = X::Factory::GenerateEntities(1000, 4);
+	auto positions = X::Factory::GenerateEntities(1000, 10);
 
 	while (isRunning) {
 		SDL_Event event;
@@ -98,6 +98,17 @@ int main(int argc, char *argv[])
 		mesh.vao.Bind();
 
 		renderer.Draw(x,y - 2,0, cam, default_shader, {0,0,0,1});
+
+		for(auto& e : positions)
+		{
+			renderer.Draw(e.position.x,e.position.y,e.position.z,     cam, default_shader,
+				 {
+					e.color.r,
+					e.color.g,
+					e.color.b,
+					e.color.a
+				 });
+		}
 
 
 		renderer.Draw(0,0,0,     cam, default_shader, {0,1,0,1});
