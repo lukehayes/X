@@ -13,14 +13,14 @@ class Mesh
 public:
 
 	Mesh() {}
+
 	X::GL::VertexArray vao;
 	X::GL::VertexBuffer vbo;
 	X::GL::IndexBuffer ibo;
-	GLenum primitive;
+
 	size_t vertex_count;
 	size_t index_count;
-
-
+	GLenum primitive;
 };
 
 }
