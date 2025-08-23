@@ -4,6 +4,7 @@
 #include "X/GL/VertexBuffer.h"
 #include "X/GL/IndexBuffer.h"
 #include "X/Mesh/Mesh.h"
+#include "X/Model/Model.h"
 
 #include <vector>
 #include "X/Math/GLM.h"
@@ -11,13 +12,6 @@
 
 namespace X::Factory
 {
-
-struct Entity
-{
-	glm::vec3 position;
-	glm::vec4 color;
-};
-
 
 X::Mesh::Mesh CreatePlaneMesh()
 {
@@ -111,9 +105,6 @@ X::Mesh::Mesh CreateCubeMesh()
 }
 
 
-
-
-
 /**
 * Generate randomized entites for quick testing.
 *
@@ -125,9 +116,9 @@ X::Mesh::Mesh CreateCubeMesh()
 *
 * @return std::vector<Entity>
 */
-static std::vector<Entity> GenerateEntities(int count, int space = 10)
+static std::vector<X::Model::Model> GenerateEntities(int count, int space = 10)
 {
-	std::vector<Entity> positions;
+	std::vector<X::Model::Model> positions;
 
 
 	for (int i = 0; i<= count; i++)
@@ -144,11 +135,11 @@ static std::vector<Entity> GenerateEntities(int count, int space = 10)
 		glm::vec3 pos{rx,ry,rz};
 		glm::vec4 color{rr,rg,rb,ra};
 
-		Entity f;
-		f.position = pos;
-		f.color = color;
+		X::Model::Model m;
+		m.transform.position = {rx,ry,rz};
+		m.color = {rr,rg,rb,ra};
 
-		positions.push_back(f);
+		positions.push_back(m);
 
 	}
 
