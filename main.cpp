@@ -1,4 +1,3 @@
-
 #include <SDL3/SDL.h>
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
@@ -8,8 +7,11 @@
 #include "X/Factory/MeshFactory.h"
 #include "X/Mesh/Mesh.h"
 #include "X/App.h"
-#include <print>
 
+#include "Game/Level/Level.h"
+#include "X/Model/Model.h"
+
+#include <print>
 
 
 int main(int argc, char *argv[])
@@ -17,7 +19,7 @@ int main(int argc, char *argv[])
 	// ------------------------------------------------------------------------
 	// Set initial state here.
 
-	constexpr int WIN_MULT   = 4;
+	constexpr int WIN_MULT   = 8;
 	constexpr int WIN_WIDTH  = 320 * WIN_MULT;
 	constexpr int WIN_HEIGHT = 180 * WIN_MULT;
 	bool isRunning           = true;
@@ -25,6 +27,8 @@ int main(int argc, char *argv[])
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
 	X::Mesh::Mesh mesh = X::Factory::CreateCubeMesh();
+	X::Model::Model model;
+	model.color = {0.3,0.3,0.3,1};
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
@@ -34,6 +38,8 @@ int main(int argc, char *argv[])
 	X::Gfx::Renderer renderer;
 	X::Camera::Camera3D cam;
 
+	Game::Level::Level level;
+
 	int x = 0;
 	int y = 0;
 	bool camToggled = false;
@@ -42,7 +48,7 @@ int main(int argc, char *argv[])
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
 
-	auto positions = X::Factory::GenerateEntities(1000, 10);
+	std::vector<X::Model::Model> positions;
 
 	while (isRunning) {
 		SDL_Event event;
@@ -73,6 +79,7 @@ int main(int argc, char *argv[])
 				}
 				if (event.key.key == SDLK_S) {
 					y -= 1;
+	positions = X::Factory::GenerateEntities(1000, 100);
 				}
 
 				if (event.key.key == SDLK_C) {
@@ -93,29 +100,20 @@ int main(int argc, char *argv[])
 			cam.update(0.1);
 		}
 
-		//vao.Bind();
-		//mesh.vao.UnBind();
+		static float c = 0.0;
+		c -= 0.1;
+
 		mesh.vao.Bind();
 
-		renderer.Draw(x,y - 2,0, cam, default_shader, {0,0,0,1});
+		renderer.Draw(model, cam, default_shader);
 
-		for(auto& e : positions)
+		for(auto m : positions)
 		{
-			renderer.Draw(e.position.x,e.position.y,e.position.z,     cam, default_shader,
-				 {
-					e.color.r,
-					e.color.g,
-					e.color.b,
-					e.color.a
-				 });
+			X::Model::Model model;
+			model.Translate(m.transform.position);
+			model.color = m.color;
+			renderer.Draw(model, cam, default_shader);
 		}
-
-
-		renderer.Draw(0,0,0,     cam, default_shader, {0,1,0,1});
-		renderer.Draw(5,0,0,     cam, default_shader, {0,0,1,1});
-		renderer.Draw(0,5,0,     cam, default_shader, {1,0,1,1});
-		renderer.Draw(0,-5,-0,   cam, default_shader, {0,1,1,1});
-		renderer.Draw(-5,5, -0,  cam, default_shader, {1,1,0,1});
 
 
 		SDL_GL_SwapWindow(app.GetWindow());
