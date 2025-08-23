@@ -6,6 +6,7 @@
 #include "X/Gfx/Renderer.h"
 #include "X/GL/VertexArray.h"
 #include "X/Factory/MeshFactory.h"
+#include "X/Mesh/Mesh.h"
 #include "X/App.h"
 #include <print>
 
@@ -23,7 +24,7 @@ int main(int argc, char *argv[])
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-	X::Factory::Mesh mesh = X::Factory::CreatePlaneMesh();
+	X::Mesh::Mesh mesh = X::Factory::CreatePlaneMesh();
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",

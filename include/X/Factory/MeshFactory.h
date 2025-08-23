@@ -1,9 +1,9 @@
 #ifndef X_FACTORY_MESH_FACTORY_H
 #define X_FACTORY_MESH_FACTORY_H
 
-#include "X/GL/VertexArray.h"
 #include "X/GL/VertexBuffer.h"
 #include "X/GL/IndexBuffer.h"
+#include "X/Mesh/Mesh.h"
 
 #include <vector>
 #include "X/Math/GLM.h"
@@ -19,20 +19,9 @@ struct Entity
 };
 
 
-
-struct Mesh
+X::Mesh::Mesh CreatePlaneMesh()
 {
-	Mesh() {}
-	X::GL::VertexArray vao;
-	X::GL::VertexBuffer vbo;
-	X::GL::IndexBuffer ibo;
-	GLenum primitive;
-};
-
-
-X::Factory::Mesh CreatePlaneMesh()
-{
-	Mesh mesh;
+	X::Mesh::Mesh mesh;
 	mesh.vao.Bind();
 
 	std::vector<GLfloat> data = {
