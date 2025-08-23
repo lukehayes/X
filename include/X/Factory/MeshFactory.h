@@ -24,7 +24,7 @@ X::Mesh::Mesh CreatePlaneMesh()
 	X::Mesh::Mesh mesh;
 	mesh.vao.Bind();
 
-	std::vector<GLfloat> data = {
+	std::vector<GLfloat> verticies = {
 		0.5f,  0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f,
 		-0.5f, -0.5f, 0.0f,
@@ -35,7 +35,7 @@ X::Mesh::Mesh CreatePlaneMesh()
 		GL::ATTRIB_VERTEX_POSITION,
 		GL::ATTRIB_VERTEX_COUNT,
 		GL::ATTRIB_STRIDE,
-		data,
+		verticies,
 		GL_ARRAY_BUFFER};
 
 	std::vector<unsigned int> indices = {
@@ -45,10 +45,90 @@ X::Mesh::Mesh CreatePlaneMesh()
 
 	X::GL::IndexBuffer ibo(indices);
 
+	mesh.vertex_count = verticies.size();
+	mesh.index_count = indices.size();
 	mesh.primitive = GL_TRIANGLES;
 
 	return mesh;
 }
+
+X::Mesh::Mesh CreateCubeMesh()
+{
+	X::Mesh::Mesh mesh;
+	mesh.vao.Bind();
+
+	std::vector<GLfloat> data = {
+		-0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+	};
+
+	mesh.index_count = data.size();
+
+	X::GL::VertexBuffer vbo{
+		GL::ATTRIB_VERTEX_POSITION,
+		GL::ATTRIB_VERTEX_COUNT,
+		GL::ATTRIB_STRIDE,
+		data,
+		GL_ARRAY_BUFFER};
+
+	std::vector<unsigned int> indices = {
+		0, 1, 3, 3, 1, 2,
+		1, 5, 2, 2, 5, 6,
+		5, 4, 6, 6, 4, 7,
+		4, 0, 7, 7, 0, 3,
+		3, 2, 7, 7, 2, 6,
+		4, 5, 0, 0, 5, 1
+	};
+
+	X::GL::IndexBuffer ibo(indices);
+
+	mesh.primitive = GL_TRIANGLES;
+
+	return mesh;
+}
+
+
+
+
 
 /**
 * Generate randomized entites for quick testing.
