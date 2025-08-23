@@ -543,5 +543,8 @@ MigrationBackup/
 .ionide/
 
 build/
+html/
+Docs/
+docs/
 
 # End of https://www.toptal.com/developers/gitignore/api/c,vim,osx,linux,windows,sublimetext,visualstudiocode,visualstudio
