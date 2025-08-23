@@ -57,71 +57,55 @@ X::Mesh::Mesh CreateCubeMesh()
 	X::Mesh::Mesh mesh;
 	mesh.vao.Bind();
 
-	std::vector<GLfloat> data = {
-		-0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
+	std::vector<GLfloat> verticies = {
+        -1, -1,  0.5, //0
+         1, -1,  0.5, //1
+        -1,  1,  0.5, //2
+         1,  1,  0.5, //3
+        -1, -1, -0.5, //4
+         1, -1, -0.5, //5
+        -1,  1, -0.5, //6
+         1,  1, -0.5  //7
 	};
-
-	mesh.index_count = data.size();
 
 	X::GL::VertexBuffer vbo{
 		GL::ATTRIB_VERTEX_POSITION,
 		GL::ATTRIB_VERTEX_COUNT,
 		GL::ATTRIB_STRIDE,
-		data,
+		verticies,
 		GL_ARRAY_BUFFER};
 
 	std::vector<unsigned int> indices = {
-		0, 1, 3, 3, 1, 2,
-		1, 5, 2, 2, 5, 6,
-		5, 4, 6, 6, 4, 7,
-		4, 0, 7, 7, 0, 3,
-		3, 2, 7, 7, 2, 6,
-		4, 5, 0, 0, 5, 1
+       //Top
+        2, 6, 7,
+        2, 3, 7,
+
+        //Bottom
+        0, 4, 5,
+        0, 1, 5,
+
+        //Left
+        0, 2, 6,
+        0, 4, 6,
+
+        //Right
+        1, 3, 7,
+        1, 5, 7,
+
+        //Front
+        0, 2, 3,
+        0, 1, 3,
+
+        //Back
+        4, 6, 7,
+        4, 5, 7
 	};
 
 	X::GL::IndexBuffer ibo(indices);
 
-	mesh.primitive = GL_TRIANGLES;
+	mesh.primitive   = GL_TRIANGLES;
+	mesh.vertex_count = verticies.size();
+	mesh.index_count = indices.size();
 
 	return mesh;
 }
