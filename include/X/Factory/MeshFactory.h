@@ -6,12 +6,52 @@
 #include "X/Mesh/Mesh.h"
 #include "X/Model/Model.h"
 
+#include <utility>
 #include <vector>
+#include <unordered_map>
 #include "X/Math/GLM.h"
 
 
+namespace std
+{
+	template<>
+	struct hash<X::Mesh::Mesh>
+	{
+		size_t operator()(const X::Mesh::Mesh& mesh)
+		{
+			std::println("X::MESH OPERATOR ()");
+			return std::hash<size_t>()(mesh.vertex_count + mesh.index_count);
+		}
+	};
+}
+
 namespace X::Factory
 {
+
+
+class MeshFactory
+{
+public:
+	MeshFactory () {}
+	~MeshFactory () {}
+
+	/**
+	 * Add a mesh instance into the factory
+	 *
+	 * @param const std::string& key
+	 * @param X::Mesh::Mesh* mesh
+	 *
+	 * @return X::Mesh::Mesh* A reference to the newly inserted mesh.
+	 */
+	X::Mesh::Mesh* AddMesh(const std::string& key, X::Mesh::Mesh* mesh)
+	{
+		return this->meshes[key] = mesh;
+	}
+
+	std::unordered_map<std::string, X::Mesh::Mesh*> meshes;
+};
+
+
 
 X::Mesh::Mesh CreatePlaneMesh()
 {
