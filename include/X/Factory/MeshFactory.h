@@ -1,14 +1,12 @@
 #ifndef X_FACTORY_MESH_FACTORY_H
 #define X_FACTORY_MESH_FACTORY_H
 
+#include "X/GL/BufferData.h"
 #include "X/GL/VertexBuffer.h"
 #include "X/GL/IndexBuffer.h"
 #include "X/Mesh/Mesh.h"
 #include "X/Model/Model.h"
-
-#include <utility>
 #include <vector>
-#include <unordered_map>
 #include "X/Math/GLM.h"
 
 
@@ -19,7 +17,6 @@ struct hash<X::Mesh::Mesh>
 {
 	size_t operator()(const X::Mesh::Mesh& mesh)
 	{
-		std::println("X::MESH OPERATOR ()");
 		return std::hash<size_t>()(mesh.vertex_count + mesh.index_count);
 	}
 };
@@ -68,8 +65,6 @@ private:
 
 X::Mesh::Mesh CreatePlaneMesh()
 {
-	X::Mesh::Mesh mesh;
-	mesh.vao.Bind();
 
 	std::vector<GLfloat> verticies = {
 		0.5f,  0.5f, 0.0f,
@@ -84,6 +79,10 @@ X::Mesh::Mesh CreatePlaneMesh()
 		GL::ATTRIB_STRIDE,
 		verticies,
 		GL_ARRAY_BUFFER};
+
+	X::Mesh::Mesh mesh(0, verticies.size(), 3, verticies, GL_ARRAY_BUFFER);
+
+	mesh.vao.Bind();
 
 	std::vector<unsigned int> indices = {
 		0, 1, 3,   // first triangle
@@ -101,8 +100,6 @@ X::Mesh::Mesh CreatePlaneMesh()
 
 X::Mesh::Mesh CreateCubeMesh()
 {
-	X::Mesh::Mesh mesh;
-	mesh.vao.Bind();
 
 	std::vector<GLfloat> verticies = {
 		-1, -1,  0.5, //0
@@ -121,6 +118,15 @@ X::Mesh::Mesh CreateCubeMesh()
 		GL::ATTRIB_STRIDE,
 		verticies,
 		GL_ARRAY_BUFFER};
+
+	X::GL::BufferData bufferData {
+		X::GL::ATTRIB_VERTEX_COUNT,
+		verticies,
+		indicies
+	}
+
+	X::Mesh::Mesh mesh(0, verticies.size(), 3, verticies, GL_ARRAY_BUFFER);
+	mesh.vao.Bind();
 
 	std::vector<unsigned int> indices = {
 		//Top

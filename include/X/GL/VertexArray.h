@@ -2,7 +2,6 @@
 #define X_GL_VERTEX_BUFFER_H
 
 #include "glad/glad.h"
-#include <print>
 
 namespace X::GL
 {
