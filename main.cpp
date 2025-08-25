@@ -8,7 +8,6 @@
 #include "X/Mesh/Mesh.h"
 #include "X/App.h"
 
-#include "Game/Level/Level.h"
 #include "X/Model/Model.h"
 
 #include <print>
@@ -26,19 +25,31 @@ int main(int argc, char *argv[])
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-	X::Mesh::Mesh mesh = X::Factory::CreateCubeMesh();
+	X::Gfx::Renderer renderer;
+	X::Camera::Camera3D cam;
+	X::Mesh::Mesh cubeMesh = X::Factory::CreateCubeMesh();
+	X::Mesh::Mesh planeMesh = X::Factory::CreatePlaneMesh();
+	X::Factory::MeshFactory meshFactory;
+	meshFactory.AddMesh("cube", &cubeMesh);
+	meshFactory.AddMesh("plane", &planeMesh);
+
+
+
 	X::Model::Model model;
 	model.color = {0.3,0.3,0.3,1};
+	model.mesh = meshFactory.GetMesh("cube");
+	model.transform.position = {0.5,-0.5,-22};
+
+	X::Model::Model model2;
+	model2.color = {0.2,0.2,0.6,1};
+	model2.mesh = meshFactory.GetMesh("plane");
+	model2.transform.position = {0,0.5,12};
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Camera3D.glsl",
 		"../assets/shaders/FSH-Camera3D.glsl"
 	);
 
-	X::Gfx::Renderer renderer;
-	X::Camera::Camera3D cam;
-
-	Game::Level::Level level;
 
 	int x = 0;
 	int y = 0;
@@ -101,19 +112,22 @@ int main(int argc, char *argv[])
 		}
 
 		static float c = 0.0;
-		c -= 0.1;
+		c += 1.0;
 
-		mesh.vao.Bind();
+		//mesh.vao.Bind();
 
+		model.transform.position.z += sin(c);
+
+		renderer.Draw(model2, cam, default_shader);
 		renderer.Draw(model, cam, default_shader);
 
-		for(auto m : positions)
-		{
-			X::Model::Model model;
-			model.Translate(m.transform.position);
-			model.color = m.color;
-			renderer.Draw(model, cam, default_shader);
-		}
+		//for(auto m : positions)
+		//{
+			//X::Model::Model model;
+			//model.Translate(m.transform.position);
+			//model.color = m.color;
+			//renderer.Draw(model, cam, default_shader);
+		//}
 
 
 		SDL_GL_SwapWindow(app.GetWindow());
