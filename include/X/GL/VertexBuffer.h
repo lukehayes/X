@@ -24,12 +24,11 @@ public:
 		GLenum buffer_type
 	);
 
-	VertexBuffer();
 	VertexBuffer(const VertexBuffer& rhs) = delete;
 	VertexBuffer& operator=(const VertexBuffer& rhs) = delete;
 
-	VertexBuffer(const VertexBuffer&& rhs);
-	VertexBuffer& operator=(const VertexBuffer&& rhs);
+	VertexBuffer(VertexBuffer&& rhs);
+	VertexBuffer& operator=(VertexBuffer&& rhs);
 
 	~VertexBuffer();
 
