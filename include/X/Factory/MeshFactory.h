@@ -14,15 +14,15 @@
 
 namespace std
 {
-	template<>
-	struct hash<X::Mesh::Mesh>
+template<>
+struct hash<X::Mesh::Mesh>
+{
+	size_t operator()(const X::Mesh::Mesh& mesh)
 	{
-		size_t operator()(const X::Mesh::Mesh& mesh)
-		{
-			std::println("X::MESH OPERATOR ()");
-			return std::hash<size_t>()(mesh.vertex_count + mesh.index_count);
-		}
-	};
+		std::println("X::MESH OPERATOR ()");
+		return std::hash<size_t>()(mesh.vertex_count + mesh.index_count);
+	}
+};
 }
 
 namespace X::Factory
@@ -48,6 +48,19 @@ public:
 		return this->meshes[key] = mesh;
 	}
 
+	/**
+	 * Get mesh instance from Factory.
+	 *
+	 * @param const std::string& key
+	 *
+	 * @return X::Mesh::Mesh* A reference to the newly inserted mesh.
+	 */
+	X::Mesh::Mesh* GetMesh(const std::string& key)
+	{
+		return this->meshes[key];
+	}
+
+private:
 	std::unordered_map<std::string, X::Mesh::Mesh*> meshes;
 };
 
@@ -92,14 +105,14 @@ X::Mesh::Mesh CreateCubeMesh()
 	mesh.vao.Bind();
 
 	std::vector<GLfloat> verticies = {
-        -1, -1,  0.5, //0
-         1, -1,  0.5, //1
-        -1,  1,  0.5, //2
-         1,  1,  0.5, //3
-        -1, -1, -0.5, //4
-         1, -1, -0.5, //5
-        -1,  1, -0.5, //6
-         1,  1, -0.5  //7
+		-1, -1,  0.5, //0
+		1, -1,  0.5, //1
+		-1,  1,  0.5, //2
+		1,  1,  0.5, //3
+		-1, -1, -0.5, //4
+		1, -1, -0.5, //5
+		-1,  1, -0.5, //6
+		1,  1, -0.5  //7
 	};
 
 	X::GL::VertexBuffer vbo{
@@ -110,29 +123,29 @@ X::Mesh::Mesh CreateCubeMesh()
 		GL_ARRAY_BUFFER};
 
 	std::vector<unsigned int> indices = {
-       //Top
-        2, 6, 7,
-        2, 3, 7,
+		//Top
+		2, 6, 7,
+		2, 3, 7,
 
-        //Bottom
-        0, 4, 5,
-        0, 1, 5,
+		//Bottom
+		0, 4, 5,
+		0, 1, 5,
 
-        //Left
-        0, 2, 6,
-        0, 4, 6,
+		//Left
+		0, 2, 6,
+		0, 4, 6,
 
-        //Right
-        1, 3, 7,
-        1, 5, 7,
+		//Right
+		1, 3, 7,
+		1, 5, 7,
 
-        //Front
-        0, 2, 3,
-        0, 1, 3,
+		//Front
+		0, 2, 3,
+		0, 1, 3,
 
-        //Back
-        4, 6, 7,
-        4, 5, 7
+		//Back
+		4, 6, 7,
+		4, 5, 7
 	};
 
 	X::GL::IndexBuffer ibo(indices);
