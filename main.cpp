@@ -3,7 +3,6 @@
 #include "X/Math/GLM.h"
 #include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
-#include "X/GL/VertexArray.h"
 #include "X/Factory/MeshFactory.h"
 #include "X/Mesh/Mesh.h"
 #include "X/App.h"
@@ -121,13 +120,13 @@ int main(int argc, char *argv[])
 		renderer.Draw(model2, cam, default_shader);
 		renderer.Draw(model, cam, default_shader);
 
-		//for(auto m : positions)
-		//{
-			//X::Model::Model model;
-			//model.Translate(m.transform.position);
-			//model.color = m.color;
-			//renderer.Draw(model, cam, default_shader);
-		//}
+		for(auto m : positions)
+		{
+			X::Model::Model model;
+			model.Translate(m.transform.position);
+			model.color = m.color;
+			renderer.Draw(model, cam, default_shader);
+		}
 
 
 		SDL_GL_SwapWindow(app.GetWindow());
