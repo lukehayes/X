@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	// ------------------------------------------------------------------------
 	// Set initial state here.
 
-	constexpr int WIN_MULT   = 8;
+	constexpr int WIN_MULT   = 4;
 	constexpr int WIN_WIDTH  = 320 * WIN_MULT;
 	constexpr int WIN_HEIGHT = 180 * WIN_MULT;
 	bool isRunning           = true;
