@@ -3,6 +3,8 @@
 
 ### Backlog
 - [x] feat:  add simple scene implementation
+- [ ] refactor:   Move engine/app code into Engine class
+- [ ] feat:  implement screen resizing
 - [ ] refactor:  seperate Model\Mesh functionality
 - [ ] refactor: move opengl init to seperate class
 - [ ] feat: add destructor to Vertex Array and Index Buffer
