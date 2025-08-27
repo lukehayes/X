@@ -27,8 +27,8 @@ public:
 	VertexBuffer(const VertexBuffer& rhs) = delete;
 	VertexBuffer& operator=(const VertexBuffer& rhs) = delete;
 
-	VertexBuffer(VertexBuffer&& rhs);
-	VertexBuffer& operator=(VertexBuffer&& rhs);
+	VertexBuffer(VertexBuffer&& rhs) = default;
+	VertexBuffer& operator=(VertexBuffer&& rhs) = default;
 
 	~VertexBuffer();
 
