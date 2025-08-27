@@ -7,6 +7,8 @@
 #include "X/Mesh/Mesh.h"
 #include "X/Model/Model.h"
 #include <vector>
+#include <string>
+#include <unordered_map>
 #include "X/Math/GLM.h"
 
 
