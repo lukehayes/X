@@ -68,6 +68,7 @@ private:
 X::Mesh::Mesh CreatePlaneMesh()
 {
 
+	/**
 	std::vector<GLfloat> verticies = {
 		0.5f,  0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f,
@@ -82,9 +83,9 @@ X::Mesh::Mesh CreatePlaneMesh()
 		verticies,
 		GL_ARRAY_BUFFER};
 
-	X::Mesh::Mesh mesh(0, verticies.size(), 3, verticies, GL_ARRAY_BUFFER);
+	//X::Mesh::Mesh mesh(0, verticies.size(), 3, verticies, GL_ARRAY_BUFFER);
 
-	mesh.vao.Bind();
+	//mesh.vao.Bind();
 
 	std::vector<unsigned int> indices = {
 		0, 1, 3,   // first triangle
@@ -93,16 +94,22 @@ X::Mesh::Mesh CreatePlaneMesh()
 
 	X::GL::IndexBuffer ibo(indices);
 
+	X::GL::BufferData buffer_data {0, verticies, indices};
+
+	X::Mesh::Mesh mesh;
+
 	mesh.vertex_count = verticies.size();
 	mesh.index_count = indices.size();
 	mesh.primitive = GL_TRIANGLES;
 
 	return mesh;
+	*/
 }
 
 X::Mesh::Mesh CreateCubeMesh()
 {
 
+	/*
 	std::vector<GLfloat> verticies = {
 		-1, -1,  0.5, //0
 		1, -1,  0.5, //1
@@ -163,6 +170,7 @@ X::Mesh::Mesh CreateCubeMesh()
 	mesh.index_count = indices.size();
 
 	return mesh;
+	*/
 }
 
 
