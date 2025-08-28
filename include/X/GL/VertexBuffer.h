@@ -37,6 +37,7 @@ public:
 	void Destroy();
 
 	GLuint id;
+	GLenum buffer_type;
 };
 }
 
