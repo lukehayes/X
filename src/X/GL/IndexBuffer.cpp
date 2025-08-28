@@ -2,13 +2,27 @@
 
 namespace X::GL
 {
-	IndexBuffer::IndexBuffer() {}
+IndexBuffer::IndexBuffer(
+	std::vector<unsigned int>& data
+) : data(data)
+{
+	glGenBuffers(1, &this->id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->data.at(0)) * this->data.size(), this->data.data(), GL_STATIC_DRAW);
+}
 
-	IndexBuffer::IndexBuffer(
-		std::vector<unsigned int> data
-	) {
-		glGenBuffers(1, &this->id);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(data.at(0)) * data.size(), data.data(), GL_STATIC_DRAW);
-	}
+
+void
+IndexBuffer::Bind()
+{
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
+}
+
+void
+IndexBuffer::UnBind()
+{
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+
 }

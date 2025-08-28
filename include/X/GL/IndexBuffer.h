@@ -11,12 +11,16 @@ class IndexBuffer
 {
 public:
 
-	IndexBuffer();
+	IndexBuffer() = delete;
 
 	IndexBuffer(
-		std::vector<unsigned int> data
+		std::vector<unsigned int>& data
 	);
 
+	void Bind();
+	void UnBind();
+
+	std::vector<unsigned int> data;
 	GLuint id;
 };
 }
