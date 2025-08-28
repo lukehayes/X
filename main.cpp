@@ -6,6 +6,7 @@
 #include "X/Factory/MeshFactory.h"
 #include "X/Mesh/Mesh.h"
 #include "X/App.h"
+#include "X/GL/VertexArray.h"
 
 #include "X/Model/Model.h"
 
@@ -24,24 +25,60 @@ int main(int argc, char *argv[])
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
+	std::vector<GLfloat> verticies = {
+		0.5f,  0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f
+	};
+
+	X::GL::VertexArray vertex_array;
+	vertex_array.Bind();
+
+	X::GL::VertexBuffer vertex_buffer {
+		0,
+		9,
+		0,
+		verticies,
+		GL_ARRAY_BUFFER
+	};
+
+	//vertex_buffer.Bind();
+
+	std::vector<unsigned int> indices = {
+		0, 1, 3,   // first triangle
+		1, 2, 3    // second triangle
+	};
+
+	X::GL::IndexBuffer index_buffer { indices };
+
+	X::Mesh::Mesh mesh {
+		vertex_array,
+		vertex_buffer,
+		index_buffer  };
+
+	//mesh.vertex_array.Bind();
+
+
 	X::Gfx::Renderer renderer;
 	X::Camera::Camera3D cam;
-	X::Mesh::Mesh cubeMesh = X::Factory::CreateCubeMesh();
-	X::Mesh::Mesh planeMesh = X::Factory::CreatePlaneMesh();
-	X::Factory::MeshFactory meshFactory;
-	meshFactory.AddMesh("cube", &cubeMesh);
-	meshFactory.AddMesh("plane", &planeMesh);
+	//X::Mesh::Mesh cubeMesh = X::Factory::CreateCubeMesh();
+	//X::Mesh::Mesh planeMesh = X::Factory::CreatePlaneMesh();
+	//X::Factory::MeshFactory meshFactory;
+	//meshFactory.AddMesh("cube", &cubeMesh);
+	//meshFactory.AddMesh("plane", &planeMesh);
+
 
 
 
 	X::Model::Model model;
 	model.color = {0.3,0.3,0.3,1};
-	model.mesh = meshFactory.GetMesh("cube");
+	//model.mesh = meshFactory.GetMesh("cube");
 	model.transform.position = {0.5,-0.5,-22};
 
 	X::Model::Model model2;
 	model2.color = {0.2,0.2,0.6,1};
-	model2.mesh = meshFactory.GetMesh("plane");
+	//model2.mesh = meshFactory.GetMesh("plane");
 	model2.transform.position = {0,0.5,12};
 
 	X::GL::Shader default_shader(
@@ -115,18 +152,21 @@ int main(int argc, char *argv[])
 
 		//mesh.vao.Bind();
 
-		model.transform.position.z += sin(c);
+		//default_shader.use();
 
-		renderer.Draw(model2, cam, default_shader);
+		//model.transform.position.z += sin(c);
+
 		renderer.Draw(model, cam, default_shader);
+		renderer.Draw(model2, cam, default_shader);
 
-		for(auto m : positions)
-		{
-			X::Model::Model model;
-			model.Translate(m.transform.position);
-			model.color = m.color;
-			renderer.Draw(model, cam, default_shader);
-		}
+		//for(auto m : positions)
+		//{
+			//X::Model::Model model;
+			//model.transform.position.z = -40.0;
+			////model.Translate(m.transform.position);
+			//model.color = m.color;
+			//renderer.Draw(model, cam, default_shader);
+		//}
 
 
 		SDL_GL_SwapWindow(app.GetWindow());
