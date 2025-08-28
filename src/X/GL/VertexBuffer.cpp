@@ -13,6 +13,8 @@ VertexBuffer::VertexBuffer(
 	GLenum buffer_type
 ) {
 
+	this->buffer_type = buffer_type;
+
 	glGenBuffers(1, &this->id);
 	glBindBuffer(buffer_type, this->id);
 
@@ -38,6 +40,19 @@ VertexBuffer::~VertexBuffer()
 {
 	//this->Destroy();
 	std::println("Vertex Buffer Deleted");
+}
+
+
+void
+VertexBuffer::Bind()
+{
+	glBindBuffer(this->buffer_type, this->id);
+}
+
+void
+VertexBuffer::UnBind()
+{
+	glBindBuffer(this->buffer_type, 0);
 }
 
 void
