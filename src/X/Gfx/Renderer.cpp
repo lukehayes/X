@@ -11,7 +11,7 @@ Renderer::Clear(float r, float g, float b)
 }
 
 void
-Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D cam, X::GL::Shader& shader)
+Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)
 {
 	shader.use();
 
