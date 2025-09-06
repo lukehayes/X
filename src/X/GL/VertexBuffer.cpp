@@ -1,5 +1,4 @@
 #include "X/GL/VertexBuffer.h"
-
 #include <print>
 
 namespace X::GL
