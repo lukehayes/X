@@ -49,8 +49,6 @@ int main(int argc, char *argv[]) {
 				 "../assets/shaders/FSH-Camera3D.glsl");
 
     
-    mesh.index_count = indices.size();
-
     X::Model::Model model;
     model.color = {0.3, 0.3, 0.3, 1};
     model.mesh = &mesh;
@@ -100,7 +98,7 @@ int main(int argc, char *argv[]) {
 		}
 		if (event.key.key == SDLK_S) {
 		    y -= 1;
-		    positions = X::Factory::GenerateEntities(1000, 100);
+		    positions = X::Factory::GenerateEntities(1000, 15);
 		}
 
 		if (event.key.key == SDLK_C) {
@@ -143,6 +141,10 @@ int main(int argc, char *argv[]) {
 
 	for (auto m : positions) {
 	    X::Model::Model model;
+
+	    // Temporary crash fix
+	    model.mesh = &mesh;
+
 	    model.transform.position.z = 20.0;
 	    model.Translate(m.transform.position);
 	    model.color = m.color;
