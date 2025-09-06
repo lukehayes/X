@@ -36,8 +36,10 @@ public:
 	void UnBind();
 	void Destroy();
 
+	std::vector<GLfloat> data;
 	GLuint id;
 	GLenum buffer_type;
+
 };
 }
 

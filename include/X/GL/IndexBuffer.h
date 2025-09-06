@@ -19,7 +19,8 @@ public:
 
 	void Bind();
 	void UnBind();
-
+	
+	// TODO Refactor this part later
 	std::vector<unsigned int> data;
 	GLuint id;
 };

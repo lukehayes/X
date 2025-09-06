@@ -25,7 +25,7 @@ Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& 
     shader.SetUniformMat4(model.matrix, "model");
     shader.setUniformVec4(model.color, "color");
 
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, model.mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
 
 }
 }

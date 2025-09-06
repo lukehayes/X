@@ -10,7 +10,8 @@ VertexBuffer::VertexBuffer(
 	std::uint8_t vertex_stride,
 	const std::vector<GLfloat>& data,
 	GLenum buffer_type
-) {
+) : data(data)
+{
 
 	this->buffer_type = buffer_type;
 
