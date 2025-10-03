@@ -1,4 +1,5 @@
 #include "X/Gfx/Renderer.h"
+#include "X/Factory/MeshFactory.h"
 
 namespace X::Gfx
 {
@@ -12,6 +13,10 @@ Renderer::Clear(float r, float g, float b)
 void
 Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)
 {
+    X::Factory::MeshFactory factory;
+
+    auto mesh = factory.GetMesh("cube");
+
     shader.use();
 
     shader.SetUniformMat4(cam.projection, "projection");
@@ -25,7 +30,7 @@ Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& 
     shader.SetUniformMat4(model.matrix, "model");
     shader.setUniformVec4(model.color, "color");
 
-    glDrawElements(GL_TRIANGLES, model.mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
 
 }
 }
