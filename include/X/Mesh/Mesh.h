@@ -19,9 +19,9 @@ public:
 	index_buffer(std::move(index_buffer))
     {}
 
-    X::GL::VertexArray vertex_array;
+    X::GL::VertexArray  vertex_array;
     X::GL::VertexBuffer vertex_buffer;
-    X::GL::IndexBuffer index_buffer;
+    X::GL::IndexBuffer  index_buffer;
 
     inline std::size_t  GetIndexCount() const { return this->index_buffer.data.size(); }
     inline std::size_t  GetVertexCount() const { return this->vertex_buffer.data.size(); }

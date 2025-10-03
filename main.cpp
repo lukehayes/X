@@ -23,40 +23,17 @@ int main(int argc, char *argv[]) {
 
     X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-    std::vector<GLfloat> verticies = {0.5f,  0.5f,  0.0f, 0.5f,  -0.5f, 0.0f,
-	-0.5f, -0.5f, 0.0f, -0.5f, 0.5f,  0.0f};
-
-    X::GL::VertexArray vertex_array;
-    // vertex_array.Bind();
-
-    X::GL::VertexBuffer vertex_buffer{X::GL::ATTRIB_VERTEX_POSITION, 3, 0,
-	verticies, GL_ARRAY_BUFFER};
-
-    // vertex_buffer.Bind();
-
-    std::vector<unsigned int> indices = {
-	0, 1, 3, // first triangle
-	1, 2, 3  // second triangle
-    };
-
-    X::GL::IndexBuffer index_buffer{indices};
-
-    X::Mesh::Mesh mesh{vertex_array, vertex_buffer, index_buffer};
-
     X::Gfx::Renderer renderer;
     X::Camera::Camera3D cam;
     X::GL::Shader default_shader("../assets/shaders/VSH-Camera3D.glsl",
 				 "../assets/shaders/FSH-Camera3D.glsl");
 
-    
     X::Model::Model model;
     model.color = {0.3, 0.3, 0.3, 1};
-    model.mesh = &mesh;
     model.transform.position = {0.5, -0.5, -22};
 
     X::Model::Model model2;
     model2.color = {0.2, 0.2, 0.6, 1};
-    model2.mesh = &mesh;
     model2.transform.position = {0, 0.5, 12};
 
     int x = 0;
@@ -125,9 +102,9 @@ int main(int argc, char *argv[]) {
 
 	// mesh.vao.Bind();
 
-	vertex_array.Bind();
-	vertex_buffer.Bind();
-	index_buffer.Bind();
+	// vertex_array.Bind();
+	// vertex_buffer.Bind();
+	// index_buffer.Bind();
 
 	// index_buffer.Bind();
 	// vertex_array.Bind();
@@ -143,8 +120,6 @@ int main(int argc, char *argv[]) {
 	    X::Model::Model model;
 
 	    // Temporary crash fix
-	    model.mesh = &mesh;
-
 	    model.transform.position.z = 20.0;
 	    model.Translate(m.transform.position);
 	    model.color = m.color;
