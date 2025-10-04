@@ -26,9 +26,6 @@ public:
     inline std::size_t  GetIndexCount() const { return this->index_buffer.data.size(); }
     inline std::size_t  GetVertexCount() const { return this->vertex_buffer.data.size(); }
 
-
-    size_t vertex_count;
-    size_t index_count;
     GLenum primitive;
 };
 

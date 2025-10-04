@@ -17,10 +17,10 @@ namespace std
 template<>
 struct hash<X::Mesh::Mesh>
 {
-	size_t operator()(const X::Mesh::Mesh& mesh)
-	{
-		return std::hash<size_t>()(mesh.vertex_count + mesh.index_count);
-	}
+    size_t operator()(const X::Mesh::Mesh& mesh)
+    {
+        return std::hash<size_t>()(mesh.GetVertexCount() + mesh.GetIndexCount());
+    }
 };
 }
 
@@ -31,8 +31,8 @@ namespace X::Factory
 class MeshFactory
 {
 public:
-	MeshFactory () {}
-	~MeshFactory () {}
+	MeshFactory ();
+	~MeshFactory ();
 
 	/**
 	 * Add a mesh instance into the factory
@@ -42,10 +42,7 @@ public:
 	 *
 	 * @return X::Mesh::Mesh* A reference to the newly inserted mesh.
 	 */
-	X::Mesh::Mesh* AddMesh(const std::string& key, X::Mesh::Mesh* mesh)
-	{
-		return this->meshes[key] = mesh;
-	}
+	X::Mesh::Mesh* AddMesh(const std::string& key, X::Mesh::Mesh* mesh);
 
 	/**
 	 * Get mesh instance from Factory.
@@ -54,108 +51,17 @@ public:
 	 *
 	 * @return X::Mesh::Mesh* A reference to the newly inserted mesh.
 	 */
-	X::Mesh::Mesh* GetMesh(const std::string& key)
-	{
-		return this->meshes[key];
-	}
+	X::Mesh::Mesh* GetMesh(const std::string& key);
+
+        X::Mesh::Mesh* CreatePlaneMesh();
+
+        X::Mesh::Mesh CreateCubeMesh();
 
 private:
 	std::unordered_map<std::string, X::Mesh::Mesh*> meshes;
 };
 
 
-
-X::Mesh::Mesh CreatePlaneMesh()
-{
-    std::vector<GLfloat> verticies = {0.5f,  0.5f,  0.0f, 0.5f,  -0.5f, 0.0f,
-	-0.5f, -0.5f, 0.0f, -0.5f, 0.5f,  0.0f};
-
-    X::GL::VertexArray vertex_array;
-    // vertex_array.Bind();
-
-    X::GL::VertexBuffer vertex_buffer{X::GL::ATTRIB_VERTEX_POSITION, 3, 0,
-	verticies, GL_ARRAY_BUFFER};
-
-    // vertex_buffer.Bind();
-
-    std::vector<unsigned int> indices = {
-	0, 1, 3, // first triangle
-	1, 2, 3  // second triangle
-    };
-
-    X::GL::IndexBuffer index_buffer{indices};
-
-    X::Mesh::Mesh mesh{vertex_array, vertex_buffer, index_buffer};
-
-	return mesh;
-}
-
-X::Mesh::Mesh CreateCubeMesh()
-{
-
-	/*
-	std::vector<GLfloat> verticies = {
-		-1, -1,  0.5, //0
-		1, -1,  0.5, //1
-		-1,  1,  0.5, //2
-		1,  1,  0.5, //3
-		-1, -1, -0.5, //4
-		1, -1, -0.5, //5
-		-1,  1, -0.5, //6
-		1,  1, -0.5  //7
-	};
-
-	X::GL::VertexBuffer vbo{
-		GL::ATTRIB_VERTEX_POSITION,
-		GL::ATTRIB_VERTEX_COUNT,
-		GL::ATTRIB_STRIDE,
-		verticies,
-		GL_ARRAY_BUFFER};
-
-	X::GL::BufferData bufferData {
-		X::GL::ATTRIB_VERTEX_COUNT,
-		verticies,
-		indicies
-	}
-
-	X::Mesh::Mesh mesh(0, verticies.size(), 3, verticies, GL_ARRAY_BUFFER);
-	mesh.vao.Bind();
-
-	std::vector<unsigned int> indices = {
-		//Top
-		2, 6, 7,
-		2, 3, 7,
-
-		//Bottom
-		0, 4, 5,
-		0, 1, 5,
-
-		//Left
-		0, 2, 6,
-		0, 4, 6,
-
-		//Right
-		1, 3, 7,
-		1, 5, 7,
-
-		//Front
-		0, 2, 3,
-		0, 1, 3,
-
-		//Back
-		4, 6, 7,
-		4, 5, 7
-	};
-
-	X::GL::IndexBuffer ibo(indices);
-
-	mesh.primitive   = GL_TRIANGLES;
-	mesh.vertex_count = verticies.size();
-	mesh.index_count = indices.size();
-
-	return mesh;
-	*/
-}
 
 
 /**
