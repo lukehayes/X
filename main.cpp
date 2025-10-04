@@ -2,10 +2,9 @@
 #include "X/Camera/Camera3D.h"
 #include "X/Factory/MeshFactory.h"
 #include "X/GL/Shader.h"
-#include "X/GL/VertexArray.h"
 #include "X/Gfx/Renderer.h"
 #include "X/Math/GLM.h"
-#include "X/Mesh/Mesh.h"
+#include "X/Factory/MeshFactory.h"
 #include <SDL3/SDL.h>
 
 #include "X/Model/Model.h"
@@ -27,6 +26,12 @@ int main(int argc, char *argv[]) {
     X::Camera::Camera3D cam;
     X::GL::Shader default_shader("../assets/shaders/VSH-Camera3D.glsl",
 				 "../assets/shaders/FSH-Camera3D.glsl");
+
+	
+    X::Factory::MeshFactory factory;
+    X::Mesh::Mesh* planeMesh = factory.CreatePlaneMesh();
+    factory.AddMesh("Plane", planeMesh); 
+
 
     X::Model::Model model;
     model.color = {0.3, 0.3, 0.3, 1};
@@ -113,8 +118,8 @@ int main(int argc, char *argv[]) {
 	// model.transform.position.x += cos(c) * 10.0;
 	// model.transform.position.z += sin(c) * 10.0;
 
-	renderer.Draw(model, cam, default_shader);
-	renderer.Draw(model2, cam, default_shader);
+	renderer.Draw(factory, model, cam, default_shader);
+	renderer.Draw(factory, model2, cam, default_shader);
 
 	for (auto m : positions) {
 	    X::Model::Model model;
@@ -123,7 +128,7 @@ int main(int argc, char *argv[]) {
 	    model.transform.position.z = 20.0;
 	    model.Translate(m.transform.position);
 	    model.color = m.color;
-	    renderer.Draw(model, cam, default_shader);
+	    renderer.Draw(factory, model, cam, default_shader);
 	}
 
 	SDL_GL_SwapWindow(app.GetWindow());
