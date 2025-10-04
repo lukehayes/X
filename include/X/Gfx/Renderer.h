@@ -6,6 +6,7 @@
 #include "X/GL/Shader.h"
 #include "X/Camera/Camera.h"
 #include "X/Camera/Camera3D.h"
+#include "X/Factory/MeshFactory.h"
 
 namespace X::Gfx
 {
@@ -19,7 +20,7 @@ public:
 	/**
 	* Draw whatever is set to the currently bound VAO.
 	*/
-	void Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader);
+	void Draw(X::Factory::MeshFactory& factory, X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader);
 };
 
 }

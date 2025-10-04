@@ -1,5 +1,5 @@
 #include "X/Gfx/Renderer.h"
-#include "X/Factory/MeshFactory.h"
+#include "glad/glad.h"
 
 namespace X::Gfx
 {
@@ -10,12 +10,15 @@ Renderer::Clear(float r, float g, float b)
     glClearColor(r,g,b,1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
-void
-Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)
-{
-    X::Factory::MeshFactory factory;
 
-    auto mesh = factory.GetMesh("cube");
+void
+Renderer::Draw(X::Factory::MeshFactory& factory, X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)
+{
+    X::Mesh::Mesh* mesh = factory.GetMesh("Plane");
+
+    mesh->vertex_array.Bind();
+    mesh->vertex_buffer.Bind();
+    mesh->index_buffer.Bind();
 
     shader.use();
 
