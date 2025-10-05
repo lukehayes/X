@@ -1,47 +1,37 @@
 #include "X/GL/VertexArray.h"
 
-namespace X::GL
-{
+namespace X::GL {
 
-VertexArray::VertexArray()  {
-	glGenVertexArrays(1, &this->id);
-	glBindVertexArray(this->id);
+VertexArray::VertexArray() {
+    glGenVertexArrays(1, &this->id);
+    glBindVertexArray(this->id);
 }
 
-VertexArray::~VertexArray() {
-	glDeleteVertexArrays(1, &this->id);
+VertexArray::~VertexArray() { glDeleteVertexArrays(1, &this->id); }
+
+VertexArray::VertexArray(VertexArray &&other) : id(other.id) {
+
+    glGenVertexArrays(1, &other.id);
+    glBindVertexArray(other.id);
 }
 
-VertexArray::VertexArray(VertexArray&& other)
-: id(other.id) {}
+VertexArray &VertexArray::operator=(VertexArray &&other) {
 
-VertexArray&
-VertexArray::operator=(VertexArray&& other) {
+    if (this == &other)
+        return *this;
 
-	if (this == &other) return *this;
+    this->id = other.id;
 
-	this->id = other.id;
-
-	return *this;
+    return *this;
 }
 
-void
-VertexArray::Bind()
-{
-	glBindVertexArray(this->id);
+void VertexArray::Bind() { glBindVertexArray(this->id); }
+
+void VertexArray::UnBind() { glBindVertexArray(0); }
+
+void VertexArray::Delete() {
+    glDeleteVertexArrays(1, &this->id);
+    id = 0;
 }
 
-void
-VertexArray::UnBind()
-{
-	glBindVertexArray(0);
-}
-
-void
-VertexArray::Delete()
-{
-	glDeleteVertexArrays(1, &this->id);
-	id = 0;
-}
-
-}
+} // namespace X::GL
