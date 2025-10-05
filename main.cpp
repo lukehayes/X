@@ -27,7 +27,6 @@ int main(int argc, char *argv[]) {
     X::GL::Shader default_shader("../assets/shaders/VSH-Camera3D.glsl",
 				 "../assets/shaders/FSH-Camera3D.glsl");
 
-	
     X::Factory::MeshFactory factory;
     X::Mesh::Mesh* planeMesh = factory.CreatePlaneMesh();
     factory.AddMesh("Plane", planeMesh); 
@@ -35,11 +34,14 @@ int main(int argc, char *argv[]) {
 
     X::Model::Model model;
     model.color = {0.3, 0.3, 0.3, 1};
-    model.transform.position = {0.5, -0.5, -22};
+    model.Translate({0.5, -0.5, 12});
+
+
+
 
     X::Model::Model model2;
     model2.color = {0.2, 0.2, 0.6, 1};
-    model2.transform.position = {0, 0.5, 12};
+    model.Translate({0.5, -0.2, 12});
 
     int x = 0;
     int y = 0;
@@ -104,19 +106,6 @@ int main(int argc, char *argv[]) {
 	static float c = 0.0;
 
 	c += 1.0;
-
-	// mesh.vao.Bind();
-
-	// vertex_array.Bind();
-	// vertex_buffer.Bind();
-	// index_buffer.Bind();
-
-	// index_buffer.Bind();
-	// vertex_array.Bind();
-	// default_shader.use();
-
-	// model.transform.position.x += cos(c) * 10.0;
-	// model.transform.position.z += sin(c) * 10.0;
 
 	renderer.Draw(factory, model, cam, default_shader);
 	renderer.Draw(factory, model2, cam, default_shader);
