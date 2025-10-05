@@ -15,23 +15,16 @@ void
 Renderer::Draw(X::Factory::MeshFactory& factory, X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)
 {
     X::Mesh::Mesh* mesh = factory.GetMesh("Plane");
-
+    
     mesh->vertex_array.Bind();
     mesh->vertex_buffer.Bind();
     mesh->index_buffer.Bind();
 
     shader.use();
-
     shader.SetUniformMat4(cam.projection, "projection");
-    shader.SetUniformMat4(cam.view, "view");
-
-    // model.matrix = glm::translate(
-    // 	model.matrix,
-    // 	model.transform.position
-    // );
-
-    shader.SetUniformMat4(model.matrix, "model");
-    shader.setUniformVec4(model.color, "color");
+    shader.SetUniformMat4(cam.view,       "view");
+    shader.SetUniformMat4(model.matrix,   "model");
+    shader.setUniformVec4(model.color,    "color");
 
     glDrawElements(GL_TRIANGLES, mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
 
