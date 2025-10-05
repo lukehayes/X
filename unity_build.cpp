@@ -9,5 +9,6 @@
 #include "src/X/GL/IndexBuffer.cpp"
 #include "src/X/Gfx/Renderer.cpp"
 #include "src/X/Model/Model.cpp"
+#include "src/X/Factory/MeshFactory.cpp"
 #include "src/X/Camera/Camera2D.cpp"
 #include "src/X/Camera/Camera3D.cpp"
