@@ -55,7 +55,7 @@ public:
 
         X::Mesh::Mesh* CreatePlaneMesh();
 
-        X::Mesh::Mesh CreateCubeMesh();
+        X::Mesh::Mesh* CreateCubeMesh();
 
 private:
 	std::unordered_map<std::string, X::Mesh::Mesh*> meshes;

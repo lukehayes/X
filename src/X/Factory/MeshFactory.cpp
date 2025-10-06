@@ -4,124 +4,124 @@
 namespace X::Factory
 {
 
-    MeshFactory::MeshFactory () {}
+MeshFactory::MeshFactory () {}
 
-    MeshFactory::~MeshFactory () {
+MeshFactory::~MeshFactory () {
 
-        for(auto& mesh : meshes)
-        {
-            auto m = mesh.second;
-
-            std::println("Mesh VertexCount: {}", m->GetVertexCount());
-            std::println("Mesh IndexCount: {}", m->GetIndexCount());
-            delete m;
-        }
-    }
-
-    X::Mesh::Mesh*
-    MeshFactory::AddMesh(const std::string& key, X::Mesh::Mesh* mesh)
+    for(auto& mesh : meshes)
     {
-            return this->meshes[key] = mesh;
+        auto m = mesh.second;
+
+        std::println("Mesh VertexCount: {}", m->GetVertexCount());
+        std::println("Mesh IndexCount: {}", m->GetIndexCount());
+        std::println("Deleteing Mesh");
+        delete m;
+        std::println("...........");
     }
 
-    X::Mesh::Mesh*
-    MeshFactory::GetMesh(const std::string& key)
-    {
-            return this->meshes[key];
-    }
+}
 
-    X::Mesh::Mesh*
-    MeshFactory::CreatePlaneMesh()
-    {
-        std::vector<GLfloat> verticies = {0.5f,  0.5f,  0.0f, 0.5f,  -0.5f, 0.0f,
-            -0.5f, -0.5f, 0.0f, -0.5f, 0.5f,  0.0f};
+X::Mesh::Mesh*
+MeshFactory::AddMesh(const std::string& key, X::Mesh::Mesh* mesh)
+{
+    return this->meshes[key] = mesh;
+}
 
-        X::GL::VertexArray vertex_array;
-        // vertex_array.Bind();
+X::Mesh::Mesh*
+MeshFactory::GetMesh(const std::string& key)
+{
+    return this->meshes[key];
+}
 
-        X::GL::VertexBuffer vertex_buffer{X::GL::ATTRIB_VERTEX_POSITION, 3, 0,
-            verticies, GL_ARRAY_BUFFER};
+X::Mesh::Mesh*
+MeshFactory::CreatePlaneMesh()
+{
+    std::vector<GLfloat> verticies = {0.5f,  0.5f,  0.0f, 0.5f,  -0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f, -0.5f, 0.5f,  0.0f};
 
-        // vertex_buffer.Bind();
+    X::GL::VertexArray vertex_array;
+    // vertex_array.Bind();
 
-        std::vector<unsigned int> indices = {
-            0, 1, 3, // first triangle
-            1, 2, 3  // second triangle
-        };
+    X::GL::VertexBuffer vertex_buffer{X::GL::ATTRIB_VERTEX_POSITION, 3, 0,
+        verticies, GL_ARRAY_BUFFER};
 
-        X::GL::IndexBuffer index_buffer{indices};
+    // vertex_buffer.Bind();
 
-        X::Mesh::Mesh* mesh = new X::Mesh::Mesh{vertex_array, vertex_buffer, index_buffer};
+    std::vector<unsigned int> indices = {
+        0, 1, 3, // first triangle
+        1, 2, 3  // second triangle
+    };
 
-        return mesh;
-    }
+    X::GL::IndexBuffer index_buffer{indices};
 
-    X::Mesh::Mesh CreateCubeMesh()
-    {
+    X::Mesh::Mesh* mesh = new X::Mesh::Mesh{vertex_array, vertex_buffer, index_buffer};
 
-            /*
-            std::vector<GLfloat> verticies = {
-                    -1, -1,  0.5, //0
-                    1, -1,  0.5, //1
-                    -1,  1,  0.5, //2
-                    1,  1,  0.5, //3
-                    -1, -1, -0.5, //4
-                    1, -1, -0.5, //5
-                    -1,  1, -0.5, //6
-                    1,  1, -0.5  //7
-            };
+    return mesh;
+}
 
-            X::GL::VertexBuffer vbo{
-                    GL::ATTRIB_VERTEX_POSITION,
-                    GL::ATTRIB_VERTEX_COUNT,
-                    GL::ATTRIB_STRIDE,
-                    verticies,
-                    GL_ARRAY_BUFFER};
+X::Mesh::Mesh* 
+MeshFactory::CreateCubeMesh()
+{
 
-            X::GL::BufferData bufferData {
-                    X::GL::ATTRIB_VERTEX_COUNT,
-                    verticies,
-                    indicies
-            }
+    std::vector<GLfloat> verticies = {
+        -1, -1,  0.5, //0
+        1, -1,  0.5, //1
+        -1,  1,  0.5, //2
+        1,  1,  0.5, //3
+        -1, -1, -0.5, //4
+        1, -1, -0.5, //5
+        -1,  1, -0.5, //6
+        1,  1, -0.5  //7
+    };
 
-            X::Mesh::Mesh mesh(0, verticies.size(), 3, verticies, GL_ARRAY_BUFFER);
-            mesh.vao.Bind();
+    X::GL::VertexArray vertex_array;
+    vertex_array.Bind();
 
-            std::vector<unsigned int> indices = {
-                    //Top
-                    2, 6, 7,
-                    2, 3, 7,
 
-                    //Bottom
-                    0, 4, 5,
-                    0, 1, 5,
+    X::GL::VertexBuffer vertex_buffer {
+        GL::ATTRIB_VERTEX_POSITION,
+        GL::ATTRIB_VERTEX_COUNT,
+        GL::ATTRIB_STRIDE,
+        verticies,
+        GL_ARRAY_BUFFER};
 
-                    //Left
-                    0, 2, 6,
-                    0, 4, 6,
+    vertex_buffer.Bind();
 
-                    //Right
-                    1, 3, 7,
-                    1, 5, 7,
+    std::vector<unsigned int> indices = {
+        //Top
+        2, 6, 7,
+        2, 3, 7,
 
-                    //Front
-                    0, 2, 3,
-                    0, 1, 3,
+        //Bottom
+        0, 4, 5,
+        0, 1, 5,
 
-                    //Back
-                    4, 6, 7,
-                    4, 5, 7
-            };
+        //Left
+        0, 2, 6,
+        0, 4, 6,
 
-            X::GL::IndexBuffer ibo(indices);
+        //Right
+        1, 3, 7,
+        1, 5, 7,
 
-            mesh.primitive   = GL_TRIANGLES;
-            mesh.vertex_count = verticies.size();
-            mesh.index_count = indices.size();
+        //Front
+        0, 2, 3,
+        0, 1, 3,
 
-            return mesh;
-            */
-    }
+        //Back
+        4, 6, 7,
+        4, 5, 7
+    };
+
+    X::GL::IndexBuffer index_buffer(indices);
+    index_buffer.Bind();
+
+
+    X::Mesh::Mesh* mesh = new X::Mesh::Mesh{vertex_array, vertex_buffer, index_buffer};
+    mesh->primitive   = GL_TRIANGLES;
+
+    return mesh;
+}
 
 }
 
