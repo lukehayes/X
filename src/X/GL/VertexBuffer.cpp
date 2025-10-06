@@ -38,7 +38,7 @@ VertexBuffer::VertexBuffer(
 
 VertexBuffer::~VertexBuffer()
 {
-	//this->Destroy();
+	this->Destroy();
 	std::println("Vertex Buffer Deleted");
 }
 
