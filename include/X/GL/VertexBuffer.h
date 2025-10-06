@@ -16,29 +16,41 @@ class VertexBuffer
 {
 public:
 
-	VertexBuffer(
-		std::uint8_t attrib_position,
-		std::uint8_t vtx_size,
-		std::uint8_t vtx_stride,
-		const std::vector<GLfloat>& data,
-		GLenum buffer_type
-	);
+    VertexBuffer(
+        std::uint8_t attrib_position,
+        std::uint8_t vtx_size,
+        std::uint8_t vtx_stride,
+        const std::vector<GLfloat>& data,
+        GLenum buffer_type
+    );
 
-	VertexBuffer(const VertexBuffer& rhs) = delete;
-	VertexBuffer& operator=(const VertexBuffer& rhs) = delete;
+    VertexBuffer(const VertexBuffer& rhs) = delete;
+    VertexBuffer& operator=(const VertexBuffer& rhs) = delete;
 
-	VertexBuffer(VertexBuffer&& rhs) = default;
-	VertexBuffer& operator=(VertexBuffer&& rhs) = default;
+    VertexBuffer(VertexBuffer&& rhs) = default;
+    VertexBuffer& operator=(VertexBuffer&& rhs) = default;
 
-	~VertexBuffer();
+    ~VertexBuffer();
 
-	void Bind();
-	void UnBind();
-	void Destroy();
+    /**
+    * Bind the vertex buffer.
+    *
+    */
+    void Bind();
 
-	std::vector<GLfloat> data;
-	GLuint id;
-	GLenum buffer_type;
+    /**
+    * Unbind the vertex buffer.
+    */
+    void UnBind();
+
+    /**
+    * Destroy the vertex buffer.
+    */
+    void Destroy();
+
+    std::vector<GLfloat> data;
+    GLuint id;
+    GLenum buffer_type;
 
 };
 }
