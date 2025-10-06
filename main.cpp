@@ -1,4 +1,5 @@
 #include "X/App.h"
+#include "X/Global.h"
 #include "X/Camera/Camera3D.h"
 #include "X/Factory/MeshFactory.h"
 #include "X/GL/Shader.h"
@@ -10,6 +11,10 @@
 #include "X/Model/Model.h"
 
 #include <print>
+
+
+extern X::Global global;
+
 
 int main(int argc, char *argv[]) {
     // ------------------------------------------------------------------------
@@ -36,12 +41,19 @@ int main(int argc, char *argv[]) {
     model.color = {0.3, 0.3, 0.3, 1};
     model.Translate({0.5, -0.5, 12});
 
+    X::Mesh::Mesh* cubeMesh = global.factory.CreateCubeMesh();
+    global.factory.AddMesh("Cube", cubeMesh);
 
 
+    X::Model::Model model;
+    model.color = {0.0, 0.5, 0.0, 1};
+    model.Translate({0, 0, 0});
+    model.Scale({1, 1, 1});
 
     X::Model::Model model2;
-    model2.color = {0.2, 0.2, 0.6, 1};
-    model.Translate({0.5, -0.2, 12});
+    model2.color = {0.5, 0.0, 0.0, 1};
+    model2.Translate({0, 10, 0});
+    model2.Scale({1, 1, 1});
 
     int x = 0;
     int y = 0;
@@ -107,8 +119,8 @@ int main(int argc, char *argv[]) {
 
 	c += 1.0;
 
-	renderer.Draw(factory, model, cam, default_shader);
-	renderer.Draw(factory, model2, cam, default_shader);
+	renderer.Draw(model, cam, default_shader);
+	renderer.Draw(model2, cam, default_shader);
 
 	for (auto m : positions) {
 	    X::Model::Model model;
@@ -117,7 +129,7 @@ int main(int argc, char *argv[]) {
 	    model.transform.position.z = 20.0;
 	    model.Translate(m.transform.position);
 	    model.color = m.color;
-	    renderer.Draw(factory, model, cam, default_shader);
+	    renderer.Draw(model, cam, default_shader);
 	}
 
 	SDL_GL_SwapWindow(app.GetWindow());

@@ -1,6 +1,9 @@
 #include "X/Gfx/Renderer.h"
 #include "glad/glad.h"
 
+#include "X/Global.h"
+extern X::Global global;
+
 namespace X::Gfx
 {
 void
@@ -12,9 +15,9 @@ Renderer::Clear(float r, float g, float b)
 }
 
 void
-Renderer::Draw(X::Factory::MeshFactory& factory, X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)
+Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)
 {
-    X::Mesh::Mesh* mesh = factory.GetMesh("Plane");
+    X::Mesh::Mesh* mesh = global.factory.GetMesh("Cube");
     
     mesh->vertex_array.Bind();
     mesh->vertex_buffer.Bind();
