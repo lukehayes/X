@@ -3,6 +3,7 @@
 #define X_CAMERA3D_H
 
 #include "X/Math/GLM.h"
+#include "X/Transform.h"
 
 namespace X::Camera
 {
@@ -14,7 +15,7 @@ public:
 
 	virtual void update(double dt);
 
-	glm::vec3 position;
+	X::Transform transform;
 	glm::vec3 eye;
 	glm::vec3 up;
 	glm::mat4 projection;
