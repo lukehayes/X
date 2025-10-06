@@ -13,28 +13,32 @@ class Mesh
 {
 public:
 
-    Mesh(X::GL::VertexArray& vertex_array, X::GL::VertexBuffer& vertex_buffer, X::GL::IndexBuffer& index_buffer)
-	: vertex_array(std::move(vertex_array)),
-	vertex_buffer(std::move(vertex_buffer)),
-	index_buffer(std::move(index_buffer))
-    {}
+    Mesh(X::GL::VertexArray& vertex_array, X::GL::VertexBuffer& vertex_buffer, X::GL::IndexBuffer& index_buffer);
 
     Mesh(Mesh&& rhs) = default;
     Mesh& operator=(Mesh&& rhs) = default;
 
-
     Mesh(const Mesh& rhs) = delete;
     Mesh& operator=(const Mesh& rhs) = delete;
 
+    /**
+    * Get the number of indicies for this mesh.
+    *
+    * @param size_t
+    */
+    std::size_t  GetIndexCount();
+
+    /**
+    * Get the number of verticies for this mesh.
+    *
+    * @param size_t.
+    */
+    std::size_t  GetVertexCount();
 
 
     X::GL::VertexArray  vertex_array;
     X::GL::VertexBuffer vertex_buffer;
     X::GL::IndexBuffer  index_buffer;
-
-    inline std::size_t  GetIndexCount() const { return this->index_buffer.data.size(); }
-    inline std::size_t  GetVertexCount() const { return this->vertex_buffer.data.size(); }
-
     GLenum primitive;
 };
 

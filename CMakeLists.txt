@@ -27,38 +27,41 @@ include_directories(${INCLUDE_DIRS})
 
 add_executable(${BIN_NAME} main.cpp
 
-    unity_build.cpp
+    # unity_build.cpp
 
     ## X/GL
-    #"${SRC_DIR}/glad.c"
+    "${SRC_DIR}/glad.c"
 
-    #"${X_SRC_DIR}/Util.cpp"
+    "${X_SRC_DIR}/Util.cpp"
 
     ## X/App
-    #"${X_SRC_DIR}/App.cpp"
-    #"${X_SRC_DIR}/Transform.cpp"
+    "${X_SRC_DIR}/App.cpp"
+    "${X_SRC_DIR}/Transform.cpp"
 
     ## X/Scene
-    #"${X_SRC_DIR}/Scene/Scene.cpp"
+    "${X_SRC_DIR}/Scene/Scene.cpp"
 
     ## X/GL
-    #"${X_SRC_DIR}/GL/Shader.cpp"
-    #"${X_SRC_DIR}/GL/VertexArray.cpp"
-    #"${X_SRC_DIR}/GL/VertexBuffer.cpp"
-    #"${X_SRC_DIR}/GL/IndexBuffer.cpp"
+    "${X_SRC_DIR}/GL/Shader.cpp"
+    "${X_SRC_DIR}/GL/VertexArray.cpp"
+    "${X_SRC_DIR}/GL/VertexBuffer.cpp"
+    "${X_SRC_DIR}/GL/IndexBuffer.cpp"
 
     ## X/Gfx
-    #"${X_SRC_DIR}/Gfx/Renderer.cpp"
+    "${X_SRC_DIR}/Gfx/Renderer.cpp"
 
     ## X/Model
-    #"${X_SRC_DIR}/Model/Model.cpp"
+    "${X_SRC_DIR}/Model/Model.cpp"
 
-    ## X/Model
-	#"${X_SRC_DIR}/Factory/MeshFactory.cpp"
+    ## X/Mesh
+    "${X_SRC_DIR}/Mesh/Mesh.cpp"
+
+    ## X/Factory
+    "${X_SRC_DIR}/Factory/MeshFactory.cpp"
 
     ## X/Camera
-    #"${X_SRC_DIR}/Camera/Camera2D.cpp"
-    #"${X_SRC_DIR}/Camera/Camera3D.cpp"
+    "${X_SRC_DIR}/Camera/Camera2D.cpp"
+    "${X_SRC_DIR}/Camera/Camera3D.cpp"
 )
 
 # -----------------------------------------------------------------------------

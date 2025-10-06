@@ -1,9 +1,6 @@
 #ifndef X_FACTORY_MESH_FACTORY_H
 #define X_FACTORY_MESH_FACTORY_H
 
-#include "X/GL/BufferData.h"
-#include "X/GL/VertexBuffer.h"
-#include "X/GL/IndexBuffer.h"
 #include "X/Mesh/Mesh.h"
 #include "X/Model/Model.h"
 #include <vector>
@@ -17,7 +14,7 @@ namespace std
 template<>
 struct hash<X::Mesh::Mesh>
 {
-    size_t operator()(const X::Mesh::Mesh& mesh)
+    size_t operator()(X::Mesh::Mesh& mesh)
     {
         return std::hash<size_t>()(mesh.GetVertexCount() + mesh.GetIndexCount());
     }
