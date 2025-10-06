@@ -19,6 +19,15 @@ public:
 	index_buffer(std::move(index_buffer))
     {}
 
+    Mesh(Mesh&& rhs) = default;
+    Mesh& operator=(Mesh&& rhs) = default;
+
+
+    Mesh(const Mesh& rhs) = delete;
+    Mesh& operator=(const Mesh& rhs) = delete;
+
+
+
     X::GL::VertexArray  vertex_array;
     X::GL::VertexBuffer vertex_buffer;
     X::GL::IndexBuffer  index_buffer;
