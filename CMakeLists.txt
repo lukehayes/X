@@ -36,6 +36,7 @@ add_executable(${BIN_NAME} main.cpp
 
     ## X/App
     "${X_SRC_DIR}/App.cpp"
+    "${X_SRC_DIR}/Global.cpp"
     "${X_SRC_DIR}/Transform.cpp"
 
     ## X/Scene
