@@ -2,6 +2,7 @@
 #define X_CAMERA_H
 
 #include "X/Math/GLM.h"
+#include <glm/ext/matrix_float4x4.hpp>
 
 namespace X::Camera
 {
@@ -10,10 +11,18 @@ namespace X::Camera
 */
 class Camera
 {
-	Camera() {}
+public:
+	Camera() 
+            : projection(glm::mat4(1.0f)),
+              view(glm::mat4(1.0f))
+            {}
+
 	~Camera() {}
 
 	virtual void update(double dt) = 0;
+
+	glm::mat4 projection;
+	glm::mat4 view;
 };
 }
 
