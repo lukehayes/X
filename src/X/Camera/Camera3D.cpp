@@ -17,7 +17,7 @@ Camera3D::Camera3D()
 {
 
     this->view = glm::lookAt(
-        this->position,
+        this->transform.position,
         this->eye,
         this->up
     );
@@ -32,9 +32,9 @@ void Camera3D::update(double dt)
     c += 0.01;
     int mult = 10.0f;
 
-    this->position.x = std::cos(c) * mult;
-    this->position.y = std::sin(c) * mult;
-    this->position.z = -20 + std::cos(c) * mult;
+    this->transform.position.x = std::cos(c) * mult;
+    this->transform.position.y = std::sin(c) * mult;
+    this->transform.position.z = -20 + std::cos(c) * mult;
 
     this->view = glm::lookAt(
         this->transform.position,
