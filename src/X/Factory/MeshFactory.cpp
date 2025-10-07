@@ -118,7 +118,6 @@ MeshFactory::CreateCubeMesh()
 
 
     X::Mesh::Mesh* mesh = new X::Mesh::Mesh{vertex_array, vertex_buffer, index_buffer};
-    mesh->primitive   = GL_TRIANGLES;
 
     return mesh;
 }

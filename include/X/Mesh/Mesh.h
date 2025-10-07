@@ -39,7 +39,7 @@ public:
     X::GL::VertexArray  vertex_array;
     X::GL::VertexBuffer vertex_buffer;
     X::GL::IndexBuffer  index_buffer;
-    GLenum primitive;
+    GLenum primitive = GL_TRIANGLES;
 };
 
 }
