@@ -30,6 +30,12 @@ Model::RotateZ(float angle) {
 }
 
 void
+Model::Rotate(float angle, const glm::vec3& rotation)
+{
+    this->matrix = glm::rotate(this->matrix, glm::radians(angle), rotation);
+}
+
+void
 Model::Scale(const glm::vec3& axis)
 {
 	this->matrix = glm::scale(this->matrix, axis);

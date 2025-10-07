@@ -43,6 +43,15 @@ public:
 	void RotateZ(float angle);
 
 	/**
+	* Rotate the model on every axis.
+	*
+	* @param float angle
+        *
+	* @param glm::vec3 rotation
+	*/
+	void Rotate(float angle, const glm::vec3& rotation);
+
+	/**
 	* Scale the model.
 	*
 	* @param const glm::vec3& axis    The axis to scale.
