@@ -4,10 +4,11 @@
 
 #include "X/Math/GLM.h"
 #include "X/Transform.h"
+#include "X/Camera/Camera.h"
 
 namespace X::Camera
 {
-class Camera3D
+class Camera3D : public X::Camera::Camera
 {
 public:
 	Camera3D();
