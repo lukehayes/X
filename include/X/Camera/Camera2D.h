@@ -9,7 +9,7 @@ namespace X::Camera
 class Camera2D : public X::Camera::Camera
 {
 public:
-	Camera2D(int width, int height);
+	Camera2D(float width, float height);
 	~Camera2D();
 
 	void update(double dt);
