@@ -17,6 +17,11 @@ public:
               view(glm::mat4(1.0f))
             {}
 
+	Camera(const glm::mat4& projection, const glm::mat4& view)
+            : projection(projection),
+              view(view)
+            {}
+
 	~Camera() {}
 
 	virtual void update(double dt) = 0;
