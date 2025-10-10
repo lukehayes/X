@@ -15,12 +15,12 @@ public:
 	~Camera3D();
 
 	virtual void update(double dt);
-
+        
 	X::Transform transform;
 	glm::vec3 eye;
 	glm::vec3 up;
-	glm::mat4 projection;
-	glm::mat4 view;
+
+        const char* name = "Camera 3D";
 };
 }
 

@@ -12,22 +12,18 @@ namespace X::Camera
 class Camera
 {
 public:
-	Camera() 
-            : projection(glm::mat4(1.0f)),
-              view(glm::mat4(1.0f))
-            {}
-
-	Camera(const glm::mat4& projection, const glm::mat4& view)
-            : projection(projection),
-              view(view)
-            {}
-
-	~Camera() {}
+	Camera() ;
+	Camera(const glm::mat4& projection, const glm::mat4& view);
+	~Camera();
 
 	virtual void update(double dt) = 0;
 
+        virtual const char* getName();
+
 	glm::mat4 projection;
 	glm::mat4 view;
+
+        const char* name = "Camera Base";
 };
 }
 

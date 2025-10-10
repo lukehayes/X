@@ -1,4 +1,5 @@
 #include "X/Camera/Camera3D.h"
+#include <print>
 
 
 constexpr int WIN_MULT   = 4;
@@ -8,12 +9,13 @@ constexpr int WIN_HEIGHT = 180 * WIN_MULT;
 namespace X::Camera
 {
 Camera3D::Camera3D()
-        : transform({0,0,-30.0}),
-          eye({0,0,0}),
-          up({0,1,0}),
-		  projection( glm::perspective(45.0f, (float)WIN_WIDTH/(float)WIN_HEIGHT, 0.1f, 1000.0f) ),
-		  view(glm::mat4(1.0f)
-        )
+        : X::Camera::Camera(
+	    glm::perspective(45.0f, (float)WIN_WIDTH/(float)WIN_HEIGHT, 0.1f, 1000.0f),
+	    glm::mat4(1.0f)
+            ),
+            transform({0,0,-30.0}),
+            eye({0,0,0}),
+            up({0,1,0})
 {
 
     this->view = glm::lookAt(
@@ -27,6 +29,10 @@ Camera3D::~Camera3D() {}
 
 void Camera3D::update(double dt)
 {
+
+    std::println("Cam 3D Delta: {}", dt);
+    std::println("Name: ", this->name);
+    std::println("Name: ", this->getName());
 
     static float c = 0.0;
     c += 0.01;

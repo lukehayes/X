@@ -13,6 +13,9 @@ public:
 	~Camera2D();
 
 	void update(double dt);
+
+        const char* name = "Camera 2D";
+
 };
 }
 

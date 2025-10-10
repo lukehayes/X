@@ -16,6 +16,4 @@ void
 Camera2D::update(double dt)
 {}
 
-
-
 }

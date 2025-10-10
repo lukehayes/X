@@ -1,6 +1,7 @@
 #include "X/App.h"
 #include "X/Global.h"
 #include "X/Camera/Camera3D.h"
+#include "X/Camera/Camera2D.h"
 #include "X/Factory/MeshFactory.h"
 #include "X/GL/Shader.h"
 #include "X/Gfx/Renderer.h"
@@ -28,18 +29,13 @@ int main(int argc, char *argv[]) {
     X::App app(WIN_WIDTH, WIN_HEIGHT);
 
     X::Gfx::Renderer renderer;
-    X::Camera::Camera3D cam;
+    // X::Camera::Camera* cam = new X::Camera::Camera2D(WIN_WIDTH, WIN_HEIGHT);
+    X::Camera::Camera* cam = new X::Camera::Camera3D;
     X::GL::Shader default_shader("../assets/shaders/VSH-Camera3D.glsl",
 				 "../assets/shaders/FSH-Camera3D.glsl");
 
-    X::Factory::MeshFactory factory;
-    X::Mesh::Mesh* planeMesh = factory.CreatePlaneMesh();
-    factory.AddMesh("Plane", planeMesh); 
-
-
-    X::Model::Model model;
-    model.color = {0.3, 0.3, 0.3, 1};
-    model.Translate({0.5, -0.5, 12});
+    X::Mesh::Mesh* planeMesh = global.factory.CreatePlaneMesh();
+    global.factory.AddMesh("Plane", planeMesh);
 
     X::Mesh::Mesh* cubeMesh = global.factory.CreateCubeMesh();
     global.factory.AddMesh("Cube", cubeMesh);
@@ -112,7 +108,7 @@ int main(int argc, char *argv[]) {
 	renderer.Clear(cv, cv, cv);
 
 	if (camToggled) {
-	    cam.update(0.1);
+	    cam->update(0.1);
 	}
 
 	static float c = 0.0;
