@@ -1,6 +1,4 @@
 #include "X/Camera/Camera3D.h"
-#include <print>
-
 
 constexpr int WIN_MULT   = 4;
 constexpr int WIN_WIDTH  = 320 * WIN_MULT;
@@ -29,11 +27,6 @@ Camera3D::~Camera3D() {}
 
 void Camera3D::update(double dt)
 {
-
-    std::println("Cam 3D Delta: {}", dt);
-    std::println("Name: ", this->name);
-    std::println("Name: ", this->getName());
-
     static float c = 0.0;
     c += 0.01;
     int mult = 10.0f;
