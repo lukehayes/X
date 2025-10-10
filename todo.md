@@ -2,6 +2,8 @@
 - [ ] refactor:  Renderer should accept a Camera
 
 ### Backlog
+- [ ] refactor: move transform from X::Model class
+- [ ] fix: make model rotation work
 - [x] feat:  add simple scene implementation
 - [ ] refactor:  remove <print>
 - [ ] refactor:  Tidy up unused includes
