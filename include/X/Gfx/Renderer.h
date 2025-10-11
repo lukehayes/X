@@ -27,8 +27,9 @@ public:
 	* Draw whatever is set to the currently bound VAO.
         *
         * @param const glm::vec2 position
+        * @param const glm::vec4 color
 	*/
-	void DrawPixel2D(const glm::vec2& position);
+	void DrawPixel2D(const glm::vec2& position, const glm::vec4& color);
 
         X::Camera::Camera3D* camera3D;
         X::Camera::Camera2D* camera2D;
