@@ -21,18 +21,23 @@ int main(int argc, char *argv[]) {
     // ------------------------------------------------------------------------
     // Set initial state here.
 
-    constexpr int WIN_MULT = 4;
-    constexpr int WIN_WIDTH = 320 * WIN_MULT;
+    constexpr int WIN_MULT   = 4;
+    constexpr int WIN_WIDTH  = 320 * WIN_MULT;
     constexpr int WIN_HEIGHT = 180 * WIN_MULT;
     bool isRunning = true;
 
     X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-    X::Gfx::Renderer renderer;
-    // X::Camera::Camera* cam = new X::Camera::Camera2D(WIN_WIDTH, WIN_HEIGHT);
-    X::Camera::Camera* cam = new X::Camera::Camera3D;
+    X::Camera::Camera2D* cam2D = new X::Camera::Camera2D(WIN_WIDTH, WIN_HEIGHT);
+    X::Camera::Camera3D* cam3D = new X::Camera::Camera3D;
     X::GL::Shader default_shader("../assets/shaders/VSH-Camera3D.glsl",
 				 "../assets/shaders/FSH-Camera3D.glsl");
+
+    X::Gfx::Renderer renderer;
+    renderer.camera2D = cam2D;
+    renderer.camera3D = cam3D;
+    renderer.shader = &default_shader;
+
 
     X::Mesh::Mesh* planeMesh = global.factory.CreatePlaneMesh();
     global.factory.AddMesh("Plane", planeMesh);
@@ -43,12 +48,12 @@ int main(int argc, char *argv[]) {
 
     X::Model::Model model;
     model.color = {0.0, 0.5, 0.0, 1};
-    model.Translate({0, 0, 0});
+    model.Translate({0.1, 0.1, -2});
     model.Scale({1, 1, 1});
 
     X::Model::Model model2;
     model2.color = {0.5, 0.0, 0.0, 1};
-    model2.Translate({0, 10, 0});
+    model2.Translate({0, 0, -3});
     model2.Scale({1, 1, 1});
 
     int x = 0;
@@ -108,15 +113,17 @@ int main(int argc, char *argv[]) {
 	renderer.Clear(cv, cv, cv);
 
 	if (camToggled) {
-	    cam->update(0.1);
+	    cam3D->update(0.1);
 	}
 
 	static float c = 0.0;
 
-	c += 1.0;
+	c += 0.1;
 
-	renderer.Draw(model, cam, default_shader);
-	renderer.Draw(model2, cam, default_shader);
+	renderer.Draw(model);
+	renderer.Draw(model2);
+
+        renderer.DrawPixel2D({std::sin(c) / 10.0f, std::cos(c) / 10.0});
 
 	for (auto m : positions) {
 	    X::Model::Model model;
@@ -125,7 +132,7 @@ int main(int argc, char *argv[]) {
 	    model.transform.position.z = 20.0;
 	    model.Translate(m.transform.position);
 	    model.color = m.color;
-	    renderer.Draw(model, cam, default_shader);
+            renderer.Draw(model);
 	}
 
 	SDL_GL_SwapWindow(app.GetWindow());

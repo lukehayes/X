@@ -16,7 +16,7 @@ Renderer::Clear(float r, float g, float b)
 }
 
 void
-Renderer::Draw(X::Model::Model& model, X::Camera::Camera* cam, X::GL::Shader& shader)
+Renderer::Draw(X::Model::Model& model)
 {
     X::Mesh::Mesh* mesh = global.factory.GetMesh("Plane");
 
@@ -24,13 +24,35 @@ Renderer::Draw(X::Model::Model& model, X::Camera::Camera* cam, X::GL::Shader& sh
     mesh->vertex_buffer.Bind();
     mesh->index_buffer.Bind();
 
-    shader.use();
-    shader.SetUniformMat4(cam->projection, "projection");
-    shader.SetUniformMat4(cam->view,       "view");
-    shader.SetUniformMat4(model.matrix,   "model");
-    shader.setUniformVec4(model.color,    "color");
+    shader->use();
+    shader->SetUniformMat4(camera3D->projection, "projection");
+    shader->SetUniformMat4(camera3D->view,       "view");
+    shader->SetUniformMat4(model.matrix,   "model");
+    shader->setUniformVec4(model.color,    "color");
 
     glDrawElements(mesh->primitive, mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
 
 }
+
+void 
+Renderer::DrawPixel2D(const glm::vec2& position)
+{
+    X::Model::Model model;
+    model.color = {0.0, 0.5, 0.6, 1};
+    model.Translate({position.x, position.y, -1});
+    model.Scale({1, 1, 0.1});
+
+    X::Mesh::Mesh* mesh = global.factory.GetMesh("Plane");
+
+    mesh->vertex_array.Bind();
+
+    shader->use();
+    shader->SetUniformMat4(camera2D->projection, "projection");
+    shader->SetUniformMat4(camera2D->view,       "view");
+    shader->SetUniformMat4(model.matrix,   "model");
+    shader->setUniformVec4(model.color,    "color");
+
+    glDrawElements(mesh->primitive, mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
+}
+
 }
