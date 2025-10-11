@@ -54,4 +54,24 @@ Renderer::DrawPixel2D(const glm::vec2& position, const glm::vec4& color)
     glDrawElements(mesh->primitive, mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
 }
 
+void
+Renderer::DrawRect2D(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color)
+{
+    X::Model::Model model;
+    model.Translate({position.x, position.y, -1});
+    model.Scale({scale.x, scale.y, 1});
+
+    X::Mesh::Mesh* mesh = global.factory.GetMesh("Plane");
+
+    mesh->vertex_array.Bind();
+
+    shader->use();
+    shader->SetUniformMat4(camera2D->projection, "projection");
+    shader->SetUniformMat4(camera2D->view,       "view");
+    shader->SetUniformMat4(model.matrix,   "model");
+    shader->setUniformVec4(color,    "color");
+
+    glDrawElements(mesh->primitive, mesh->GetIndexCount(), GL_UNSIGNED_INT, 0);
+}
+
 }
