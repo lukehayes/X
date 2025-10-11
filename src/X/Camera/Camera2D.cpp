@@ -1,13 +1,12 @@
 #include "X/Camera/Camera2D.h"
 
-
 namespace X::Camera
 {
 
 Camera2D::Camera2D(float width, float height)
         : X::Camera::Camera(
-         glm::ortho(width/height, -width/height, -1.0f,1.0f,0.1f,10.0f),
-         glm::mat4(1.0f)
+            glm::ortho(0.0f, width, 0.0f, height, 0.1f, 10.0f),
+            glm::mat4(1.0f)
         ) {
 }
 
