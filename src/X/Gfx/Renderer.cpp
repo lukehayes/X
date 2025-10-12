@@ -16,7 +16,7 @@ Renderer::Clear(float r, float g, float b)
 }
 
 void
-Renderer::Draw(X::Model::Model& model)
+Renderer::DrawModel(X::Model::Model& model)
 {
     X::Mesh::Mesh* mesh = global.factory.GetMesh("Plane");
 

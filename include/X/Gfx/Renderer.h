@@ -21,7 +21,8 @@ public:
         *
         * @param X::Model::Model model
 	*/
-	void Draw(X::Model::Model& model);
+	void DrawModel(X::Model::Model& model);
+
 
 	/**
 	* Draw whatever is set to the currently bound VAO.
