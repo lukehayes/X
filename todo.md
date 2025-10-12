@@ -2,6 +2,8 @@
 - [ ] refactor:  Renderer should accept a Camera
 
 ### Backlog
+- [ ] feat: Implement 3D rotation
+- [ ] feat: Camera2D panning
 - [ ] refactor: move transform from X::Model class
 - [ ] fix: make model rotation work
 - [x] feat:  add simple scene implementation
