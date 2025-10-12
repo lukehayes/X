@@ -21,7 +21,7 @@ public:
         *
         * @param X::Model::Model model
 	*/
-	void DrawModel(X::Model::Model& model);
+	void DrawModel3D(X::Model::Model& model);
 
 
 	/**
