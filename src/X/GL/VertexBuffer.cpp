@@ -1,5 +1,4 @@
 #include "X/GL/VertexBuffer.h"
-#include <print>
 
 namespace X::GL
 {
@@ -39,7 +38,6 @@ VertexBuffer::VertexBuffer(
 VertexBuffer::~VertexBuffer()
 {
 	this->Destroy();
-	std::println("Vertex Buffer Deleted");
 }
 
 

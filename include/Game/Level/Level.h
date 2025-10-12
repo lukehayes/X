@@ -1,7 +1,6 @@
 #ifndef GAME_LEVEL_LEVEL_H
 #define GAME_LEVEL_LEVEL_H
 #include "X/Scene/Scene.h"
-#include <print>
 
 namespace Game::Level
 {
@@ -23,7 +22,6 @@ public:
 	void Update(double delta)
 	{
 		X::Scene::Scene::Update(delta);
-		std::println("Level Update {}", delta);
 	}
 
 
@@ -36,7 +34,6 @@ public:
 	{
 		X::Scene::Scene::Render();
 
-		std::println("Level Update");
 		this->renderer.Clear(0,1,1);
 	}
 

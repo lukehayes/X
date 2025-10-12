@@ -5,7 +5,7 @@
 - [ ] refactor: move transform from X::Model class
 - [ ] fix: make model rotation work
 - [x] feat:  add simple scene implementation
-- [ ] refactor:  remove <print>
+- [x] refactor:  remove <print> includes
 - [ ] refactor:  Tidy up unused includes
 - [ ] refactor:   Move engine/app code into Engine class
 - [ ] feat:  implement screen resizing
