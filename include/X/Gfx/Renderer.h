@@ -31,6 +31,13 @@ public:
 	*/
 	void DrawPixel2D(const glm::vec2& position, const glm::vec4& color);
 
+	/**
+	* Draw a pixel to the screen.
+        *
+        * @param const glm::vec2 position
+        * @param const glm::vec4 scale
+        * @param const glm::vec4 color
+	*/
 	void DrawRect2D(const glm::vec2& position, const glm::vec2& scale, const glm::vec4& color);
 
         X::Camera::Camera3D* camera3D;
