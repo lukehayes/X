@@ -20,6 +20,8 @@ Renderer::DrawModel3D(X::Model::Model& model)
 {
     X::Mesh::Mesh* mesh = global.factory.GetMesh("Plane");
 
+    model.matrix = glm::translate(model.matrix, model.transform.position);
+
     mesh->vertex_array.Bind();
     mesh->vertex_buffer.Bind();
     mesh->index_buffer.Bind();
