@@ -33,7 +33,7 @@ void Camera3D::update(double dt)
 
     this->transform.position.x = std::cos(c) * mult;
     this->transform.position.y = std::sin(c) * mult;
-    this->transform.position.z = -20 + std::cos(c) * mult;
+    this->transform.position.z = -30 + std::hypot(std::sin(c), c) * mult;
 
     this->view = glm::lookAt(
         this->transform.position,
