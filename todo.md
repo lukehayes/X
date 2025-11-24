@@ -2,6 +2,7 @@
 - [ ] refactor:  Renderer should accept a Camera
 
 ### Backlog
+- [ ] fix:  make sure OpenGL memory is cleaned up
 - [x] feat:  add simple scene implementation
 - [ ] refactor:  remove <print>
 - [ ] refactor:  Tidy up unused includes
