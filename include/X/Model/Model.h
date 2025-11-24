@@ -12,50 +12,14 @@ public:
 	Model(const glm::vec3 &position = {0,0, -0.1f});
 	~Model();
 
+	void SetMatrix(
+		const glm::vec3 &position,
+		const glm::vec3 &rotation,
+		const glm::vec3 &scale
+	);
 
-	/**
-	* Translate the model.
-	*
-	* @param float angle
-	*/
-	void Translate(const glm::vec3& position);
+	glm::mat4 GetMatrix();
 
-	/**
-	* Rotate the model on the X axis.
-	*
-	* @param float angle
-	*/
-	void RotateX(float angle);
-
-	/**
-	* Rotate the model on the Y axis.
-	*
-	* @param float angle
-	*/
-	void RotateY(float angle);
-
-	/**
-	* Rotate the model on the Z axis.
-	*
-	* @param float angle
-	*/
-	void RotateZ(float angle);
-
-	/**
-	* Rotate the model on every axis.
-	*
-	* @param float angle
-        *
-	* @param glm::vec3 rotation
-	*/
-	void Rotate(float angle, const glm::vec3& rotation);
-
-	/**
-	* Scale the model.
-	*
-	* @param const glm::vec3& axis    The axis to scale.
-	*/
-	void Scale(const glm::vec3& axis);
 
 	X::Transform transform;
 	glm::vec4 color    = {0.5,0,0.5,1};
