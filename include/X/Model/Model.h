@@ -3,7 +3,6 @@
 
 #include "X/Math/GLM.h"
 #include "X/Transform.h"
-#include "X/Mesh/Mesh.h"
 
 namespace X::Model
 {
