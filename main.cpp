@@ -1,59 +1,36 @@
 #include "X/App.h"
-#include "X/Global.h"
-#include "X/Camera/Camera3D.h"
-#include "X/Factory/MeshFactory.h"
-#include "X/GL/Shader.h"
 #include "X/Gfx/Renderer.h"
+#include "X/Global.h"
+#include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
-#include "X/Factory/MeshFactory.h"
-#include <SDL3/SDL.h>
 
 #include "X/Model/Model.h"
-
-#include <print>
 
 
 extern X::Global global;
 
+constexpr int WIN_MULT   = 4;
+constexpr int WIN_WIDTH  = 320 * WIN_MULT;
+constexpr int WIN_HEIGHT = 180 * WIN_MULT;
 
 int main(int argc, char *argv[]) {
     // ------------------------------------------------------------------------
     // Set initial state here.
 
-    constexpr int WIN_MULT = 4;
-    constexpr int WIN_WIDTH = 320 * WIN_MULT;
-    constexpr int WIN_HEIGHT = 180 * WIN_MULT;
     bool isRunning = true;
 
     X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-    X::Gfx::Renderer renderer;
-    X::Camera::Camera3D cam;
-    X::GL::Shader default_shader("../assets/shaders/VSH-Camera3D.glsl",
-				 "../assets/shaders/FSH-Camera3D.glsl");
-
-    X::Factory::MeshFactory factory;
-    X::Mesh::Mesh* planeMesh = factory.CreatePlaneMesh();
-    factory.AddMesh("Plane", planeMesh); 
+    X::GL::Shader default_shader(
+		"../assets/shaders/VSH-Default.glsl",
+		"../assets/shaders/FSH-Default.glsl"
+	);
 
 
     X::Model::Model model;
     model.color = {0.3, 0.3, 0.3, 1};
-    model.Translate({0.5, -0.5, 12});
+    // model.Translate({0.5, -0.5, 12});
 
-    X::Mesh::Mesh* cubeMesh = global.factory.CreateCubeMesh();
-    global.factory.AddMesh("Cube", cubeMesh);
-
-
-    X::Model::Model model;
-    model.color = {0.0, 0.5, 0.0, 1};
-    model.Translate({0, 0, 0});
-    model.Scale({1, 1, 1});
-
-    X::Model::Model model2;
-    model2.color = {0.5, 0.0, 0.0, 1};
-    model2.Translate({0, 10, 0});
-    model2.Scale({1, 1, 1});
 
     int x = 0;
     int y = 0;
@@ -62,8 +39,6 @@ int main(int argc, char *argv[]) {
     float deltaTime = 0;
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
-
-    std::vector<X::Model::Model> positions;
 
     while (isRunning) {
 	SDL_Event event;
@@ -80,7 +55,6 @@ int main(int argc, char *argv[]) {
 
 	    if (event.type == SDL_EVENT_KEY_DOWN) {
 		if (event.key.key == SDLK_SPACE) {
-		    std::println("SPace");
 		}
 
 		if (event.key.key == SDLK_A) {
@@ -94,7 +68,6 @@ int main(int argc, char *argv[]) {
 		}
 		if (event.key.key == SDLK_S) {
 		    y -= 1;
-		    positions = X::Factory::GenerateEntities(1000, 15);
 		}
 
 		if (event.key.key == SDLK_C) {
@@ -109,28 +82,17 @@ int main(int argc, char *argv[]) {
 
 	// Test basic OPENGL works
 	float cv = 0.70;
-	renderer.Clear(cv, cv, cv);
+	// renderer.Clear(cv, cv, cv);
 
-	if (camToggled) {
-	    cam.update(0.1);
-	}
+	// if (camToggled) {
+	//     cam.update(0.1);
+	// }
 
 	static float c = 0.0;
 
 	c += 1.0;
 
-	renderer.Draw(model, cam, default_shader);
-	renderer.Draw(model2, cam, default_shader);
-
-	for (auto m : positions) {
-	    X::Model::Model model;
-
-	    // Temporary crash fix
-	    model.transform.position.z = 20.0;
-	    model.Translate(m.transform.position);
-	    model.color = m.color;
-	    renderer.Draw(model, cam, default_shader);
-	}
+	// renderer.Draw(model, cam, default_shader);
 
 	SDL_GL_SwapWindow(app.GetWindow());
     }
