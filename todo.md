@@ -1,5 +1,4 @@
-### TODO
-- [ ] refactor:  Renderer should accept a Camera
+### Current
 
 ### Backlog
 - [ ] fix:  make sure OpenGL memory is cleaned up
