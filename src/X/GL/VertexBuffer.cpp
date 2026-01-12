@@ -33,7 +33,12 @@ VertexBuffer::VertexBuffer(
 		pointer
 	);
 
-	glBufferData(buffer_type, sizeof(data.at(0)) * data.size(), data.data(), GL_STATIC_DRAW);
+	glBufferData(
+		buffer_type,
+		sizeof(data.at(0)) * data.size(),
+		data.data(),
+		GL_STATIC_DRAW
+	);
 }
 
 VertexBuffer::~VertexBuffer()
