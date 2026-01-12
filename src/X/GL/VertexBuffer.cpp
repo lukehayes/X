@@ -18,17 +18,17 @@ VertexBuffer::VertexBuffer(
 	glGenBuffers(1, &this->id);
 	glBindBuffer(buffer_type, this->id);
 
-	GLenum type          = GL_FLOAT;
-	GLboolean normalized = GL_FALSE;
-	GLvoid* pointer      = (void*)0;
+	GLenum dataType        = GL_FLOAT;
+	GLboolean isNormalized = GL_FALSE;
+	GLvoid* pointer        = (void*)0;
 
 	glEnableVertexAttribArray(attrib_position);
 
 	glVertexAttribPointer(
 		attrib_position,
 		vertex_size,
-		type,
-		normalized,
+		dataType,
+		isNormalized,
 		vertex_stride,
 		pointer
 	);
