@@ -18,8 +18,8 @@ public:
 
     VertexBuffer(
         std::uint8_t attrib_position,
-        std::uint8_t vtx_size,
-        std::uint8_t vtx_stride,
+        std::uint8_t vertex_size,
+        std::uint8_t vertex_stride,
         const std::vector<GLfloat>& data,
         GLenum buffer_type
     );
