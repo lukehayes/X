@@ -1,6 +1,6 @@
 namespace X::GL
 {
-	class VertexAttributes
+	class VertexAttribute
 	{
 	public:
 		static constexpr int POSITION  = 0;
