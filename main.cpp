@@ -24,29 +24,7 @@ int main(int argc, char *argv[]) {
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-	
-
-
-
-
-
-	// X::GL::VertexBuffer vertex_buffer{
-	// 	X::GL::ATTRIB_VERTEX_POSITION, 
-	// 	3, 
-	// 	0,
-	// 	verticies, 
-	// 	GL_ARRAY_BUFFER
-	// };
-
-	// vertex_buffer.Bind();
-
-	// std::vector<unsigned int> indices = {
-	// 	0, 1, 3, // first triangle
-	// 	1, 2, 3  // second triangle
-	// };
-
-	// X::GL::IndexBuffer index_buffer{indices};
-
+	X::GL::buildGL();
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Default.glsl",
@@ -54,7 +32,6 @@ int main(int argc, char *argv[]) {
 	);
 
 
-	X::GL::buildGL();
 
 	// X::Model::Model model;
 	// model.color = {0.3, 0.3, 0.3, 1};
@@ -115,12 +92,12 @@ int main(int argc, char *argv[]) {
 		static float c = 0.0;
 
 		c += 0.1;
+	X::GL::buildGL();
 
 		glClearColor(cv,cv,cv,1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		default_shader.use();
-		default_shader.setUniformVec4({0.2,0.2,0.2,0.2}, "color");
 		default_shader.setUniformFloat(c, "time");
 
 		// renderer.Draw(model, cam, default_shader);
