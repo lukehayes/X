@@ -1,39 +1,32 @@
 #ifndef X_GL_GLPROGRAM
 #define X_GL_GLPROGRAM
 
-
 #include "X/Math/GLM.h"
 #include "X/GL/VertexBuffer.h"
-#include "X/GL/Shader.h"
+#include "glad/glad.h"
 
 namespace X::GL
 {
 struct GLProgram
 {
-	GLProgram() {}
-	glm::mat4 projection;
-	glm::mat4 view;
-
-	X::GL::Shader shader;
-	X::GL::VertexBuffer buffer;
-
 };
 
 inline GLProgram GLProgramCreate()
 {
 	GLProgram program;
 
-
 	return program;
 }
+
 
 void buildGL()
 {
     std::vector<GLfloat> vertices = {
-		0.5f,  0.5f,  0.0f,
-		0.5f,  -0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f,
-		-0.5f, 0.5f,  0.0f
+		0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f,
+		0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+		-0.5f, 0.5f,  0.0f, 0.0f, 1.0f, 1.0f
+
 	};
 
 	GLuint vao;
@@ -46,7 +39,7 @@ void buildGL()
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	int vertex_size        = 3;
-	int vertex_stride      = 0;
+	int vertex_stride      = 6 * sizeof(float);
 	GLenum dataType        = GL_FLOAT;
 	GLboolean isNormalized = GL_FALSE;
 	GLvoid* pointer        = (void*)0;
@@ -60,6 +53,17 @@ void buildGL()
 		isNormalized,
 		vertex_stride,
 		pointer
+	);
+
+	glEnableVertexAttribArray(X::GL::ATTRIB_VERTEX_COLOR);
+
+	glVertexAttribPointer(
+		X::GL::ATTRIB_VERTEX_COLOR,
+		vertex_size,
+		dataType,
+		isNormalized,
+		vertex_stride,
+		(void*)(sizeof(float) * 3)
 	);
 
 	glBufferData(
