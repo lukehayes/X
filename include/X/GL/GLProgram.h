@@ -29,10 +29,10 @@ inline GLProgram GLProgramCreate()
 
 void buildGL()
 {
-	std::vector<GLfloat> verticies = {
+    std::vector<GLfloat> vertices = {
 		0.5f,  0.5f,  0.0f,
 		0.5f,  -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
 		-0.5f, 0.5f,  0.0f
 	};
 
@@ -60,6 +60,13 @@ void buildGL()
 		isNormalized,
 		vertex_stride,
 		pointer
+	);
+
+	glBufferData(
+		GL_ARRAY_BUFFER,
+		sizeof(vertices.at(0)) * vertices.size(),
+		vertices.data(),
+		GL_STATIC_DRAW
 	);
 
 
