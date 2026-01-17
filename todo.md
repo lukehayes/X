@@ -1,6 +1,5 @@
-### Current
-
 ### Backlog
+- [ ] feat:  add some form of error checking
 - [ ] fix:  make sure OpenGL memory is cleaned up
 - [x] feat:  add simple scene implementation
 - [ ] refactor:  remove <print>
