@@ -38,8 +38,8 @@ void buildGL()
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-	int vertex_size        = 3;
-	int vertex_stride      = 6 * sizeof(float);
+	int vertex_size        = X::GL::ATTRIB_VERTEX_COUNT;
+	int vertex_stride      = X::GL::ATTRIB_STRIDE * sizeof(float);
 	GLenum dataType        = GL_FLOAT;
 	GLboolean isNormalized = GL_FALSE;
 	GLvoid* pointer        = (void*)0;
