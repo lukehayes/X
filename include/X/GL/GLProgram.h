@@ -2,9 +2,9 @@
 #define X_GL_GLPROGRAM
 
 #include "X/Math/GLM.h"
-#include "X/GL/VertexBuffer.h"
 #include "X/GL/VertexAttribute.h"
 #include "glad/glad.h"
+#include <vector>
 
 namespace X::GL
 {
@@ -19,6 +19,47 @@ inline GLProgram GLProgramCreate()
 	return program;
 }
 
+GLuint SetVertexArray(int count = 1)
+{
+	GLuint vao;
+	glGenVertexArrays(count, &vao);
+	glBindVertexArray(vao);
+
+	return vao;
+
+}
+
+GLuint SetVertexBuffer(int count = 1)
+{
+	GLuint vbo;
+
+	glGenBuffers(count, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+	return vbo;
+}
+
+
+GLuint SetIndexBuffer(const std::vector<unsigned int> indices)
+{
+	GLuint ibo;
+
+	glGenBuffers(1, &ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices.at(0)) * indices.size(), indices.data(), GL_STATIC_DRAW);
+
+	return ibo;
+}
+
+void SetBufferData(GLenum bufferType, const std::vector<float> data)
+{
+	glBufferData(
+		bufferType,
+		sizeof(data.at(0)) * data.size(),
+		data.data(),
+		GL_STATIC_DRAW
+	);
+}
 
 void buildGL()
 {
@@ -30,21 +71,13 @@ void buildGL()
 
 	};
 
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
 
+	X::GL::SetVertexArray();
+	X::GL::SetVertexBuffer();
 
-	GLuint vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-
-	glBufferData(
+	X::GL::SetBufferData(
 		GL_ARRAY_BUFFER,
-		sizeof(vertices.at(0)) * vertices.size(),
-		vertices.data(),
-		GL_STATIC_DRAW
+		vertices
 	);
 
 	X::GL::SetVertexAttribute(
@@ -69,11 +102,10 @@ void buildGL()
 		1, 2, 3  // second triangle
 	};
 
-	GLuint ibo;
-	glGenBuffers(1, &ibo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices.at(0)) * indices.size(), indices.data(), GL_STATIC_DRAW);
+
+	X::GL::SetIndexBuffer(indices);
 }
+
 
 
 }
