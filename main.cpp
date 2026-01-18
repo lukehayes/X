@@ -6,10 +6,6 @@
 #include "X/GL/GLProgram.h"
 #include "X/Math/GLM.h"
 
-#include "X/GL/VertexArray.h"
-#include "X/GL/VertexBuffer.h"
-#include "X/GL/VertexAttribute.h"
-
 extern X::Global global;
 
 constexpr int WIN_MULT   = 4;
