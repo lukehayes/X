@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-	X::GL::buildGL();
+	X::GL::buildGL({255,0,255});
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Default.glsl",
@@ -88,7 +88,6 @@ int main(int argc, char *argv[]) {
 		static float c = 0.0;
 
 		c += 0.1;
-	X::GL::buildGL();
 
 		glClearColor(cv,cv,cv,1);
 		glClear(GL_COLOR_BUFFER_BIT);

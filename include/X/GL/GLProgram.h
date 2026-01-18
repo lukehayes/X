@@ -3,6 +3,7 @@
 
 #include "X/Math/GLM.h"
 #include "X/GL/VertexAttribute.h"
+#include "X/Gfx/Color.h"
 #include "glad/glad.h"
 #include <vector>
 
@@ -61,13 +62,13 @@ void SetBufferData(GLenum bufferType, const std::vector<float> data)
 	);
 }
 
-void buildGL()
+void buildGL(const X::Gfx::Color color)
 {
     std::vector<GLfloat> vertices = {
-		0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f,
-		0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-		-0.5f, 0.5f,  0.0f, 0.0f, 1.0f, 1.0f
+		0.5f,  0.5f,  0.0f, color.r, color.g, color.b,
+		0.5f,  -0.5f, 0.0f, color.r, color.g, color.b,
+        -0.5f, -0.5f, 0.0f, color.r, color.g, color.b,
+		-0.5f, 0.5f,  0.0f, color.r, color.g, color.b
 
 	};
 
