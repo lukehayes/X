@@ -39,11 +39,6 @@ void buildGL()
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-	// int vertex_size        = X::GL::ATTRIB_VERTEX_COUNT;
-	// int vertex_stride      = X::GL::ATTRIB_STRIDE * sizeof(float);
-	// GLenum dataType        = GL_FLOAT;
-	// GLboolean isNormalized = GL_FALSE;
-	// GLvoid* pointer        = (void*)0;
 
 	glBufferData(
 		GL_ARRAY_BUFFER,
@@ -52,40 +47,20 @@ void buildGL()
 		GL_STATIC_DRAW
 	);
 
+	X::GL::SetVertexAttribute(
+		0,
+		3,
+		6,
+		0
+	);
 
-	X::GL::VertexAttribute position(
-		X::GL::ATTRIB_VERTEX_POSITION,
-		X::GL::ATTRIB_VERTEX_COUNT,
-		X::GL::ATTRIB_STRIDE,
-		0);
 
-	X::GL::VertexAttribute color(
-		X::GL::ATTRIB_VERTEX_COLOR,
-		X::GL::ATTRIB_VERTEX_COUNT,
-		X::GL::ATTRIB_STRIDE,
-		3);
-
-	// glEnableVertexAttribArray(X::GL::ATTRIB_VERTEX_POSITION);
-
-	// glVertexAttribPointer(
-	// 	X::GL::ATTRIB_VERTEX_POSITION,
-	// 	vertex_size,
-	// 	dataType,
-	// 	isNormalized,
-	// 	vertex_stride,
-	// 	pointer
-	// );
-	//
-	// glEnableVertexAttribArray(X::GL::ATTRIB_VERTEX_COLOR);
-
-	// glVertexAttribPointer(
-	// 	X::GL::ATTRIB_VERTEX_COLOR,
-	// 	vertex_size,
-	// 	dataType,
-	// 	isNormalized,
-	// 	vertex_stride,
-	// 	(void*)(sizeof(float) * 3)
-	// );
+	X::GL::SetVertexAttribute(
+		1,
+		3,
+		6,
+		3
+	);
 
 
 

@@ -21,18 +21,20 @@ public:
 		  vertex_offset(vertex_offset)
 	{}
 
-	void build()
+	X::GL::VertexAttribute set()
 	{
-		glEnableVertexAttribArray(this->vertex_position);
-
 		glVertexAttribPointer(
 			this->vertex_position,
-			this->vertex_size * sizeof(float),
+			this->vertex_size,
 			GL_FLOAT,
 			GL_FALSE,
-			this->vertex_stride,
+			sizeof(float) * this->vertex_stride,
 			(void*)(sizeof(float) * this->vertex_offset)
 		);
+
+		glEnableVertexAttribArray(this->vertex_position);
+
+		return *this;
 	}
 
 	int vertex_position;
@@ -41,6 +43,20 @@ public:
 	int vertex_offset;
 
 };
+
+void SetVertexAttribute(int vertex_position,int vertex_size, int vertex_stride, int vertex_offset)
+	{
+		glVertexAttribPointer(
+			vertex_position,
+			vertex_size,
+			GL_FLOAT,
+			GL_FALSE,
+			sizeof(float) * vertex_stride,
+			(void*)(sizeof(float) * vertex_offset)
+		);
+
+		glEnableVertexAttribArray(vertex_position);
+	}
 }
 
 #endif // X_GL_VERTEX_ATTIB_H
