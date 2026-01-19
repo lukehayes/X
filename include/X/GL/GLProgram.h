@@ -11,6 +11,9 @@ namespace X::GL
 {
 struct GLProgram
 {
+	GLuint vao;
+	GLuint vbo;
+	GLuint ibo;
 };
 
 inline GLProgram GLProgramCreate()
@@ -20,36 +23,24 @@ inline GLProgram GLProgramCreate()
 	return program;
 }
 
-GLuint SetVertexArray(int count = 1)
+void SetVertexArray(X::GL::GLProgram* program, int count = 1)
 {
-	GLuint vao;
-	glGenVertexArrays(count, &vao);
-	glBindVertexArray(vao);
-
-	return vao;
-
+	glGenVertexArrays(count, &program->vao);
+	glBindVertexArray(program->vao);
 }
 
-GLuint SetVertexBuffer(int count = 1)
+void SetVertexBuffer(X::GL::GLProgram* program, int count = 1)
 {
-	GLuint vbo;
-
-	glGenBuffers(count, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-	return vbo;
+	glGenBuffers(count, &program->vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, program->vbo);
 }
 
 
-GLuint SetIndexBuffer(const std::vector<unsigned int> indices)
+void SetIndexBuffer(X::GL::GLProgram* program, const std::vector<unsigned int> indices)
 {
-	GLuint ibo;
-
-	glGenBuffers(1, &ibo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glGenBuffers(1, &program->ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, program->ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices.at(0)) * indices.size(), indices.data(), GL_STATIC_DRAW);
-
-	return ibo;
 }
 
 void SetBufferData(GLenum bufferType, const std::vector<float> data)
@@ -62,7 +53,7 @@ void SetBufferData(GLenum bufferType, const std::vector<float> data)
 	);
 }
 
-void buildGL(const X::Gfx::Color color)
+X::GL::GLProgram* buildGL(X::GL::GLProgram* program, const X::Gfx::Color color)
 {
     std::vector<GLfloat> vertices = {
 		0.5f,  0.5f,  0.0f, color.r, color.g, color.b,
@@ -72,9 +63,8 @@ void buildGL(const X::Gfx::Color color)
 
 	};
 
-
-	X::GL::SetVertexArray();
-	X::GL::SetVertexBuffer();
+	X::GL::SetVertexArray(program);
+	X::GL::SetVertexBuffer(program);
 
 	X::GL::SetBufferData(
 		GL_ARRAY_BUFFER,
@@ -104,7 +94,9 @@ void buildGL(const X::Gfx::Color color)
 	};
 
 
-	X::GL::SetIndexBuffer(indices);
+	X::GL::SetIndexBuffer(program, indices);
+
+	return program;
 }
 
 
