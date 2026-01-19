@@ -23,8 +23,7 @@ Renderer::BasicDraw(X::GL::Shader& shader)
 	float cv = 0.70;
 	static float c = 0.1;
 
-	glClearColor(cv, cv, cv, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
+	this->Clear(cv,cv,cv);
 
 	shader.use();
 	shader.setUniformFloat(c, "time");
