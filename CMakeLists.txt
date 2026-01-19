@@ -58,9 +58,6 @@ add_executable(${BIN_NAME} main.cpp
     ## X/Mesh
     "${X_SRC_DIR}/Mesh/Mesh.cpp"
 
-    ## X/Factory
-    "${X_SRC_DIR}/Factory/MeshFactory.cpp"
-
     ## X/Camera
     "${X_SRC_DIR}/Camera/Camera2D.cpp"
     "${X_SRC_DIR}/Camera/Camera3D.cpp"
