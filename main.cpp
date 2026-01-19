@@ -1,9 +1,8 @@
 #include "X/App.h"
-#include "glad/glad.h"
-
 #include "X/Global.h"
 #include "X/GL/Shader.h"
 #include "X/GL/GLProgram.h"
+#include "X/Gfx/Renderer.h"
 #include "X/Math/GLM.h"
 
 extern X::Global global;
@@ -28,11 +27,7 @@ int main(int argc, char *argv[]) {
 	);
 
 
-
-	// X::Model::Model model;
-	// model.color = {0.3, 0.3, 0.3, 1};
-	// model.Translate({0.5, -0.5, 12});
-
+	X::Gfx::Renderer renderer;
 
 	int x = 0;
 	int y = 0;
