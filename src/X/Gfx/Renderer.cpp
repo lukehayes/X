@@ -1,4 +1,5 @@
 #include "X/Gfx/Renderer.h"
+#include "X/GL/Shader.h"
 #include "glad/glad.h"
 
 #include "X/Global.h"
@@ -13,6 +14,26 @@ Renderer::Clear(float r, float g, float b)
     glClearColor(r,g,b,1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
+
+
+
+void
+Renderer::BasicDraw(X::GL::Shader& shader)
+{
+	float cv = 0.70;
+	static float c = 0.1;
+
+	glClearColor(cv, cv, cv, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	shader.use();
+	shader.setUniformFloat(c, "time");
+
+	// renderer.Draw(model, cam, default_shader);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+
 
 void
 Renderer::Draw(X::Model::Model& model, X::Camera::Camera3D& cam, X::GL::Shader& shader)

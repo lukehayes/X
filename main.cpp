@@ -83,20 +83,8 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		float cv = 0.70;
-
-		static float c = 0.0;
-
-		c += 0.1;
-
-		glClearColor(cv,cv,cv,1);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		default_shader.use();
-		default_shader.setUniformFloat(c, "time");
-
-		// renderer.Draw(model, cam, default_shader);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	
+		renderer.BasicDraw(default_shader);
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
