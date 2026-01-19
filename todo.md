@@ -1,4 +1,5 @@
 ### Backlog
+- [ ] refactor:  attach shader instance to mesh/model
 - [ ] refactor:  move GL helper functions into single location
 - [ ] feat:  add some form of error checking
 - [ ] fix:  make sure OpenGL memory is cleaned up
@@ -18,7 +19,7 @@
 - [ ] feat: add hashmap for vertex arrays
 - [ ] feat: create VAO abstraction
 - [ ] feat: add textures
-- [ ] feat: add Random class
+- [x] feat: add Random class
 - [ ] feat: implement delta time
 - [ ] feat: add simple logging for debug mode
 - [ ] refactor: tidy up main entry point
