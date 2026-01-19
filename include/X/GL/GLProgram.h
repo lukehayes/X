@@ -100,6 +100,13 @@ X::GL::GLProgram* buildGL(X::GL::GLProgram* program, const X::Gfx::Color color)
 }
 
 
+void DeleteGLProgram(X::GL::GLProgram* program)
+{
+	glDeleteVertexArrays(1, &program->vao);
+	glDeleteBuffers(1, &program->vbo);
+	glDeleteBuffers(1, &program->ibo);
+}
+
 
 }
 
