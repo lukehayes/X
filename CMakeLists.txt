@@ -49,6 +49,7 @@ add_executable(${BIN_NAME} main.cpp
     "${X_SRC_DIR}/GL/IndexBuffer.cpp"
 
     ## X/Gfx
+	"${X_SRC_DIR}/Gfx/Color.cpp"
     "${X_SRC_DIR}/Gfx/Renderer.cpp"
 
     ## X/Model
