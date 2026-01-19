@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-	X::GL::buildGL({255,0,255});
+	X::GL::buildGL(&glProg, {0,0,1});
 
 	X::GL::Shader default_shader(
 		"../assets/shaders/VSH-Default.glsl",
