@@ -84,6 +84,8 @@ int main(int argc, char *argv[]) {
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
 
+	X::GL::DeleteGLProgram(&glProg);
+
 	SDL_GL_DestroyContext(app.GetContext());
 	SDL_DestroyWindow(app.GetWindow());
 
