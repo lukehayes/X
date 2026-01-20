@@ -18,11 +18,8 @@ class VertexBuffer
 public:
 
     VertexBuffer(
-        std::uint8_t attrib_position,
-        std::uint8_t vertex_size,
-        std::uint8_t vertex_stride,
-        const std::vector<GLfloat>& data,
-        GLenum buffer_type
+		const std::vector<GLfloat>& data,
+		GLenum buffer_type
     );
 
     VertexBuffer(const VertexBuffer& rhs) = delete;
@@ -34,8 +31,17 @@ public:
     ~VertexBuffer();
 
     /**
+    * Load the vertex data into the buffef.
+    */
+	void SetBufferData();
+
+    /**
+    * Set the buffers vertex attribute pointer.
+    */
+	void SetVertexAttribute(int vertex_position,int vertex_size, int vertex_stride, int vertex_offset);
+
+    /**
     * Bind the vertex buffer.
-    *
     */
     void Bind();
 
@@ -50,8 +56,8 @@ public:
     void Destroy();
 
     std::vector<GLfloat> data;
+	GLenum bufferType;
     GLuint id;
-    GLenum buffer_type;
 
 };
 }

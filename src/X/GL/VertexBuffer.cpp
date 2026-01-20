@@ -5,40 +5,12 @@ namespace X::GL
 {
 
 VertexBuffer::VertexBuffer(
-	std::uint8_t attrib_position,
-	std::uint8_t vertex_size,
-	std::uint8_t vertex_stride,
 	const std::vector<GLfloat>& data,
 	GLenum buffer_type
-) : data(data)
+) : data(data), bufferType(buffer_type)
 {
 
-	this->buffer_type = buffer_type;
-
-	glGenBuffers(1, &this->id);
-	glBindBuffer(buffer_type, this->id);
-
-	GLenum dataType        = GL_FLOAT;
-	GLboolean isNormalized = GL_FALSE;
-	GLvoid* pointer        = (void*)0;
-
-	glEnableVertexAttribArray(attrib_position);
-
-	glVertexAttribPointer(
-		attrib_position,
-		vertex_size,
-		dataType,
-		isNormalized,
-		vertex_stride,
-		pointer
-	);
-
-	glBufferData(
-		buffer_type,
-		sizeof(data.at(0)) * data.size(),
-		data.data(),
-		GL_STATIC_DRAW
-	);
+	this->bufferType = buffer_type;
 }
 
 VertexBuffer::~VertexBuffer()
@@ -47,17 +19,42 @@ VertexBuffer::~VertexBuffer()
 	std::println("Vertex Buffer Deleted");
 }
 
+void 
+VertexBuffer::SetBufferData()
+{
+	glBufferData(
+		this->bufferType,
+		sizeof(this->data.at(0)) * this->data.size(),
+		this->data.data(),
+		GL_STATIC_DRAW
+	);
+}
+
+void 
+VertexBuffer::SetVertexAttribute(int vertex_position,int vertex_size, int vertex_stride, int vertex_offset)
+{
+	glVertexAttribPointer(
+		vertex_position,
+		vertex_size,
+		GL_FLOAT,
+		GL_FALSE,
+		sizeof(float) * vertex_stride,
+		(void*)(sizeof(float) * vertex_offset)
+	);
+
+	glEnableVertexAttribArray(vertex_position);
+}
 
 void
 VertexBuffer::Bind()
 {
-	glBindBuffer(this->buffer_type, this->id);
+	glBindBuffer(this->bufferType, this->id);
 }
 
 void
 VertexBuffer::UnBind()
 {
-	glBindBuffer(this->buffer_type, 0);
+	glBindBuffer(this->bufferType, 0);
 }
 
 void
