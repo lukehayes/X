@@ -1,8 +1,8 @@
 ### Backlog
+- [ ] feat:  add some form of error checking
 - [ ] feat:  add position to Renderer::BasicDraw()
 - [ ] refactor:  attach shader instance to mesh/model
 - [x] refactor:  move GL helper functions into single location
-- [ ] feat:  add some form of error checking
 - [ ] fix:  make sure OpenGL memory is cleaned up
 - [x] feat:  add simple scene implementation
 - [ ] refactor:  remove <print>
