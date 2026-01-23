@@ -24,7 +24,6 @@ void
 Renderer::BasicDraw(X::GL::Shader& shader)
 {
 	float cv = 0.70;
-	static float c = 0.1;
 
 	this->Clear(cv,cv,cv);
 
