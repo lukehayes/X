@@ -28,7 +28,6 @@ Renderer::BasicDraw(X::GL::Shader& shader)
 	this->Clear(cv,cv,cv);
 
 	shader.use();
-	shader.setUniformFloat(c, "time");
 
 	// renderer.Draw(model, cam, default_shader);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
