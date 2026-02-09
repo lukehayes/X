@@ -41,19 +41,10 @@ add_executable(${BIN_NAME} main.cpp
 
     ## X/GL
     "${X_SRC_DIR}/GL/Shader.cpp"
-    "${X_SRC_DIR}/GL/VertexArray.cpp"
-    "${X_SRC_DIR}/GL/VertexBuffer.cpp"
-    "${X_SRC_DIR}/GL/IndexBuffer.cpp"
 
     ## X/Gfx
 	"${X_SRC_DIR}/Gfx/Color.cpp"
     "${X_SRC_DIR}/Gfx/Renderer.cpp"
-
-    ## X/Model
-    "${X_SRC_DIR}/Model/Model.cpp"
-
-    ## X/Mesh
-    "${X_SRC_DIR}/Mesh/Mesh.cpp"
 
     ## X/Camera
     "${X_SRC_DIR}/Camera/Camera2D.cpp"
