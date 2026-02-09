@@ -39,9 +39,6 @@ add_executable(${BIN_NAME} main.cpp
     "${X_SRC_DIR}/Global.cpp"
     "${X_SRC_DIR}/Transform.cpp"
 
-    ## X/Scene
-    "${X_SRC_DIR}/Scene/Scene.cpp"
-
     ## X/GL
     "${X_SRC_DIR}/GL/Shader.cpp"
     "${X_SRC_DIR}/GL/VertexArray.cpp"
