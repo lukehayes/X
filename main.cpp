@@ -18,8 +18,49 @@ int main(int argc, char *argv[]) {
 	bool isRunning = true;
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
-	X::GL::Shader default_shader;
+
+	X::GL::Shader default_shader {
+		"../assets/shaders/VSH-Default.glsl",
+		"../assets/shaders/FSH-Default.glsl"
+	};
+
 	X::Gfx::Renderer renderer;
+
+
+	// OPENGL --------------------------------------------------------
+
+	std::vector<float> vertices = {
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f
+	};  
+
+	GLuint vao;
+	GLuint vbo;
+	GLuint ibo;
+
+	glGenVertexArrays(1, &vao);
+	glGenBuffers(1, &vao);
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+	std::println("Data Size: {}", sizeof(float) * vertices.size());
+
+	glBufferData(
+		GL_ARRAY_BUFFER,
+		sizeof(float) * vertices.size(),
+		vertices.data(),
+		GL_STATIC_DRAW
+	);
+
+	constexpr int VERTEX_POSITION = 0;
+	glVertexAttribPointer(VERTEX_POSITION,3,GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glEnableVertexAttribArray(VERTEX_POSITION);
+
+
+
+	// END OPENGL ----------------------------------------------------
+
 
 	float deltaTime = 0;
 	Uint64 NOW = SDL_GetPerformanceCounter();
@@ -28,7 +69,7 @@ int main(int argc, char *argv[]) {
 	while (isRunning) {
 		SDL_Event event;
 
-		LAST = NOW;
+	LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
 		deltaTime =
 			(double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
@@ -49,6 +90,8 @@ int main(int argc, char *argv[]) {
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.7,0.7,0.7,1.0);
+
+		glDrawArrays(GL_TRIANGLES, 0,3);
 
 
 		SDL_GL_SwapWindow(app.GetWindow());
