@@ -19,6 +19,7 @@ public:
 
 	void Bind();
 	void UnBind();
+	void SetIndexBuffer();
 	
 	// TODO Refactor this part later
 	std::vector<unsigned int> data;
