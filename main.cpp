@@ -40,11 +40,9 @@ int main(int argc, char *argv[]) {
 	GLuint ibo;
 
 	glGenVertexArrays(1, &vao);
-	glGenBuffers(1, &vao);
+	glGenBuffers(1, &vbo);
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-	std::println("Data Size: {}", sizeof(float) * vertices.size());
 
 	glBufferData(
 		GL_ARRAY_BUFFER,
