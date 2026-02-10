@@ -30,10 +30,17 @@ int main(int argc, char *argv[]) {
 	// OPENGL --------------------------------------------------------
 
 	std::vector<float> vertices = {
+		0.5f,  0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
 		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
+		-0.5f,  0.5f, 0.0f
 	};  
+
+	std::vector<unsigned int> indices = {
+		0,1,3,
+		1,2,3
+	};
+
 
 	GLuint vao;
 	GLuint vbo;
@@ -41,6 +48,7 @@ int main(int argc, char *argv[]) {
 
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
+	glGenBuffers(1, &ibo);
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
@@ -51,9 +59,19 @@ int main(int argc, char *argv[]) {
 		GL_STATIC_DRAW
 	);
 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBufferData(
+		GL_ELEMENT_ARRAY_BUFFER,
+		sizeof(unsigned int) * indices.size(),
+		indices.data(),
+		GL_STATIC_DRAW
+	);
+
+
 	constexpr int VERTEX_POSITION = 0;
 	glVertexAttribPointer(VERTEX_POSITION,3,GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(VERTEX_POSITION);
+
 
 
 
@@ -67,7 +85,7 @@ int main(int argc, char *argv[]) {
 	while (isRunning) {
 		SDL_Event event;
 
-	LAST = NOW;
+		LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
 		deltaTime =
 			(double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
@@ -86,11 +104,13 @@ int main(int argc, char *argv[]) {
 
 		default_shader.use();
 
+		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.7,0.7,0.7,1.0);
 
-		glDrawArrays(GL_TRIANGLES, 0,3);
+		// glDrawArrays(GL_TRIANGLES, 0,3);
 
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
