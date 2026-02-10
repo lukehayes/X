@@ -31,8 +31,12 @@ Shader::Shader(
 	this->build();
 }
 
-Shader::Shader(const Shader& rhs) {}
-Shader::Shader(const Shader&& rhs) {}
+Shader::Shader(const Shader& rhs) {
+	std::cout << "Shader Copy Constructed" << std::endl;
+}
+Shader::Shader(const Shader&& rhs) {
+	std::cout << "Shader Move Constructed" << std::endl;
+}
 
 Shader&
 Shader::operator=(Shader& rhs)  { return *this; }
