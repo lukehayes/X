@@ -30,10 +30,10 @@ int main(int argc, char *argv[]) {
 	// OPENGL --------------------------------------------------------
 
 	std::vector<float> vertices = {
-		0.5f,  0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
+		0.5f,  0.5f, 0.0f, 1.0f,0.0f,0.0f,
+		0.5f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
+		-0.5f, -0.5f, 0.0f,0.0f,0.0f,1.0f,
+		-0.5f,  0.5f, 0.0f, 1.0f, 1.0f,1.0f
 	};  
 
 	std::vector<unsigned int> indices = {
@@ -69,8 +69,12 @@ int main(int argc, char *argv[]) {
 
 
 	constexpr int VERTEX_POSITION = 0;
-	glVertexAttribPointer(VERTEX_POSITION,3,GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(VERTEX_POSITION,3,GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(0));
 	glEnableVertexAttribArray(VERTEX_POSITION);
+
+	constexpr int VERTEX_COLOR = 1;
+	glVertexAttribPointer(VERTEX_COLOR,3,GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(VERTEX_COLOR);
 
 
 
