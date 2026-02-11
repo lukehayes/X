@@ -1,3 +1,6 @@
+#ifndef X_GL_VERTEX_ATTRIBUTE_H
+#define X_GL_VERTEX_ATTRIBUTE_H
+
 #include "glad/glad.h"
 
 namespace X::GL
@@ -8,3 +11,5 @@ namespace X::GL
 		glEnableVertexAttribArray(position);
 	}
 }
+
+#endif // X_GL_VERTEX_ATTRIBUTE_H
