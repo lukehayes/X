@@ -18,6 +18,21 @@ namespace X::GL
 		GLuint ibo;
 	};
 
+	void GenerateVertexArray(GL* glState, int count = 1)
+	{
+		glGenVertexArrays(count, &glState->vao);
+	}
+
+	void GenerateVertexBuffer(GL* glState, int count = 1)
+	{
+		glGenBuffers(count, &glState->vbo);
+	}
+
+	void GenerateIndexBuffer(GL* glState, int count = 1)
+	{
+		glGenBuffers(count, &glState->ibo);
+	}
+
 	void SetVertexAttribute(int position, int size, int stride, int pointer )
 	{
 		glVertexAttribPointer(position,size,GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(sizeof(float) * pointer));
