@@ -5,6 +5,12 @@
 
 namespace X::GL
 {
+	enum BufferType
+	{
+		ARRAY_BUFFER,
+		ELEMENT_ARRAY_BUFFER
+	};
+
 	struct GL
 	{
 		GLuint vao;
@@ -12,12 +18,11 @@ namespace X::GL
 		GLuint ibo;
 	};
 
-void SetVertexAttribute(int position, int size, int stride, int pointer )
-{
-	glVertexAttribPointer(position,size,GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(sizeof(float) * pointer));
-	glEnableVertexAttribArray(position);
-}
-
+	void SetVertexAttribute(int position, int size, int stride, int pointer )
+	{
+		glVertexAttribPointer(position,size,GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(sizeof(float) * pointer));
+		glEnableVertexAttribArray(position);
+	}
 }
 
 
