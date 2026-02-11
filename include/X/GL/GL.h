@@ -2,13 +2,14 @@
 #define X_GL_GL_H
 
 #include "glad/glad.h"
+#include <vector>
 
 namespace X::GL
 {
 	enum BufferType
 	{
-		ARRAY_BUFFER,
-		ELEMENT_ARRAY_BUFFER
+		ARRAY_BUFFER         = GL_ARRAY_BUFFER,
+		ELEMENT_ARRAY_BUFFER = GL_ELEMENT_ARRAY_BUFFER
 	};
 
 	struct GL
@@ -21,6 +22,7 @@ namespace X::GL
 	void GenerateVertexArray(GL* glState, int count = 1)
 	{
 		glGenVertexArrays(count, &glState->vao);
+		glBindVertexArray(glState->vao);
 	}
 
 	void GenerateVertexBuffer(GL* glState, int count = 1)
@@ -31,6 +33,18 @@ namespace X::GL
 	void GenerateIndexBuffer(GL* glState, int count = 1)
 	{
 		glGenBuffers(count, &glState->ibo);
+	}
+
+	template<class T>
+	void SetBufferData(BufferType bufferType, GLuint buffer, const std::vector<T> data)
+	{
+		glBindBuffer(bufferType, buffer);
+		glBufferData(
+			bufferType,
+			sizeof(T) * data.size(),
+			data.data(),
+			GL_STATIC_DRAW
+		);
 	}
 
 	void SetVertexAttribute(int position, int size, int stride, int pointer )
