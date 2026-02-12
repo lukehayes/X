@@ -58,6 +58,21 @@ namespace X::GL
 		glEnableVertexAttribArray(position);
 	}
 
+	void Build(GLState* glState)
+	{
+		X::GL::GenerateVertexArray(glState);
+		X::GL::GenerateVertexBuffer(glState);
+		X::GL::GenerateIndexBuffer(glState);
+
+		X::GL::SetBufferData<float>(X::GL::ARRAY_BUFFER, glState->vbo, glState->verticies);
+		X::GL::SetBufferData<unsigned int>(X::GL::ELEMENT_ARRAY_BUFFER, glState->ibo, glState->indices);
+		// X::GL::SetBufferData<unsigned int>(X::GL::ELEMENT_ARRAY_BUFFER, glState.ibo, indices);
+
+		X::GL::SetVertexAttribute(0,3,6,0);
+		X::GL::SetVertexAttribute(1,3,6,3);
+	}
+
+
 
 	void PrintGLState(const GLState& glState)
 	{
