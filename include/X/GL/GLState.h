@@ -18,6 +18,8 @@ namespace X::GL
 		GLuint vao;
 		GLuint vbo;
 		GLuint ibo;
+		std::vector<float> verticies;
+		std::vector<unsigned int> indices;
 	};
 
 	void GenerateVertexArray(GLState* glState, int count = 1)
