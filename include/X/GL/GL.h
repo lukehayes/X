@@ -27,11 +27,13 @@ namespace X::GL
 
 	void GenerateVertexBuffer(GL* glState, int count = 1)
 	{
+		glBindBuffer(GL_ARRAY_BUFFER, glState->vbo);
 		glGenBuffers(count, &glState->vbo);
 	}
 
 	void GenerateIndexBuffer(GL* glState, int count = 1)
 	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, glState->ibo);
 		glGenBuffers(count, &glState->ibo);
 	}
 
