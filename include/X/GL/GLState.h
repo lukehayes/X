@@ -12,26 +12,26 @@ namespace X::GL
 		ELEMENT_ARRAY_BUFFER = GL_ELEMENT_ARRAY_BUFFER
 	};
 
-	struct GL
+	struct GLState
 	{
 		GLuint vao;
 		GLuint vbo;
 		GLuint ibo;
 	};
 
-	void GenerateVertexArray(GL* glState, int count = 1)
+	void GenerateVertexArray(GLState* glState, int count = 1)
 	{
 		glGenVertexArrays(count, &glState->vao);
 		glBindVertexArray(glState->vao);
 	}
 
-	void GenerateVertexBuffer(GL* glState, int count = 1)
+	void GenerateVertexBuffer(GLState* glState, int count = 1)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, glState->vbo);
 		glGenBuffers(count, &glState->vbo);
 	}
 
-	void GenerateIndexBuffer(GL* glState, int count = 1)
+	void GenerateIndexBuffer(GLState* glState, int count = 1)
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, glState->ibo);
 		glGenBuffers(count, &glState->ibo);
