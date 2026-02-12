@@ -3,6 +3,7 @@
 
 #include "glad/glad.h"
 #include <vector>
+#include <print>
 
 namespace X::GL
 {
@@ -53,6 +54,19 @@ namespace X::GL
 	{
 		glVertexAttribPointer(position,size,GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(sizeof(float) * pointer));
 		glEnableVertexAttribArray(position);
+	}
+
+
+	void PrintGLState(const GLState& glState)
+	{
+		std::println("---------------------");
+		std::println("GLState:");
+		std::println(" ");
+		std::println("VAO: {}", glState.vao );
+		std::println("VBO: {}", glState.vbo );
+		std::println("IBO: {}", glState.ibo );
+		std::println("---------------------");
+
 	}
 }
 
