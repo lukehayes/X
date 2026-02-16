@@ -1,5 +1,7 @@
 ### Backlog
 
+- [ ] feat: add Orthographic camera
+- [ ] feat: add Perspective camera
 - [ ] refactor:  change glDrawArrays() count to indicies.size()
 - [ ] refactor:  remove <print>
 - [ ] feat:  add some form of error checking
@@ -27,7 +29,6 @@
 - [ ] feat: add simple logging for debug mode
 - [ ] refactor: tidy up main entry point
 - [ ] feat: add Model class
-- [ ] feat: add orthographic camera
 - [ ] feat: add FPS style movement
 - [ ] refactor: move matrix calcs into Camera class
 - [ ] refactor: make better random functions
