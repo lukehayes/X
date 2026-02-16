@@ -88,8 +88,6 @@ int main(int argc, char *argv[]) {
 
 		c += 0.1;
 
-		default_shader.use();
-
 		default_shader.setUniformVec3(glm::vec3{sin(c),cos(c),1}, "col");
 
 		renderer.Clear(0.7,0.7,0.7);
