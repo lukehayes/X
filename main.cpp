@@ -86,20 +86,14 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-
 		c += 0.1;
 
 		default_shader.use();
 
 		default_shader.setUniformVec3(glm::vec3{sin(c),cos(c),1}, "col");
 
-		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(0.7,0.7,0.7,1.0);
-
-		// glDrawArrays(GL_TRIANGLES, 0,3);
-
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		renderer.Clear(0.7,0.7,0.7);
+		renderer.BasicDraw(default_shader);
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
