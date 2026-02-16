@@ -1,4 +1,5 @@
 #include "X/App.h"
+#include "X/GL/GLState.h"
 #include "X/GL/Shader.h"
 #include "X/Gfx/Renderer.h"
 #include "X/Global.h"
@@ -42,45 +43,24 @@ int main(int argc, char *argv[]) {
 	};
 
 
-	GLuint vao;
-	GLuint vbo;
-	GLuint ibo;
+	X::GL::GLState glState;
 
-	glGenVertexArrays(1, &vao);
-	glGenBuffers(1, &vbo);
-	glGenBuffers(1, &ibo);
-	glBindVertexArray(vao);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	X::GL::GenerateVertexArray(&glState);
+	X::GL::GenerateVertexBuffer(&glState);
+	X::GL::GenerateIndexBuffer(&glState);
 
-	glBufferData(
-		GL_ARRAY_BUFFER,
-		sizeof(float) * vertices.size(),
-		vertices.data(),
-		GL_STATIC_DRAW
-	);
+	X::GL::SetBufferData(X::GL::ARRAY_BUFFER, glState.vbo, vertices);
+	X::GL::SetBufferData(X::GL::ELEMENT_ARRAY_BUFFER, glState.ibo, indices);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	glBufferData(
-		GL_ELEMENT_ARRAY_BUFFER,
-		sizeof(unsigned int) * indices.size(),
-		indices.data(),
-		GL_STATIC_DRAW
-	);
-
-
-	constexpr int VERTEX_POSITION = 0;
-	glVertexAttribPointer(VERTEX_POSITION,3,GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(0));
-	glEnableVertexAttribArray(VERTEX_POSITION);
-
-	constexpr int VERTEX_COLOR = 1;
-	glVertexAttribPointer(VERTEX_COLOR,3,GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(VERTEX_COLOR);
-
+	X::GL::SetVertexAttribute(0,3,6,0);
+	X::GL::SetVertexAttribute(1,3,6,6);
 
 
 
 	// END OPENGL ----------------------------------------------------
 
+
+	float c = 0.0;
 
 	float deltaTime = 0;
 	Uint64 NOW = SDL_GetPerformanceCounter();
@@ -106,7 +86,12 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
+
+		c += 0.1;
+
 		default_shader.use();
+
+		default_shader.setUniformVec3(glm::vec3{sin(c),cos(c),1}, "col");
 
 		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT);
