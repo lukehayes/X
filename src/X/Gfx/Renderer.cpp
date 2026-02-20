@@ -25,14 +25,8 @@ Renderer::BasicDraw(X::GL::Shader& shader)
 {
 	float cv = 0.70;
 
-	this->Clear(cv,cv,cv);
-
 	shader.use();
 
-
-	// glDrawArrays(GL_TRIANGLES, 0,3);
-
-	// renderer.Draw(model, cam, default_shader);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
