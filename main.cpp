@@ -5,12 +5,14 @@
 #include "X/Global.h"
 #include "X/Math/GLM.h"
 #include "glad/glad.h"
+#include <vector>
 
 extern X::Global global;
 
 constexpr int WIN_MULT   = 4;
 constexpr int WIN_WIDTH  = 320 * WIN_MULT;
 constexpr int WIN_HEIGHT = 180 * WIN_MULT;
+
 
 int main(int argc, char *argv[]) {
 	// ------------------------------------------------------------------------
@@ -56,6 +58,51 @@ int main(int argc, char *argv[]) {
 	X::GL::SetVertexAttribute(1,3,6,6);
 
 
+	std::println(
+		"VAO {}, VBO: {}, IBO: {}",
+		glState.vao,
+		glState.vbo,
+		glState.ibo
+	);
+
+	std::vector<float> vert2 = {
+		1.0f,  0.5f, 0.0f, 0.0f,1.0f,0.0f,
+		1.0f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
+		0.5f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
+		0.5f,  0.5f, 0.0f, 0.0f, 1.0f,0.0f
+	};  
+
+	std::vector<unsigned int> ind2 = {
+		0,1,3,
+		1,2,3
+	};
+
+
+	X::GL::GLState glState2;
+
+	X::GL::GenerateVertexArray(&glState2);
+	X::GL::GenerateVertexBuffer(&glState2);
+	X::GL::GenerateIndexBuffer(&glState2);
+
+	X::GL::SetBufferData(X::GL::ARRAY_BUFFER, glState2.vbo, vert2);
+	X::GL::SetBufferData(X::GL::ELEMENT_ARRAY_BUFFER, glState2.ibo, ind2);
+
+	X::GL::SetVertexAttribute(0,3,6,0);
+	X::GL::SetVertexAttribute(1,3,6,6);
+
+
+	std::println(
+		"VAO {}, VBO: {}, IBO: {}",
+		glState2.vao,
+		glState2.vbo,
+		glState2.ibo
+	);
+
+
+	std::vector<X::GL::GLState*> states;
+	states.push_back(&glState);
+	states.push_back(&glState2);
+
 
 	// END OPENGL ----------------------------------------------------
 
@@ -88,10 +135,15 @@ int main(int argc, char *argv[]) {
 
 		c += 0.1;
 
-		default_shader.setUniformVec3(glm::vec3{sin(c),cos(c),1}, "col");
-
 		renderer.Clear(0.7,0.7,0.7);
-		renderer.BasicDraw(default_shader);
+
+		for(auto state : states)
+		{
+			X::GL::BindGLState( state );
+			default_shader.setUniformVec3(glm::vec3{sin(c),cos(c),1}, "col");
+			renderer.BasicDraw(default_shader);
+
+		}
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
