@@ -40,6 +40,12 @@ namespace X::GL
 		glGenBuffers(count, &glState->ibo);
 	}
 
+	void BindGLState(GLState* state)
+	{
+		glBindVertexArray(state->vao);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, state->ibo);
+	}
+
 	template<class T>
 	void SetBufferData(BufferType bufferType, GLuint buffer, const std::vector<T> data)
 	{
