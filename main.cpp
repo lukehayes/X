@@ -32,44 +32,44 @@ int main(int argc, char *argv[]) {
 
 	// OPENGL --------------------------------------------------------
 
-	std::vector<float> vertices = {
-		0.5f,  0.5f, 0.0f, 1.0f,0.0f,0.0f,
-		0.5f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
-		-0.5f, -0.5f, 0.0f,0.0f,0.0f,1.0f,
-		-0.5f,  0.5f, 0.0f, 1.0f, 1.0f,1.0f
-	};  
-
-	std::vector<unsigned int> indices = {
-		0,1,3,
-		1,2,3
-	};
-
-
-	X::GL::GLState glState;
-
-	X::GL::GenerateVertexArray(&glState);
-	X::GL::GenerateVertexBuffer(&glState);
-	X::GL::GenerateIndexBuffer(&glState);
-
-	X::GL::SetBufferData(X::GL::ARRAY_BUFFER, glState.vbo, vertices);
-	X::GL::SetBufferData(X::GL::ELEMENT_ARRAY_BUFFER, glState.ibo, indices);
-
-	X::GL::SetVertexAttribute(0,3,6,0);
-	X::GL::SetVertexAttribute(1,3,6,6);
-
-
-	std::println(
-		"VAO {}, VBO: {}, IBO: {}",
-		glState.vao,
-		glState.vbo,
-		glState.ibo
-	);
+	// std::vector<float> vertices = {
+	// 	0.5f,  0.5f, 0.0f, 1.0f,0.0f,0.0f,
+	// 	0.5f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
+	// 	-0.5f, -0.5f, 0.0f,0.0f,0.0f,1.0f,
+	// 	-0.5f,  0.5f, 0.0f, 1.0f, 1.0f,1.0f
+	// };  
+	//
+	// std::vector<unsigned int> indices = {
+	// 	0,1,3,
+	// 	1,2,3
+	// };
+	//
+	//
+	// X::GL::GLState glState;
+	//
+	// X::GL::GenerateVertexArray(&glState);
+	// X::GL::GenerateVertexBuffer(&glState);
+	// X::GL::GenerateIndexBuffer(&glState);
+	//
+	// X::GL::SetBufferData(X::GL::ARRAY_BUFFER, glState.vbo, vertices);
+	// X::GL::SetBufferData(X::GL::ELEMENT_ARRAY_BUFFER, glState.ibo, indices);
+	//
+	// X::GL::SetVertexAttribute(0,3,6,0);
+	// X::GL::SetVertexAttribute(1,3,6,6);
+	//
+	//
+	// std::println(
+	// 	"VAO {}, VBO: {}, IBO: {}",
+	// 	glState.vao,
+	// 	glState.vbo,
+	// 	glState.ibo
+	// );
 
 	std::vector<float> vert2 = {
-		1.0f,  0.5f, 0.0f, 0.0f,1.0f,0.0f,
-		1.0f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
-		0.5f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
-		0.5f,  0.5f, 0.0f, 0.0f, 1.0f,0.0f
+		0.5f,  0.5f,  0.0f,  0.5f, 0.5f, 0.5f,
+		0.5f, -0.5f,  0.0f,  0.5f, 0.5f, 0.5f,
+		-0.5f, -0.5f, 0.0f,  0.5f, 0.5f, 0.5f,
+		-0.5f,  0.5f, 0.0f,  0.5f, 0.5f, 0.5f
 	};  
 
 	std::vector<unsigned int> ind2 = {
@@ -77,32 +77,54 @@ int main(int argc, char *argv[]) {
 		1,2,3
 	};
 
+	GLuint vao;
+	GLuint vbo;
+	GLuint ibo;
 
-	X::GL::GLState glState2;
+	glGenVertexArrays(1, &vao);
+	glGenBuffers(1, &vbo);
+	glGenBuffers(1, &ibo);
 
-	X::GL::GenerateVertexArray(&glState2);
-	X::GL::GenerateVertexBuffer(&glState2);
-	X::GL::GenerateIndexBuffer(&glState2);
+	glBindVertexArray(vao);
 
-	X::GL::SetBufferData(X::GL::ARRAY_BUFFER, glState2.vbo, vert2);
-	X::GL::SetBufferData(X::GL::ELEMENT_ARRAY_BUFFER, glState2.ibo, ind2);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(
+		GL_ARRAY_BUFFER,
+		sizeof(vert2.at(0)) * vert2.size(),
+		vert2.data(),
+		GL_STATIC_DRAW
+	);
 
-	X::GL::SetVertexAttribute(0,3,6,0);
-	X::GL::SetVertexAttribute(1,3,6,6);
-
-
-	std::println(
-		"VAO {}, VBO: {}, IBO: {}",
-		glState2.vao,
-		glState2.vbo,
-		glState2.ibo
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBufferData(
+		GL_ELEMENT_ARRAY_BUFFER,
+		sizeof(ind2.at(0)) * ind2.size(),
+		ind2.data(),
+		GL_STATIC_DRAW
 	);
 
 
-	std::vector<X::GL::GLState*> states;
-	states.push_back(&glState);
-	states.push_back(&glState2);
+	glVertexAttribPointer(
+		0, 
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		sizeof(float) * 6,
+		(void*)(sizeof(float) * 0)
+	);
+	glEnableVertexAttribArray(0);
 
+	glVertexAttribPointer(
+		1, 
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		sizeof(float) * 6,
+		(void*)(sizeof(float) * 3)
+	);
+	glEnableVertexAttribArray(1);
+
+	std::println("Vert Attrib Pointer Set");
 
 	// END OPENGL ----------------------------------------------------
 
@@ -136,14 +158,7 @@ int main(int argc, char *argv[]) {
 		c += 0.1;
 
 		renderer.Clear(0.7,0.7,0.7);
-
-		for(auto state : states)
-		{
-			X::GL::BindGLState( state );
-			default_shader.setUniformVec3(glm::vec3{sin(c),cos(c),1}, "col");
-			renderer.BasicDraw(default_shader);
-
-		}
+		renderer.BasicDraw(default_shader);
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
