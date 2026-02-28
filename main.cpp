@@ -1,6 +1,7 @@
 #include "X/App.h"
 #include "X/GL/GLState.h"
 #include "X/GL/Shader.h"
+#include "X/GL/RectMesh.h"
 #include "X/Gfx/Renderer.h"
 #include "X/Global.h"
 #include "X/Math/GLM.h"
@@ -29,102 +30,24 @@ int main(int argc, char *argv[]) {
 
 	X::Gfx::Renderer renderer;
 
-
-	// OPENGL --------------------------------------------------------
-
-	// std::vector<float> vertices = {
-	// 	0.5f,  0.5f, 0.0f, 1.0f,0.0f,0.0f,
-	// 	0.5f, -0.5f, 0.0f,0.0f,1.0f,0.0f,
-	// 	-0.5f, -0.5f, 0.0f,0.0f,0.0f,1.0f,
-	// 	-0.5f,  0.5f, 0.0f, 1.0f, 1.0f,1.0f
-	// };  
-	//
-	// std::vector<unsigned int> indices = {
-	// 	0,1,3,
-	// 	1,2,3
-	// };
-	//
-	//
-	// X::GL::GLState glState;
-	//
-	// X::GL::GenerateVertexArray(&glState);
-	// X::GL::GenerateVertexBuffer(&glState);
-	// X::GL::GenerateIndexBuffer(&glState);
-	//
-	// X::GL::SetBufferData(X::GL::ARRAY_BUFFER, glState.vbo, vertices);
-	// X::GL::SetBufferData(X::GL::ELEMENT_ARRAY_BUFFER, glState.ibo, indices);
-	//
-	// X::GL::SetVertexAttribute(0,3,6,0);
-	// X::GL::SetVertexAttribute(1,3,6,6);
-	//
-	//
-	// std::println(
-	// 	"VAO {}, VBO: {}, IBO: {}",
-	// 	glState.vao,
-	// 	glState.vbo,
-	// 	glState.ibo
-	// );
-
-	std::vector<float> vert2 = {
+	std::vector<float> vertices = {
 		0.5f,  0.5f,  0.0f,  0.5f, 0.5f, 0.5f,
 		0.5f, -0.5f,  0.0f,  0.5f, 0.5f, 0.5f,
 		-0.5f, -0.5f, 0.0f,  0.5f, 0.5f, 0.5f,
 		-0.5f,  0.5f, 0.0f,  0.5f, 0.5f, 0.5f
 	};  
 
-	std::vector<unsigned int> ind2 = {
+	std::vector<unsigned int> indices = {
 		0,1,3,
 		1,2,3
 	};
 
-	GLuint vao;
-	GLuint vbo;
-	GLuint ibo;
-
-	glGenVertexArrays(1, &vao);
-	glGenBuffers(1, &vbo);
-	glGenBuffers(1, &ibo);
-
-	glBindVertexArray(vao);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(
-		GL_ARRAY_BUFFER,
-		sizeof(vert2.at(0)) * vert2.size(),
-		vert2.data(),
-		GL_STATIC_DRAW
-	);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	glBufferData(
-		GL_ELEMENT_ARRAY_BUFFER,
-		sizeof(ind2.at(0)) * ind2.size(),
-		ind2.data(),
-		GL_STATIC_DRAW
-	);
-
-
-	glVertexAttribPointer(
-		0, 
-		3,
-		GL_FLOAT,
-		GL_FALSE,
-		sizeof(float) * 6,
-		(void*)(sizeof(float) * 0)
-	);
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(
-		1, 
-		3,
-		GL_FLOAT,
-		GL_FALSE,
-		sizeof(float) * 6,
-		(void*)(sizeof(float) * 3)
-	);
-	glEnableVertexAttribArray(1);
-
-	std::println("Vert Attrib Pointer Set");
+	X::GL::RectMesh rectMesh;
+	rectMesh.BindVertexArray();
+	rectMesh.SetArrayBufferData(vertices);
+	rectMesh.SetElementBufferData(indices);
+	rectMesh.SetAttribPointer(0,3,6,0);
+	rectMesh.SetAttribPointer(1,3,6,3);
 
 	// END OPENGL ----------------------------------------------------
 
