@@ -86,8 +86,6 @@ public:
 	}
 
 
-
-private:
 	std::vector<float> vertices;
 	std::vector<unsigned int> indices;
 	GLuint vao;
