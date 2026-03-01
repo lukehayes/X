@@ -1,7 +1,11 @@
+#ifndef X_MESH__QUADMESH_H
+#define X_MESH__QUADMESH_H
+
+
 #include "glad/glad.h"
 #include <vector>
 
-namespace X::GL
+namespace X::Mesh
 {
 class QuadMesh
 {
@@ -90,4 +94,7 @@ private:
 	GLuint vbo;
 	GLuint ibo;
 };
+
 }
+
+#endif // X_MESH__QUADMESH_H
