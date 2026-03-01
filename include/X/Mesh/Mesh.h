@@ -64,4 +64,36 @@ X::Mesh::QuadMesh LoadCubeMesh()
 
 
 }
+
+
+X::Mesh::QuadMesh LoadQuadMesh()
+{
+
+	std::vector<float> quadVertices = {
+		0.5f,  0.5f,  0.0f,  0.5f, 0.5f, 0.5f,
+		0.5f, -0.5f,  0.0f,  0.5f, 0.5f, 0.5f,
+		-0.5f, -0.5f, 0.0f,  0.5f, 0.5f, 0.5f,
+		-0.5f,  0.5f, 0.0f,  0.5f, 0.5f, 0.5f
+	};
+
+	std::vector<unsigned int> quadIndices = {
+		0,1,3,
+		1,2,3
+	};
+
+	X::Mesh::QuadMesh quadMesh { quadVertices, quadIndices };
+	quadMesh.BindVertexArray();
+	quadMesh.SetArrayBufferData(quadVertices);
+	quadMesh.SetElementBufferData(quadIndices);
+	quadMesh.SetAttribPointer(0,3,6,0);
+	quadMesh.SetAttribPointer(1,3,6,3);
+
+	return quadMesh;
+
+
+}
+
+
+
+
 }
