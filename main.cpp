@@ -1,7 +1,7 @@
 #include "X/App.h"
 #include "X/GL/GLState.h"
 #include "X/GL/Shader.h"
-#include "X/GL/RectMesh.h"
+#include "X/GL/QuadMesh.h"
 #include "X/Gfx/Renderer.h"
 #include "X/Global.h"
 #include "X/Math/GLM.h"
@@ -42,12 +42,12 @@ int main(int argc, char *argv[]) {
 		1,2,3
 	};
 
-	X::GL::RectMesh rectMesh;
-	rectMesh.BindVertexArray();
-	rectMesh.SetArrayBufferData(vertices);
-	rectMesh.SetElementBufferData(indices);
-	rectMesh.SetAttribPointer(0,3,6,0);
-	rectMesh.SetAttribPointer(1,3,6,3);
+	X::GL::QuadMesh quadMesh;
+	quadMesh.BindVertexArray();
+	quadMesh.SetArrayBufferData(vertices);
+	quadMesh.SetElementBufferData(indices);
+	quadMesh.SetAttribPointer(0,3,6,0);
+	quadMesh.SetAttribPointer(1,3,6,3);
 
 	// END OPENGL ----------------------------------------------------
 
