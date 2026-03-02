@@ -44,6 +44,7 @@ void
 Renderer::DrawCube3D(
 	X::Mesh::QuadMesh& mesh,
 	glm::vec3& position,
+	glm::vec3& color,
 	X::Camera::Camera3D camera,
 	X::GL::Shader& shader)
 {
@@ -64,6 +65,7 @@ Renderer::DrawCube3D(
 	shader.SetUniformMat4(camera.projection, "projection");
 	shader.SetUniformMat4(camera.view, "view");
 	shader.SetUniformMat4(model, "model");
+	shader.setUniformVec3(color, "u_color");
 
 	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 

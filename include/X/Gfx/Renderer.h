@@ -44,6 +44,7 @@ public:
 	void DrawCube3D(
 		X::Mesh::QuadMesh& mesh,
 		glm::vec3& position,
+		glm::vec3& color,
 		X::Camera::Camera3D camera,
 		X::GL::Shader& shader);
 
