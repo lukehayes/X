@@ -30,19 +30,20 @@ namespace X::GL
 
 	void GenerateVertexBuffer(GLState* glState, int count = 1)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, glState->vbo);
 		glGenBuffers(count, &glState->vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, glState->vbo);
 	}
 
 	void GenerateIndexBuffer(GLState* glState, int count = 1)
 	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, glState->ibo);
 		glGenBuffers(count, &glState->ibo);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, glState->ibo);
 	}
 
 	void BindGLState(GLState* state)
 	{
 		glBindVertexArray(state->vao);
+		glBindBuffer(GL_ARRAY_BUFFER, state->vbo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, state->ibo);
 	}
 
@@ -60,7 +61,19 @@ namespace X::GL
 
 	void SetVertexAttribute(int position, int size, int stride, int pointer )
 	{
+		std::println("position {}", position);
+		std::println("size {}", size);
+		std::println("stride {}", stride);
+		std::println("pointer {}", pointer);
+		std::println("---------------------------------");
+
 		glVertexAttribPointer(position,size,GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(sizeof(float) * pointer));
+		glEnableVertexAttribArray(position);
+	}
+
+	void SetIndexVertexAttribute(int position, int size, int stride, int pointer )
+	{
+		glVertexAttribPointer(position,size,GL_INT, GL_FALSE, stride * sizeof(int), (void*)(sizeof(int) * pointer));
 		glEnableVertexAttribArray(position);
 	}
 
