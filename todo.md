@@ -1,5 +1,6 @@
 ### Backlog
 
+- [ ] feat: add color to Draw* methods
 - [ ] feat: add instance drawing to Renderer
 - [ ] feat: add Orthographic camera
 - [ ] feat: add Perspective camera
