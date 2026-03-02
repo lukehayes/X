@@ -60,11 +60,9 @@ Renderer::DrawCube3D(
 	model = glm::translate(model, position);
 	model = glm::rotate(model, glm::radians(std::sin(c)), position);
 
-
-
-	shader.SetUniformMat4(camera.projection, "projection");
-	shader.SetUniformMat4(camera.view, "view");
-	shader.SetUniformMat4(model, "model");
+	shader.SetUniformMat4(camera.projection, "u_projection");
+	shader.SetUniformMat4(camera.view, "u_view");
+	shader.SetUniformMat4(model, "u_model");
 	shader.setUniformVec3(color, "u_color");
 
 	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
