@@ -1,11 +1,12 @@
 ### Backlog
 
+- [ ] feat: add instance drawing to Renderer
 - [ ] feat: add Orthographic camera
 - [ ] feat: add Perspective camera
 - [ ] refactor:  change glDrawArrays() count to indicies.size()
 - [ ] refactor:  remove <print>
 - [ ] feat:  add some form of error checking
-- [ ] feat:  add position to Renderer::BasicDraw()
+- [x] feat:  add position to Renderer::BasicDraw()
 - [ ] refactor:  attach shader instance to mesh/model
 - [x] refactor:  move GL helper functions into single location
 - [ ] fix:  make sure OpenGL memory is cleaned up
