@@ -1,5 +1,7 @@
 #include "X/Gfx/Renderer.h"
+#include "X/Camera/Camera3D.h"
 #include "X/GL/Shader.h"
+#include "X/Mesh/QuadMesh.h"
 #include "glad/glad.h"
 
 namespace X::Gfx
@@ -36,5 +38,37 @@ Renderer::DrawMesh(const X::Mesh::QuadMesh &mesh, X::GL::Shader& shader)
 	shader.use();
 	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 }
+
+
+void
+Renderer::DrawCube3D(
+	X::Mesh::QuadMesh& mesh,
+	glm::vec3& position,
+	X::Camera::Camera3D camera,
+	X::GL::Shader& shader)
+{
+
+	static float c = 0.0;
+	c+= 0.01f;
+	shader.use();
+
+	mesh.BindVertexArray();
+
+	glm::mat4 model = glm::mat4(1.0f);
+
+	model = glm::translate(model, position);
+	model = glm::rotate(model, glm::radians(std::sin(c)), position);
+
+
+
+	shader.SetUniformMat4(camera.projection, "projection");
+	shader.SetUniformMat4(camera.view, "view");
+	shader.SetUniformMat4(model, "model");
+
+	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+
+}
+
+
 
 }
