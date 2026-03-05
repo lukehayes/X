@@ -36,7 +36,6 @@ public:
    * Render an instance of a mesh.
    *
    * @param const X::Mesh::QuadMesh& mesh
-   *
    * @param X::GL::Shader& shader
    */
 	void DrawMesh(const X::Mesh::QuadMesh &mesh, X::GL::Shader &shader);
@@ -45,14 +44,15 @@ public:
 	/**
    * Stuff all vertex data onto te GPU and draw. VERY INEFFICIENT.
    *
-   * @param const X::Mesh::QuadMesh& mesh
-   *
+   * @param const glm::vec3& position
+   * @param const glm::vec3& color
+   * @param X::Camera::Camera3D& camera
    * @param X::GL::Shader& shader
    */
 	void DrawCube3DRaw(
 		const glm::vec3& position,
 		const glm::vec3& color,
-		X::Camera::Camera3D camera,
+		X::Camera::Camera3D& camera,
 		X::GL::Shader& shader);
 
 };

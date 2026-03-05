@@ -46,13 +46,13 @@ void
 Renderer::DrawCube3DRaw(
 	const glm::vec3& position,
 	const glm::vec3& color,
-	X::Camera::Camera3D camera,
+	X::Camera::Camera3D& camera,
 	X::GL::Shader& shader)
 {
 
 
 	static float c = 0.0;
-	c+= 0.5f;
+	c+= 0.05f;
 	shader.use();
 
 	X::Mesh::QuadMesh cubeMesh = X::Mesh::LoadCubeMesh();
@@ -62,7 +62,7 @@ Renderer::DrawCube3DRaw(
 	glm::mat4 model = glm::mat4(1.0f);
 
 	model = glm::translate(model, position);
-	model = glm::rotate(model, glm::radians(std::sin(c) * 10.0f), {1,1,1});
+
 
 	shader.SetUniformMat4(camera.projection, "u_projection");
 	shader.SetUniformMat4(camera.view, "u_view");
