@@ -43,9 +43,9 @@ Renderer::DrawMesh(const X::Mesh::QuadMesh &mesh, X::GL::Shader& shader)
 
 
 void
-Renderer::DrawCube3D(
-	glm::vec3& position,
-	glm::vec3& color,
+Renderer::DrawCube3DRaw(
+	const glm::vec3& position,
+	const glm::vec3& color,
 	X::Camera::Camera3D camera,
 	X::GL::Shader& shader)
 {

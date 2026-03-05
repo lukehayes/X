@@ -41,9 +41,17 @@ public:
    */
 	void DrawMesh(const X::Mesh::QuadMesh &mesh, X::GL::Shader &shader);
 
-	void DrawCube3D(
-		glm::vec3& position,
-		glm::vec3& color,
+
+	/**
+   * Stuff all vertex data onto te GPU and draw. VERY INEFFICIENT.
+   *
+   * @param const X::Mesh::QuadMesh& mesh
+   *
+   * @param X::GL::Shader& shader
+   */
+	void DrawCube3DRaw(
+		const glm::vec3& position,
+		const glm::vec3& color,
 		X::Camera::Camera3D camera,
 		X::GL::Shader& shader);
 
