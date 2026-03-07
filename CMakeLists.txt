@@ -46,6 +46,8 @@ add_executable(${BIN_NAME} main.cpp
 	"${X_SRC_DIR}/Gfx/Color.cpp"
     "${X_SRC_DIR}/Gfx/Renderer.cpp"
 
+	"${X_SRC_DIR}/Mesh/Mesh.cpp"
+
     ## X/Camera
     "${X_SRC_DIR}/Camera/Camera2D.cpp"
     "${X_SRC_DIR}/Camera/Camera3D.cpp"
