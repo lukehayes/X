@@ -1,5 +1,7 @@
 ### Backlog
 
+- [ ] feat: add Begin/End Drawing or Render Method
+- [ ] feat: add Transform class
 - [ ] feat: add color to Draw* methods
 - [ ] feat: add instance drawing to Renderer
 - [ ] feat: add Orthographic camera
