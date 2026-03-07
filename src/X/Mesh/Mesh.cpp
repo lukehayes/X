@@ -3,7 +3,12 @@
 
 namespace X::Mesh
 {
-X::Mesh::QuadMesh LoadCubeMesh()
+
+Mesh::Mesh(const std::vector<float> vertices, const std::vector<unsigned int> indices) 
+	: vertices(vertices), indices(indices) 
+{}
+
+X::Mesh::Mesh LoadCubeMesh()
 {
 	std::vector<float> cubeVertices =
 		{
@@ -55,13 +60,14 @@ X::Mesh::QuadMesh LoadCubeMesh()
 	cubeMesh.SetAttribPointer(0,3,6,0);
 	cubeMesh.SetAttribPointer(1,3,6,3);
 
-	return cubeMesh;
+	X::Mesh::CubeMesh mesh{ cubeVertices, cubeIndices };
+	mesh.vertex_array = cubeMesh.vao;
 
-
+	return mesh;
 }
 
 
-X::Mesh::QuadMesh LoadQuadMesh()
+X::Mesh::Mesh LoadQuadMesh()
 {
 
 	std::vector<float> quadVertices = {
@@ -83,7 +89,10 @@ X::Mesh::QuadMesh LoadQuadMesh()
 	quadMesh.SetAttribPointer(0,3,6,0);
 	quadMesh.SetAttribPointer(1,3,6,3);
 
-	return quadMesh;
+	X::Mesh::Mesh mesh{ quadVertices, quadIndices };
+	mesh.vertex_array = quadMesh.vao;
+
+	return mesh;
 
 
 }

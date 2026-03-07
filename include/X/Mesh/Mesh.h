@@ -7,9 +7,39 @@
 namespace X::Mesh
 {
 
-	X::Mesh::QuadMesh LoadCubeMesh();
+class Mesh
+{
+public:
+	Mesh(
+		const std::vector<float> vertices,
+		const std::vector<unsigned int> indices
+	);
 
-	X::Mesh::QuadMesh LoadQuadMesh();
+	virtual void Bind() {}
+
+	int GetVertexCount() const { return this->vertices.size(); }
+	int GetIndexCount() const { return this->indices.size(); }
+
+private:
+	std::vector<float> vertices;
+	std::vector<unsigned int> indices;
+};
+
+
+class CubeMesh : public Mesh
+{
+public:
+	CubeMesh(
+		const std::vector<float> vertices,
+		const std::vector<unsigned int> indices
+	) : Mesh(vertices, indices) {}
+
+	GLuint vertex_array;
+};
+
+
+X::Mesh::Mesh LoadCubeMesh();
+X::Mesh::Mesh LoadQuadMesh();
 
 }
 

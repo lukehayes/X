@@ -3,7 +3,7 @@
 
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
-#include "X/Mesh/QuadMesh.h"
+#include "X/Mesh/Mesh.h"
 #include "X/Camera/Camera3D.h"
 
 namespace X::Gfx {
@@ -31,7 +31,7 @@ public:
    * @param X::GL::Shader& shader
    */
 	void DrawMesh3D(
-		X::Mesh::QuadMesh &mesh,
+		X::Mesh::Mesh &mesh,
 		const glm::vec3& position,
 		const glm::vec3& color,
 		X::Camera::Camera3D& camera,

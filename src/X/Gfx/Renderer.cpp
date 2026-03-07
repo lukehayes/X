@@ -5,6 +5,8 @@
 #include "X/Mesh/Mesh.h"
 #include "glad/glad.h"
 
+#include <print>
+
 
 namespace X::Gfx
 {
@@ -24,7 +26,7 @@ Renderer::WireFrame()
 
 void
 Renderer::DrawMesh3D(
-		X::Mesh::QuadMesh &mesh,
+		X::Mesh::Mesh &mesh,
 		const glm::vec3& position,
 		const glm::vec3& color,
 		X::Camera::Camera3D& camera,
@@ -32,17 +34,24 @@ Renderer::DrawMesh3D(
 {
 	shader.use();
 
-	mesh.BindVertexArray();
+	mesh.Bind();
+
+	static float c = 0.0;
+	c+=0.1;
+
+	std::println("{}",mesh.GetVertexCount());
+
 
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, position);
+	model = glm::rotate(model, glm::radians(std::sin(c) * 100.0f), {1,1,1});
 
 	shader.SetUniformMat4(camera.projection, "u_projection");
-	shader.SetUniformMat4(camera.view, "u_view");
-	shader.SetUniformMat4(model, "u_model");
-	shader.setUniformVec3(color, "u_color");
+	shader.SetUniformMat4(camera.view,       "u_view");
+	shader.SetUniformMat4(model,             "u_model");
+	shader.setUniformVec3(color,             "u_color");
 
-	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, mesh.GetIndexCount(), GL_UNSIGNED_INT, 0);
 }
 
 
@@ -59,24 +68,24 @@ Renderer::DrawCube3DRaw(
 	c+= 0.05f;
 	shader.use();
 
-	X::Mesh::QuadMesh cubeMesh = X::Mesh::LoadCubeMesh();
-
-
-	cubeMesh.BindVertexArray();
-
-	glm::mat4 model = glm::mat4(1.0f);
-
-	model = glm::translate(model, position);
-	model = glm::rotate(model, glm::radians(std::sin(c) * 100.0f), {1,1,1});
-	model = glm::scale(model, {2,2,2});
-
-
-	shader.SetUniformMat4(camera.projection, "u_projection");
-	shader.SetUniformMat4(camera.view, "u_view");
-	shader.SetUniformMat4(model, "u_model");
-	shader.setUniformVec3(color, "u_color");
-
-	glDrawElements(GL_TRIANGLES, cubeMesh.indices.size(), GL_UNSIGNED_INT, 0);
+	// X::Mesh::QuadMesh cubeMesh = X::Mesh::LoadCubeMesh();
+	//
+	//
+	// cubeMesh.BindVertexArray();
+	//
+	// glm::mat4 model = glm::mat4(1.0f);
+	//
+	// model = glm::translate(model, position);
+	// model = glm::rotate(model, glm::radians(std::sin(c) * 100.0f), {1,1,1});
+	// model = glm::scale(model, {2,2,2});
+	//
+	//
+	// shader.SetUniformMat4(camera.projection, "u_projection");
+	// shader.SetUniformMat4(camera.view, "u_view");
+	// shader.SetUniformMat4(model, "u_model");
+	// shader.setUniformVec3(color, "u_color");
+	//
+	// glDrawElements(GL_TRIANGLES, cubeMesh.indices.size(), GL_UNSIGNED_INT, 0);
 
 }
 
