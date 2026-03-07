@@ -1,5 +1,5 @@
-#ifndef X_MESH__QUADMESH_H
-#define X_MESH__QUADMESH_H
+#ifndef X_MESH_QUADMESH_H
+#define X_MESH_QUADMESH_H
 
 
 #include "glad/glad.h"
