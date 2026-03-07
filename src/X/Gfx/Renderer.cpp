@@ -22,22 +22,26 @@ Renderer::WireFrame()
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 }
 
-
-
 void
-Renderer::BasicDraw(X::GL::Shader& shader)
-{
-	float cv = 0.70;
-
-	shader.use();
-
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-}
-
-void
-Renderer::DrawMesh(const X::Mesh::QuadMesh &mesh, X::GL::Shader& shader)
+Renderer::DrawMesh3D(
+		X::Mesh::QuadMesh &mesh,
+		const glm::vec3& position,
+		const glm::vec3& color,
+		X::Camera::Camera3D& camera,
+		X::GL::Shader &shader)
 {
 	shader.use();
+
+	mesh.BindVertexArray();
+
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, position);
+
+	shader.SetUniformMat4(camera.projection, "u_projection");
+	shader.SetUniformMat4(camera.view, "u_view");
+	shader.SetUniformMat4(model, "u_model");
+	shader.setUniformVec3(color, "u_color");
+
 	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 }
 
@@ -57,11 +61,14 @@ Renderer::DrawCube3DRaw(
 
 	X::Mesh::QuadMesh cubeMesh = X::Mesh::LoadCubeMesh();
 
+
 	cubeMesh.BindVertexArray();
 
 	glm::mat4 model = glm::mat4(1.0f);
 
 	model = glm::translate(model, position);
+	model = glm::rotate(model, glm::radians(std::sin(c) * 100.0f), {1,1,1});
+	model = glm::scale(model, {2,2,2});
 
 
 	shader.SetUniformMat4(camera.projection, "u_projection");

@@ -4,7 +4,6 @@
 #include "X/GL/Shader.h"
 #include "X/Math/GLM.h"
 #include "X/Mesh/QuadMesh.h"
-#include "X/Camera/Camera.h"
 #include "X/Camera/Camera3D.h"
 
 namespace X::Gfx {
@@ -26,19 +25,17 @@ public:
 	void WireFrame();
 
 	/**
-   * Push everything to the screen - for debugging.
-   *
-   * @param X::GL::Shader& shader
-   */
-	void BasicDraw(X::GL::Shader &shader);
-
-	/**
    * Render an instance of a mesh.
    *
    * @param const X::Mesh::QuadMesh& mesh
    * @param X::GL::Shader& shader
    */
-	void DrawMesh(const X::Mesh::QuadMesh &mesh, X::GL::Shader &shader);
+	void DrawMesh3D(
+		X::Mesh::QuadMesh &mesh,
+		const glm::vec3& position,
+		const glm::vec3& color,
+		X::Camera::Camera3D& camera,
+		X::GL::Shader &shader);
 
 
 	/**
