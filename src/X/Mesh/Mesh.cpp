@@ -1,4 +1,5 @@
 #include "X/Mesh/Mesh.h"
+#include "X/Mesh/QuadMesh.h"
 
 
 namespace X::Mesh
