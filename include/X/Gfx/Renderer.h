@@ -33,8 +33,7 @@ public:
 	void DrawMesh3D(
 		X::Mesh::Mesh &mesh,
 		const glm::vec3& position,
-		const glm::vec3& color,
-		X::GL::Shader &shader);
+		const glm::vec3& color);
 
 
 	/**

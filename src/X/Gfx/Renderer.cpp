@@ -24,10 +24,9 @@ void
 Renderer::DrawMesh3D(
 		X::Mesh::Mesh &mesh,
 		const glm::vec3& position,
-		const glm::vec3& color,
-		X::GL::Shader &shader)
+		const glm::vec3& color)
 {
-	shader.use();
+	this->camera3D.shader.use();
 
 	mesh.Bind();
 
@@ -38,10 +37,10 @@ Renderer::DrawMesh3D(
 	model = glm::translate(model, position);
 	model = glm::rotate(model, glm::radians(std::sin(c) * 100.0f), {1,1,1});
 
-	shader.SetUniformMat4(this->camera3D.projection, "u_projection");
-	shader.SetUniformMat4(this->camera3D.view,       "u_view");
-	shader.SetUniformMat4(model,             "u_model");
-	shader.setUniformVec3(color,             "u_color");
+	this->camera3D.shader.SetUniformMat4(this->camera3D.projection, "u_projection");
+	this->camera3D.shader.SetUniformMat4(this->camera3D.view,       "u_view");
+	this->camera3D.shader.SetUniformMat4(model,             "u_model");
+	this->camera3D.shader.setUniformVec3(color,             "u_color");
 
 	glDrawElements(GL_TRIANGLES, mesh.GetIndexCount(), GL_UNSIGNED_INT, 0);
 }

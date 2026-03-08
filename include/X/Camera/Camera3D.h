@@ -3,6 +3,7 @@
 #define X_CAMERA3D_H
 
 #include "X/Math/GLM.h"
+#include "X/GL/Shader.h"
 #include "X/Transform.h"
 
 namespace X::Camera
@@ -20,6 +21,10 @@ public:
 	glm::vec3 up;
 	glm::mat4 projection;
 	glm::mat4 view;
+
+	X::GL::Shader shader {
+		"../assets/shaders/VSH-Camera3D.glsl",
+		"../assets/shaders/FSH-Camera3D.glsl"};
 };
 }
 
