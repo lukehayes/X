@@ -1,12 +1,8 @@
 #include "X/Gfx/Renderer.h"
 #include "X/Camera/Camera3D.h"
 #include "X/GL/Shader.h"
-#include "X/Mesh/QuadMesh.h"
 #include "X/Mesh/Mesh.h"
 #include "glad/glad.h"
-
-#include <print>
-
 
 namespace X::Gfx
 {
@@ -37,10 +33,7 @@ Renderer::DrawMesh3D(
 	mesh.Bind();
 
 	static float c = 0.0;
-	c+=0.1;
-
-	std::println("{}",mesh.GetVertexCount());
-
+	c += 0.01;
 
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, position);
