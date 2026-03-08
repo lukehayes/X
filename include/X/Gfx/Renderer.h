@@ -28,12 +28,10 @@ public:
    * Render an instance of a mesh.
    *
    * @param const X::Mesh::QuadMesh& mesh
-   * @param X::GL::Shader& shader
+   * @param const glm::vec3& position
+   * @paramconst glm::vec3& color,
    */
-	void DrawMesh3D(
-		X::Mesh::Mesh &mesh,
-		const glm::vec3& position,
-		const glm::vec3& color);
+	void DrawMesh3D(X::Mesh::Mesh &mesh, const glm::vec3& position, const glm::vec3& color);
 
 
 	/**
@@ -44,11 +42,7 @@ public:
    * @param X::Camera::Camera3D& camera
    * @param X::GL::Shader& shader
    */
-	void DrawCube3DRaw(
-		const glm::vec3& position,
-		const glm::vec3& color,
-		X::Camera::Camera3D& camera,
-		X::GL::Shader& shader);
+	void DrawCube3DRaw(const glm::vec3& position, const glm::vec3& color, X::Camera::Camera3D& camera,X::GL::Shader& shader);
 
 	X::Camera::Camera3D camera3D;
 
