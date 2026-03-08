@@ -1,20 +1,21 @@
 #ifndef X_GFX_COLOR_H
 #define X_GFX_COLOR_H
 
+#include "X/Types.h"
 
 namespace X::Gfx
 {
 
-struct Color
+struct Color : public Vec3
 {
     Color();
-    Color(float r, float g, float b);
-    Color(float r, float g, float b, float a);
+    Color(f32 r, f32 g, f32 b);
+    Color(f32 r, f32 g, f32 b, f32 a);
 
-    float r;
-    float g;
-    float b;
-    float a;
+    f32 r;
+    f32 g;
+    f32 b;
+    f32 a;
 };
 
 }
