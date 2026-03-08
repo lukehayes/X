@@ -21,6 +21,13 @@ Renderer::WireFrame()
 }
 
 void
+Renderer::DrawModel3D(X::Model::Model& model, const glm::vec3& color)
+{
+	this->DrawMesh3D(model.mesh, model.transform.position, color);
+}
+
+
+void
 Renderer::DrawMesh3D(
 		X::Mesh::Mesh &mesh,
 		const glm::vec3& position,
