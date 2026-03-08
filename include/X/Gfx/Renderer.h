@@ -34,7 +34,6 @@ public:
 		X::Mesh::Mesh &mesh,
 		const glm::vec3& position,
 		const glm::vec3& color,
-		X::Camera::Camera3D& camera,
 		X::GL::Shader &shader);
 
 
@@ -51,6 +50,8 @@ public:
 		const glm::vec3& color,
 		X::Camera::Camera3D& camera,
 		X::GL::Shader& shader);
+
+	X::Camera::Camera3D camera3D;
 
 };
 
