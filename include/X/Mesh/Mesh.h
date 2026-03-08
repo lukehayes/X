@@ -2,7 +2,7 @@
 #define X_MESH_MESH_H
 
 #include <vector>
-#include "X/Mesh/QuadMesh.h"
+#include "glad/glad.h"
 
 namespace X::Mesh
 {
@@ -15,10 +15,14 @@ public:
 		const std::vector<unsigned int> indices
 	);
 
-	virtual void Bind() {}
+	virtual void Bind() {
+		glBindVertexArray(this->vertex_array);
+	}
 
 	int GetVertexCount() const { return this->vertices.size(); }
 	int GetIndexCount() const { return this->indices.size(); }
+
+	GLuint vertex_array;
 
 private:
 	std::vector<float> vertices;
@@ -33,8 +37,15 @@ public:
 		const std::vector<float> vertices,
 		const std::vector<unsigned int> indices
 	) : Mesh(vertices, indices) {}
+};
 
-	GLuint vertex_array;
+class PlaneMesh : public Mesh
+{
+public:
+	PlaneMesh(
+		const std::vector<float> vertices,
+		const std::vector<unsigned int> indices
+	) : Mesh(vertices, indices) {}
 };
 
 

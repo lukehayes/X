@@ -89,7 +89,7 @@ X::Mesh::Mesh LoadQuadMesh()
 	quadMesh.SetAttribPointer(0,3,6,0);
 	quadMesh.SetAttribPointer(1,3,6,3);
 
-	X::Mesh::Mesh mesh{ quadVertices, quadIndices };
+	X::Mesh::PlaneMesh mesh { quadVertices, quadIndices };
 	mesh.vertex_array = quadMesh.vao;
 
 	return mesh;
