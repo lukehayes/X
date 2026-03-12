@@ -31,7 +31,7 @@ public:
      *
      * @param const X::Model::Model& model
     */
-	void DrawModel3D(X::Model::Model& model, const glm::vec3& color);
+	void DrawModel3D(X::Model::Model& model);
 
 
     /**

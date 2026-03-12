@@ -21,9 +21,9 @@ Renderer::WireFrame()
 }
 
 void
-Renderer::DrawModel3D(X::Model::Model& model, const glm::vec3& color)
+Renderer::DrawModel3D(X::Model::Model& model)
 {
-	this->DrawMesh3D(model.mesh, model.transform.position, color);
+	this->DrawMesh3D(model.mesh, model.transform.position, model.color);
 }
 
 
