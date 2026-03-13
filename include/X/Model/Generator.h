@@ -1,0 +1,46 @@
+#ifndef X_MODEL_GENERATOR_H
+#define X_MODEL_GENERATOR_H
+
+#include <vector>
+#include "X/Model/Model.h"
+#include "X/Math/Random.h"
+
+namespace X::Model
+{
+	std::vector<X::Model::Model> GenerateModels(int count, int scatter)
+	{
+		std::vector<X::Model::Model> models;
+
+		for(int i = 0; i <= count; i++)
+		{
+			X::Model::Model model;
+
+			double rx = X::Math::Random::RandDouble(-scatter, scatter);
+			double ry = X::Math::Random::RandDouble(-scatter, scatter);
+			double rz = X::Math::Random::RandDouble(-scatter, scatter);
+
+			double rr = X::Math::Random::RandDouble(0,1);
+			double rg = X::Math::Random::RandDouble(0,1);
+			double rb = X::Math::Random::RandDouble(0,1);
+			double ra = X::Math::Random::RandDouble(1,1);
+
+			model.transform.position.x = rx;
+			model.transform.position.y = ry;
+			model.transform.position.z = rz;
+
+			model.color.r = rr;
+			model.color.g = rg;
+			model.color.b = rb;
+			model.color.a = ra;
+
+
+
+			models.push_back(model);
+		}
+
+		return models;
+	}
+}
+
+
+#endif // X_MODEL_GENERATOR_H
