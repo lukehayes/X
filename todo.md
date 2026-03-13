@@ -1,5 +1,11 @@
 ### Backlog
 
+- [x] feat:  add position to Renderer::BasicDraw()
+- [x] refactor:  move GL helper functions into single location
+- [x] feat:  add simple scene implementation
+- [x] feat: add Random class
+- [x] feat: add Model class
+
 - [ ] feat: add Begin/End Drawing or Render Method
 - [ ] feat: add Transform class
 - [ ] feat: add color to Draw* methods
@@ -9,11 +15,8 @@
 - [ ] refactor:  change glDrawArrays() count to indicies.size()
 - [ ] refactor:  remove <print>
 - [ ] feat:  add some form of error checking
-- [x] feat:  add position to Renderer::BasicDraw()
 - [ ] refactor:  attach shader instance to mesh/model
-- [x] refactor:  move GL helper functions into single location
 - [ ] fix:  make sure OpenGL memory is cleaned up
-- [x] feat:  add simple scene implementation
 - [ ] refactor:  Tidy up unused includes
 - [ ] refactor:   Move engine/app code into Engine class
 - [ ] feat:  implement screen resizing
@@ -28,11 +31,9 @@
 - [ ] feat: add hashmap for vertex arrays
 - [ ] feat: create VAO abstraction
 - [ ] feat: add textures
-- [x] feat: add Random class
 - [ ] feat: implement delta time
 - [ ] feat: add simple logging for debug mode
 - [ ] refactor: tidy up main entry point
-- [ ] feat: add Model class
 - [ ] feat: add FPS style movement
 - [ ] refactor: move matrix calcs into Camera class
 - [ ] refactor: make better random functions
