@@ -19,6 +19,10 @@ namespace X::Model
 			double ry = X::Math::Random::RandDouble(-scatter, scatter);
 			double rz = X::Math::Random::RandDouble(-scatter, scatter);
 
+			double rot_x = X::Math::Random::RandDouble(0, 360);
+			double rot_y = X::Math::Random::RandDouble(0, 360);
+			double rot_z = X::Math::Random::RandDouble(0, 360);
+
 			double rr = X::Math::Random::RandDouble(0,1);
 			double rg = X::Math::Random::RandDouble(0,1);
 			double rb = X::Math::Random::RandDouble(0,1);
@@ -27,6 +31,10 @@ namespace X::Model
 			model.transform.position.x = rx;
 			model.transform.position.y = ry;
 			model.transform.position.z = rz;
+
+			model.transform.rotation.x = rot_x;
+			model.transform.rotation.y = rot_y;
+			model.transform.rotation.z = rot_z;
 
 			model.color.r = rr;
 			model.color.g = rg;
