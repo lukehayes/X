@@ -6,6 +6,9 @@
 - [x] feat: add Random class
 - [x] feat: add Model class
 
+- [ ] feat: add Entity generation helper
+- [ ] feat: implement delta time
+
 - [ ] feat: add Begin/End Drawing or Render Method
 - [ ] feat: add Transform class
 - [ ] feat: add color to Draw* methods
@@ -31,11 +34,10 @@
 - [ ] feat: add hashmap for vertex arrays
 - [ ] feat: create VAO abstraction
 - [ ] feat: add textures
-- [ ] feat: implement delta time
 - [ ] feat: add simple logging for debug mode
 - [ ] refactor: tidy up main entry point
 - [ ] feat: add FPS style movement
-- [ ] refactor: move matrix calcs into Camera class
+- [x] refactor: move matrix calcs into Camera class
 - [ ] refactor: make better random functions
 - [ ] feat: create Entity class
 - [ ] feat: implement index buffer - gl_element_array
