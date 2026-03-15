@@ -1,6 +1,8 @@
 #include "X/App.h"
+#include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
-#include "X/Mesh/Mesh.h"
+#include "X/Model/Model.h"
+#include "X/Model/Generator.h"
 
 constexpr int WIN_MULT   = 4;
 constexpr int WIN_WIDTH  = 320 * WIN_MULT;
@@ -14,14 +16,17 @@ int main(int argc, char *argv[]) {
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-
+	X::Camera::Camera3D camera3D;
 	X::Gfx::Renderer renderer;
 
-	X::Mesh::Mesh planeMesh = X::Mesh::LoadQuadMesh();
-	X::Mesh::Mesh cubeMesh = X::Mesh::LoadCubeMesh();
+	X::Model::Model cubeModel;
+	cubeModel.color.r = 0;
+	cubeModel.color.g = 1;
+	cubeModel.color.b = 0.5;
+
+	std::vector<X::Model::Model> models = X::Model::GenerateModels(10,10);
 
 	// END OPENGL ----------------------------------------------------
-
 
 	float deltaTime = 0;
 	Uint64 NOW = SDL_GetPerformanceCounter();
@@ -46,21 +51,14 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		renderer.Clear(0.2, 0.2, 0.2);
+		camera3D.update(33.0);
+		static float c = 0.0;
+		c+=1;
+
+		renderer.Clear(0.1,0.1,0.1);
 		// renderer.WireFrame();
 
-		// renderer.DrawMesh3D(
-		// 	cubeMesh,
-		// 	transform,
-		// 	{0.65,0.65,0.65}
-		// );
-
-		// renderer.DrawCube3DRaw(
-		// 	{0,0,0},
-		// 	{1,1,1},
-		// 	camera,
-		// 	default_shader
-		// );
+		renderer.DrawModel3D(cubeModel);
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
