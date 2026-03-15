@@ -29,14 +29,21 @@ Renderer::DrawModel3D(X::Model::Model& model)
 
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	modelMat = glm::translate(modelMat, model.transform.position);
+
 	modelMat = glm::rotate(modelMat, glm::radians(model.transform.rotation.x), {1,0,0});
 	modelMat = glm::rotate(modelMat, glm::radians(model.transform.rotation.y), {0,1,0});
 	modelMat = glm::rotate(modelMat, glm::radians(model.transform.rotation.z), {0,0,1});
 
+	modelMat = glm::scale(modelMat, {
+		model.transform.scale.x,
+		model.transform.scale.y,
+		model.transform.scale.z
+	});
+
 	this->camera3D.shader.SetUniformMat4(this->camera3D.projection, "u_projection");
 	this->camera3D.shader.SetUniformMat4(this->camera3D.view,       "u_view");
-	this->camera3D.shader.SetUniformMat4(modelMat,             "u_model");
-	this->camera3D.shader.setUniformVec3(model.color,             "u_color");
+	this->camera3D.shader.SetUniformMat4(modelMat,                  "u_model");
+	this->camera3D.shader.setUniformVec3(model.color,               "u_color");
 
 	glDrawElements(GL_TRIANGLES, model.mesh.GetIndexCount(), GL_UNSIGNED_INT, 0);
 }
