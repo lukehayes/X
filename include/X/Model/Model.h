@@ -10,12 +10,6 @@ namespace X::Model
 	{
 	public:
 
-		Model()
-			: mesh(X::Mesh::LoadCubeMesh()),
-			  color(1,0,1,1),
-			  transform()
-		{}
-
 		Model(const X::Mesh::Mesh& mesh, const glm::vec4& color)
 			: mesh(mesh),
 			  color(color),
