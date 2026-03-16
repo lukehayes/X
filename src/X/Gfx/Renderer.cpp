@@ -23,11 +23,12 @@ Renderer::WireFrame()
 void
 Renderer::DrawModel3D(X::Model::Model& model)
 {
-	this->camera3D.shader.use();
-
 	model.mesh.Bind();
 
+	// ------------------------------------------------------------------------
+	// MATRIX TRANSLATE, ROTATE, SCALE
 	glm::mat4 modelMat = glm::mat4(1.0f);
+
 	modelMat = glm::translate(modelMat, model.transform.position);
 
 	modelMat = glm::rotate(modelMat, glm::radians(model.transform.rotation.x), {1,0,0});
@@ -40,11 +41,16 @@ Renderer::DrawModel3D(X::Model::Model& model)
 		model.transform.scale.z
 	});
 
+	// ------------------------------------------------------------------------
+	// SHADER UNIFORMS
+	this->camera3D.shader.use();
 	this->camera3D.shader.SetUniformMat4(this->camera3D.projection, "u_projection");
 	this->camera3D.shader.SetUniformMat4(this->camera3D.view,       "u_view");
 	this->camera3D.shader.SetUniformMat4(modelMat,                  "u_model");
 	this->camera3D.shader.setUniformVec3(model.color,               "u_color");
 
+	// ------------------------------------------------------------------------
+	// DRAWING
 	glDrawElements(GL_TRIANGLES, model.mesh.GetIndexCount(), GL_UNSIGNED_INT, 0);
 }
 
