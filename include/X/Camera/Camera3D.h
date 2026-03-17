@@ -14,7 +14,7 @@ public:
 	Camera3D();
 	~Camera3D();
 
-	virtual void update(double dt);
+	virtual void Update(double dt);
 
 	void Spin();
 
