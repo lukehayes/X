@@ -30,25 +30,6 @@ private:
 };
 
 
-class CubeMesh : public Mesh
-{
-public:
-	CubeMesh(
-		const std::vector<float> vertices,
-		const std::vector<unsigned int> indices
-	) : Mesh(vertices, indices) {}
-};
-
-class PlaneMesh : public Mesh
-{
-public:
-	PlaneMesh(
-		const std::vector<float> vertices,
-		const std::vector<unsigned int> indices
-	) : Mesh(vertices, indices) {}
-};
-
-
 X::Mesh::Mesh LoadCubeMesh();
 X::Mesh::Mesh LoadQuadMesh();
 

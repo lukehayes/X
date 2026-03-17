@@ -61,7 +61,7 @@ X::Mesh::Mesh LoadCubeMesh()
 	cubeMesh.SetAttribPointer(0,3,6,0);
 	cubeMesh.SetAttribPointer(1,3,6,3);
 
-	X::Mesh::CubeMesh mesh{ cubeVertices, cubeIndices };
+	X::Mesh::Mesh mesh{ cubeVertices, cubeIndices };
 	mesh.vertex_array = cubeMesh.vao;
 
 	return mesh;
@@ -90,7 +90,7 @@ X::Mesh::Mesh LoadQuadMesh()
 	quadMesh.SetAttribPointer(0,3,6,0);
 	quadMesh.SetAttribPointer(1,3,6,3);
 
-	X::Mesh::PlaneMesh mesh { quadVertices, quadIndices };
+	X::Mesh::Mesh mesh { quadVertices, quadIndices };
 	mesh.vertex_array = quadMesh.vao;
 
 	return mesh;
