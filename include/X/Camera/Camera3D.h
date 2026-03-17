@@ -16,6 +16,8 @@ public:
 
 	virtual void update(double dt);
 
+	void Spin();
+
 	X::Transform transform;
 	glm::vec3 eye;
 	glm::vec3 up;

@@ -25,9 +25,9 @@ Camera3D::Camera3D()
 
 Camera3D::~Camera3D() {}
 
-void Camera3D::update(double dt)
+void
+Camera3D::Spin()
 {
-
     static float c = 0.0;
     c += 0.01;
     int mult = 10.0f;
@@ -41,6 +41,11 @@ void Camera3D::update(double dt)
         this->eye,
         this->up
     );
+}
+
+void Camera3D::update(double dt)
+{
+
 
 }
 }
