@@ -6,6 +6,7 @@
 - [x] feat: add Random class
 - [x] feat: add Model class
 
+- [ ] fix:  make sure OpenGL memory is cleaned up
 - [ ] feat: add Entity generation helper
 - [ ] feat: implement delta time
 
@@ -19,7 +20,6 @@
 - [ ] refactor:  remove <print>
 - [ ] feat:  add some form of error checking
 - [ ] refactor:  attach shader instance to mesh/model
-- [ ] fix:  make sure OpenGL memory is cleaned up
 - [ ] refactor:  Tidy up unused includes
 - [ ] refactor:   Move engine/app code into Engine class
 - [ ] feat:  implement screen resizing
