@@ -2,7 +2,6 @@
 #define X_SCENE_DEBUG_SCENE_H
 
 #include "X/Scene/Scene.h"
-#include <print>
 
 namespace X::Scene
 {
@@ -17,7 +16,6 @@ namespace X::Scene
 		virtual void Render(float r = 0, float g = 0, float b = 0)
 		{
 			renderer.Clear(r,g,b);
-			// renderer.WireFrame();
 
 			X::Model::CubeModel model1 { {0,0,1,1} };
 			X::Model::CubeModel model2 { {0,1,0,1} };
