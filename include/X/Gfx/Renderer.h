@@ -24,7 +24,12 @@ public:
     /**
      * Enable wireframe mode.
     */
-	void WireFrame();
+	void WireFrameOn();
+
+    /**
+     * Disable wireframe mode.
+    */
+	void WireFrameOff();
 
     /**
 	 * Render an instance of a model.

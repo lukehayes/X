@@ -15,9 +15,15 @@ Renderer::Clear(float r, float g, float b)
 }
 
 void
-Renderer::WireFrame()
+Renderer::WireFrameOn()
 {
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+}
+
+void
+Renderer::WireFrameOff()
+{
+	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
 
 void
