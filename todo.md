@@ -9,6 +9,7 @@
 - [ ] fix:  make sure OpenGL memory is cleaned up
 - [ ] feat: add Entity generation helper
 - [ ] feat: implement delta time
+- [ ] feat: add preprocessor macros for DEBUG etc
 
 - [ ] feat: add Begin/End Drawing or Render Method
 - [ ] feat: add Transform class
