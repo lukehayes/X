@@ -66,10 +66,9 @@ std::vector<X::Model::Model> GeneratePlaneModels(int count, int scatter) {
 
     X::Model::PlaneModel model{{rr, rg, rb, ra}};
 
-    model.transform.position.x = std::cos(i) * 20.0;
-    model.transform.position.y = std::sin(i) * 20.0;
-    model.transform.position.z = std::sin(i) * 20.0;
-
+    model.transform.position.x = rx;
+    model.transform.position.y = ry;
+    model.transform.position.z = rz;
 
     model.transform.rotation.x = rot_x;
     model.transform.rotation.y = rot_y;
