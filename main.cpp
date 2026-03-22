@@ -3,6 +3,7 @@
 #include "X/Gfx/Renderer.h"
 #include "X/Model/Model.h"
 #include "X/Model/Generator.h"
+#include "X/Scene/DebugScene.h"
 
 constexpr int WIN_MULT   = 4;
 constexpr int WIN_WIDTH  = 320 * WIN_MULT;
@@ -19,14 +20,14 @@ int main(int argc, char *argv[]) {
 	X::Camera::Camera3D camera3D;
 	X::Gfx::Renderer renderer;
 
-	X::Model::Model cubeModel;
-	cubeModel.color.r = 0;
-	cubeModel.color.g = 1;
-	cubeModel.color.b = 0.5;
-
-	std::vector<X::Model::Model> models = X::Model::GenerateModels(10,10);
+	std::vector<X::Model::Model> planes = X::Model::GeneratePlaneModels(100,10);
 
 	// END OPENGL ----------------------------------------------------
+
+
+	X::Scene::DebugScene scene;
+	bool canSpin = false;
+	bool wireframe = false;
 
 	float deltaTime = 0;
 	Uint64 NOW = SDL_GetPerformanceCounter();
@@ -47,18 +48,43 @@ int main(int argc, char *argv[]) {
 
 			if (event.type == SDL_EVENT_KEY_DOWN) {
 				if (event.key.key == SDLK_SPACE) {
+					canSpin = !canSpin;
+				}
+			}
+
+			if (event.type == SDL_EVENT_KEY_DOWN) {
+				if (event.key.key == SDLK_G) {
+					wireframe = !wireframe;
 				}
 			}
 		}
 
-		camera3D.update(33.0);
 		static float c = 0.0;
 		c+=1;
 
-		renderer.Clear(0.1,0.1,0.1);
-		// renderer.WireFrame();
+		if(wireframe)
+		{
+			scene.renderer.WireFrameOn();
+		}else {
+			scene.renderer.WireFrameOff();
+		}
 
-		renderer.DrawModel3D(cubeModel);
+
+		if(canSpin)
+		{
+			renderer.camera3D.Spin();
+			renderer.Clear(1.0,1.0,1.0);
+
+			for(auto &m : planes)
+			{
+				renderer.DrawModel3D(m);
+			}
+
+		}else {
+			scene.renderer.camera3D.Spin();
+			scene.Update(deltaTime);
+			scene.Render(0.2,0.2,0.2);
+		}
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
