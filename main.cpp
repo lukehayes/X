@@ -1,13 +1,13 @@
 #include "X/App.h"
 #include "X/Camera/Camera3D.h"
 #include "X/Gfx/Renderer.h"
-#include "X/Model/Model.h"
-#include "X/Model/Generator.h"
+#include "X/Mesh/Mesh.h"
 #include "X/Scene/DebugScene.h"
 
 constexpr int WIN_MULT   = 4;
 constexpr int WIN_WIDTH  = 320 * WIN_MULT;
 constexpr int WIN_HEIGHT = 180 * WIN_MULT;
+
 
 int main(int argc, char *argv[]) {
 	// ------------------------------------------------------------------------
@@ -20,7 +20,14 @@ int main(int argc, char *argv[]) {
 	X::Camera::Camera3D camera3D;
 	X::Gfx::Renderer renderer;
 
-	std::vector<X::Model::Model> planes = X::Model::GeneratePlaneModels(100,10);
+    X::Mesh::Mesh quad = X::Mesh::LoadQuadMesh();
+
+    X::Model::CubeModel cube { {0,0,1,1} };
+    X::Model::CubeModel cube2 { {0,0.7,0.2,1} };
+
+    cube.transform.position.x = 3.0f;
+    cube2.transform.position.x = -3.0f;
+
 
 	// END OPENGL ----------------------------------------------------
 
@@ -32,6 +39,9 @@ int main(int argc, char *argv[]) {
 	float deltaTime = 0;
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
+
+	float mx,my;
+
 
 	while (isRunning) {
 		SDL_Event event;
@@ -46,6 +56,9 @@ int main(int argc, char *argv[]) {
 				isRunning = false;
 			}
 
+			SDL_GetMouseState(&mx, &my);
+
+
 			if (event.type == SDL_EVENT_KEY_DOWN) {
 				if (event.key.key == SDLK_SPACE) {
 					canSpin = !canSpin;
@@ -59,8 +72,11 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
+
 		static float c = 0.0;
 		c+=1;
+
+        cube.transform.position.z = std::sin(c / 10.0f);
 
 		if(wireframe)
 		{
@@ -69,22 +85,11 @@ int main(int argc, char *argv[]) {
 			scene.renderer.WireFrameOff();
 		}
 
+        camera3D.shader.use();
 
-		if(canSpin)
-		{
-			renderer.camera3D.Spin();
-			renderer.Clear(1.0,1.0,1.0);
-
-			for(auto &m : planes)
-			{
-				renderer.DrawModel3D(m);
-			}
-
-		}else {
-			scene.renderer.camera3D.Spin();
-			scene.Update(deltaTime);
-			scene.Render(0.2,0.2,0.2);
-		}
+        renderer.Clear(1.0f, 1.0f, 1.0f);
+        renderer.DrawModel3D(cube);
+        renderer.DrawModel3D(cube2);
 
 		SDL_GL_SwapWindow(app.GetWindow());
 	}
