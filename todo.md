@@ -1,5 +1,7 @@
 ### Backlog
 
+- [ ] fix:  add basic rendering API
+
 - [x] feat:  add position to Renderer::BasicDraw()
 - [x] refactor:  move GL helper functions into single location
 - [x] feat:  add simple scene implementation
