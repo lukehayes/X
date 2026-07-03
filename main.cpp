@@ -4,6 +4,8 @@
 #include "X/Mesh/Mesh.h"
 #include "X/Scene/DebugScene.h"
 
+#include "X/Gfx/Debug.h"
+
 constexpr int WIN_MULT   = 4;
 constexpr int WIN_WIDTH  = 320 * WIN_MULT;
 constexpr int WIN_HEIGHT = 180 * WIN_MULT;
@@ -17,7 +19,6 @@ int main(int argc, char *argv[]) {
 
 	X::App app(WIN_WIDTH, WIN_HEIGHT);
 
-	X::Camera::Camera3D camera3D;
 	X::Gfx::Renderer renderer;
 
     X::Mesh::Mesh quad = X::Mesh::LoadQuadMesh();
@@ -25,9 +26,7 @@ int main(int argc, char *argv[]) {
     X::Model::CubeModel cube { {0,0,1,1} };
     X::Model::CubeModel cube2 { {0,0.7,0.2,1} };
 
-    cube.transform.position.x = 3.0f;
-    cube2.transform.position.x = -3.0f;
-
+    auto cubes = X::Gfx::DebugTestCubes3D(1000, 6);
 
 	// END OPENGL ----------------------------------------------------
 
@@ -74,9 +73,17 @@ int main(int argc, char *argv[]) {
 
 
 		static float c = 0.0;
-		c+=1;
+		c+=0.05;
 
-        cube.transform.position.z = std::sin(c / 10.0f);
+        cube.transform.position.y = 10 * std::cos(c / 10.0f);
+        cube.transform.position.z = 10 * std::sin(c / 10.0f);
+
+        cube.transform.rotation.x = 100 * std::cos(c);
+        cube.transform.rotation.y = 100 * std::cos(c);
+        cube.transform.rotation.z = 100 * std::sin(c);
+
+        cube.color.r = std::sin(c);
+        cube.transform.scale = {3,3,3};
 
 		if(wireframe)
 		{
@@ -85,10 +92,25 @@ int main(int argc, char *argv[]) {
 			scene.renderer.WireFrameOff();
 		}
 
-        camera3D.shader.use();
+
 
         renderer.Clear(1.0f, 1.0f, 1.0f);
+
+        renderer.camera3D.shader.use();
+
+        if (canSpin)
+        {
+            renderer.camera3D.Spin();
+        }
+
+
         renderer.DrawModel3D(cube);
+
+        for (auto c : cubes) {
+            renderer.DrawModel3D(c);
+        }
+
+
         renderer.DrawModel3D(cube2);
 
 		SDL_GL_SwapWindow(app.GetWindow());
