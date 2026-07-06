@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "glad/glad.h"
+#include "X/GL/GLState.h"
 
 namespace X::Mesh
 {
@@ -30,7 +31,7 @@ private:
 };
 
 
-X::Mesh::Mesh LoadCubeMesh();
+X::GL::GLState LoadCubeMesh();
 X::Mesh::Mesh LoadQuadMesh();
 
 }
